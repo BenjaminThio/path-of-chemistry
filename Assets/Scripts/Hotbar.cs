@@ -68,9 +68,70 @@ public class Hotbar : MonoBehaviour
         },
         null
     };
+    public static List<Dictionary<string, object>> flaskItem = new List<Dictionary<string, object>>()
+    {
+        {
+            new Dictionary<string, object>()
+            {
+                {"Item", "H"},
+                {"Quantity", 1}
+            }
+        },
+        {
+            new Dictionary<string, object>()
+            {
+                {"Item", "O"},
+                {"Quantity", 3}
+            }
+        },
+        {
+            new Dictionary<string, object>()
+            {
+                {"Item", "Mg"},
+                {"Quantity", 5}
+            }
+        },
+        {
+            new Dictionary<string, object>()
+            {
+                {"Item", "He"},
+                {"Quantity", 7}
+            }
+        },
+        {
+            new Dictionary<string, object>()
+            {
+                {"Item", "Na"},
+                {"Quantity", 9}
+            }
+        },
+        {
+            new Dictionary<string, object>()
+            {
+                {"Item", "Cm"},
+                {"Quantity", 11}
+            }
+        },
+        {
+            new Dictionary<string, object>()
+            {
+                {"Item", "Og"},
+                {"Quantity", 13}
+            }
+        },
+        {
+            new Dictionary<string, object>()
+            {
+                {"Item", "H"},
+                {"Quantity", 15}
+            }
+        },
+        null
+    };
 
     private void Start()
     {
+        print(Digitize(slotName));
         UpdateHotbar();
     }
 
@@ -82,6 +143,20 @@ public class Hotbar : MonoBehaviour
             slotName = selectedSlotName;
             UpdateHotbar();
         }
+    }
+
+    private int Digitize(string Text)
+    {
+        List<char> charArr = new List<char>(Text);
+        List<char> digitList = new List<char>();
+        for (int i = 0; i <= charArr.Count - 1; i++)
+        {
+            if (Char.IsDigit(charArr[i]))
+            {
+                digitList.Add(charArr[i]);
+            }
+        }
+        return Convert.ToInt32(new string(digitList.ToArray()));
     }
 
     private void UpdateHotbar()
