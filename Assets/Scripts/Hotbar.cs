@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -65,13 +66,7 @@ public class Hotbar : MonoBehaviour
                 {"Quantity", 15}
             }
         },
-        {
-            new Dictionary<string, object>()
-            {
-                {"Item", "N"},
-                {"Quantity", 17}
-            }
-        }
+        null
     };
 
     private void Start()
@@ -93,9 +88,38 @@ public class Hotbar : MonoBehaviour
     {
         for (int i = 1; i <= GameObject.Find("Hotbar").transform.childCount; i++)
         {
-            string Item = Convert.ToString(slotItem[i - 1]["Item"]);
-            print(Item);
-            GameObject.Find($"Hotbar/Slot ({i})/Item").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Elements/{Item}");
+            if (slotItem[i - 1] == null)
+            {
+                Destroy(GameObject.Find($"Hotbar/Slot ({i})/Item"));
+            }
+            else
+            {
+                /*
+                if (GameObject.Find($"Hotbar/Slot ({i})/Item") == null)
+                {
+                    GameObject item = Instantiate(Resources.Load<GameObject>("Hotbar/Item"));
+                    item.name = "Item";
+                    item.transform.SetParent(GameObject.Find($"Hotbar/Slot ({i})").transform);
+                }
+                */
+                GameObject.Find($"Hotbar/Slot ({i})/Item").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Elements/{Convert.ToString(slotItem[i - 1]["Item"])}");
+            }
+            if (slotItem[i - 1] == null || Convert.ToInt32(slotItem[i - 1]["Quantity"]) == 1)
+            {
+                Destroy(GameObject.Find($"Hotbar/Slot ({i})/Quantity"));
+            }
+            else
+            {
+                /*
+                if (GameObject.Find($"Hotbar/Slot ({i})/Quantity") == null)
+                {
+                    GameObject quantity = Instantiate(Resources.Load<GameObject>("Hotbar/Quantity"));
+                    quantity.name = "Quantity";
+                    quantity.transform.SetParent(GameObject.Find($"Hotbar/Slot ({i})").transform);
+                }
+                */
+                GameObject.Find($"Hotbar/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = Convert.ToString(slotItem[i - 1]["Quantity"]);
+            }
             if ($"Slot ({i})" == slotName)
             {
                 GameObject.Find($"Hotbar/Slot ({i})").GetComponent<Image>().color = Color.cyan;
