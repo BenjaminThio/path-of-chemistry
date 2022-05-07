@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,6 +43,34 @@ public class Hotbar : MonoBehaviour
                 {"Item", "Na"},
                 {"Quantity", 9}
             }
+        },
+        {
+            new Dictionary<string, object>()
+            {
+                {"Item", "Cm"},
+                {"Quantity", 11}
+            }
+        },
+        {
+            new Dictionary<string, object>()
+            {
+                {"Item", "Og"},
+                {"Quantity", 13}
+            }
+        },
+        {
+            new Dictionary<string, object>()
+            {
+                {"Item", "H"},
+                {"Quantity", 15}
+            }
+        },
+        {
+            new Dictionary<string, object>()
+            {
+                {"Item", "N"},
+                {"Quantity", 17}
+            }
         }
     };
 
@@ -64,7 +93,9 @@ public class Hotbar : MonoBehaviour
     {
         for (int i = 1; i <= GameObject.Find("Hotbar").transform.childCount; i++)
         {
-            GameObject.Find($"Hotbar/Slot ({i})/Text").GetComponent<Text>().text = "?";
+            string Item = Convert.ToString(slotItem[i - 1]["Item"]);
+            print(Item);
+            GameObject.Find($"Hotbar/Slot ({i})/Item").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Elements/{Item}");
             if ($"Slot ({i})" == slotName)
             {
                 GameObject.Find($"Hotbar/Slot ({i})").GetComponent<Image>().color = Color.cyan;
