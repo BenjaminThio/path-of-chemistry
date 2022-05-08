@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class Hotbar : MonoBehaviour
 {
-    public static string slotName = "Slot (1)";
+    public static int slotNum = 1;
     public static List<Dictionary<string, object>> slotItem = new List<Dictionary<string, object>>()
     {
         {
@@ -70,93 +70,30 @@ public class Hotbar : MonoBehaviour
     };
     public static List<Dictionary<string, object>> flaskItem = new List<Dictionary<string, object>>()
     {
-        {
-            new Dictionary<string, object>()
-            {
-                {"Item", "H"},
-                {"Quantity", 1}
-            }
-        },
-        {
-            new Dictionary<string, object>()
-            {
-                {"Item", "O"},
-                {"Quantity", 3}
-            }
-        },
-        {
-            new Dictionary<string, object>()
-            {
-                {"Item", "Mg"},
-                {"Quantity", 5}
-            }
-        },
-        {
-            new Dictionary<string, object>()
-            {
-                {"Item", "He"},
-                {"Quantity", 7}
-            }
-        },
-        {
-            new Dictionary<string, object>()
-            {
-                {"Item", "Na"},
-                {"Quantity", 9}
-            }
-        },
-        {
-            new Dictionary<string, object>()
-            {
-                {"Item", "Cm"},
-                {"Quantity", 11}
-            }
-        },
-        {
-            new Dictionary<string, object>()
-            {
-                {"Item", "Og"},
-                {"Quantity", 13}
-            }
-        },
-        {
-            new Dictionary<string, object>()
-            {
-                {"Item", "H"},
-                {"Quantity", 15}
-            }
-        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
         null
     };
 
-    private void Start()
+    private void Awake()
     {
-        print(Digitize(slotName));
         UpdateHotbar();
     }
 
     public void UpdateSlot()
     {
         var selectedSlotName = EventSystem.current.currentSelectedGameObject.name;
-        if (selectedSlotName != slotName)
+        if (Digitize(selectedSlotName) != slotNum)
         {
-            slotName = selectedSlotName;
+            slotNum = Digitize(selectedSlotName);
             UpdateHotbar();
         }
-    }
-
-    private int Digitize(string Text)
-    {
-        List<char> charArr = new List<char>(Text);
-        List<char> digitList = new List<char>();
-        for (int i = 0; i <= charArr.Count - 1; i++)
-        {
-            if (Char.IsDigit(charArr[i]))
-            {
-                digitList.Add(charArr[i]);
-            }
-        }
-        return Convert.ToInt32(new string(digitList.ToArray()));
     }
 
     private void UpdateHotbar()
@@ -172,9 +109,8 @@ public class Hotbar : MonoBehaviour
                 /*
                 if (GameObject.Find($"Hotbar/Slot ({i})/Item") == null)
                 {
-                    GameObject item = Instantiate(Resources.Load<GameObject>("Hotbar/Item"));
+                    GameObject item = Instantiate(Resources.Load<GameObject>("Hotbar/Item"), GameObject.Find($"Hotbar/Slot ({i})").transform);
                     item.name = "Item";
-                    item.transform.SetParent(GameObject.Find($"Hotbar/Slot ({i})").transform);
                 }
                 */
                 GameObject.Find($"Hotbar/Slot ({i})/Item").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Elements/{Convert.ToString(slotItem[i - 1]["Item"])}");
@@ -188,14 +124,13 @@ public class Hotbar : MonoBehaviour
                 /*
                 if (GameObject.Find($"Hotbar/Slot ({i})/Quantity") == null)
                 {
-                    GameObject quantity = Instantiate(Resources.Load<GameObject>("Hotbar/Quantity"));
+                    GameObject quantity = Instantiate(Resources.Load<GameObject>("Hotbar/Quantity"), GameObject.Find($"Hotbar/Slot ({i})").transform);
                     quantity.name = "Quantity";
-                    quantity.transform.SetParent(GameObject.Find($"Hotbar/Slot ({i})").transform);
                 }
                 */
                 GameObject.Find($"Hotbar/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = Convert.ToString(slotItem[i - 1]["Quantity"]);
             }
-            if ($"Slot ({i})" == slotName)
+            if (i == slotNum)
             {
                 GameObject.Find($"Hotbar/Slot ({i})").GetComponent<Image>().color = Color.cyan;
             }
@@ -204,5 +139,19 @@ public class Hotbar : MonoBehaviour
                 GameObject.Find($"Hotbar/Slot ({i})").GetComponent<Image>().color = Color.grey;
             }
         }
+    }
+
+    private int Digitize(string Text)
+    {
+        List<char> charArr = new List<char>(Text);
+        List<char> digitList = new List<char>();
+        for (int i = 0; i <= charArr.Count - 1; i++)
+        {
+            if (Char.IsDigit(charArr[i]))
+            {
+                digitList.Add(charArr[i]);
+            }
+        }
+        return Convert.ToInt32(new string(digitList.ToArray()));
     }
 }
