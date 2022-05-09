@@ -21,63 +21,51 @@ public class Hotbar : MonoBehaviour
             new Dictionary<string, object>()
             {
                 {"Item", "O"},
-                {"Quantity", 3}
+                {"Quantity", 1}
             }
         },
         {
             new Dictionary<string, object>()
             {
                 {"Item", "Mg"},
-                {"Quantity", 5}
+                {"Quantity", 1}
             }
         },
         {
             new Dictionary<string, object>()
             {
                 {"Item", "He"},
-                {"Quantity", 7}
+                {"Quantity", 1}
             }
         },
         {
             new Dictionary<string, object>()
             {
                 {"Item", "Na"},
-                {"Quantity", 9}
+                {"Quantity", 1}
             }
         },
         {
             new Dictionary<string, object>()
             {
                 {"Item", "Cm"},
-                {"Quantity", 11}
+                {"Quantity", 1}
             }
         },
         {
             new Dictionary<string, object>()
             {
                 {"Item", "Og"},
-                {"Quantity", 13}
+                {"Quantity", 1}
             }
         },
         {
             new Dictionary<string, object>()
             {
                 {"Item", "H"},
-                {"Quantity", 15}
+                {"Quantity", 1}
             }
         },
-        null
-    };
-    public static List<Dictionary<string, object>> flaskItem = new List<Dictionary<string, object>>()
-    {
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
         null
     };
 

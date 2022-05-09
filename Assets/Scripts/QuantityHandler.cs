@@ -6,6 +6,24 @@ using TMPro;
 
 public class QuantityHandler : MonoBehaviour
 {
+    public static List<Dictionary<string, object>> flaskItem = new List<Dictionary<string, object>>()
+    {
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+    };
+
+    void Start()
+    {
+        UpdateFlask();
+    }
+
     public void Add()
     {
         if (Hotbar.slotItem[Hotbar.slotNum - 1] == null)
@@ -20,12 +38,26 @@ public class QuantityHandler : MonoBehaviour
         }
         else
         {
-            Hotbar.flaskItem[0] = new Dictionary<string, object>()
+            if (flaskItem.Contains(null))
             {
-                {"Item", Hotbar.slotItem[Hotbar.slotNum - 1]["Item"]},
-                {"Quantity", Hotbar.slotItem[Hotbar.slotNum - 1]["Quantity"]}
-            };
-            Hotbar.slotItem[0] = null;
+                for (int i = 0; i < flaskItem.Count; i++)
+                {
+                    if (flaskItem[i] == null)
+                    {
+                        flaskItem[i] = new Dictionary<string, object>()
+                    {
+                        {"Item", Hotbar.slotItem[Hotbar.slotNum - 1]["Item"]},
+                        {"Quantity", Hotbar.slotItem[Hotbar.slotNum - 1]["Quantity"]}
+                    };
+                        Hotbar.slotItem[Hotbar.slotNum - 1] = null;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                //Alert
+            }
         }
         UpdateFlask();
         UpdateHotbar();
@@ -40,12 +72,22 @@ public class QuantityHandler : MonoBehaviour
     {
         for (int i = 1; i <= GameObject.Find("Flask/Inventory").transform.childCount; i++)
         {
-            if (Hotbar.flaskItem[i - 1] != null)
+            GameObject.Find($"Flask/Inventory/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = "";
+            if (GameObject.Find($"Flask/Inventory/Slot ({i})/Item") == null)
             {
-                GameObject.Find($"Flask/Inventory/Slot ({i})/Item").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Elements/{Hotbar.flaskItem[i - 1]["Item"]}");
-                if (Convert.ToInt32(Hotbar.flaskItem[i - 1]["Quantity"]) == 1)
+                GameObject item = Instantiate(Resources.Load<GameObject>("Inventory/Item"), GameObject.Find($"Flask/Inventory/Slot ({i})").transform);
+                item.name = "Item";
+            }
+            if (flaskItem[i - 1] != null)
+            {
+                GameObject.Find($"Flask/Inventory/Slot ({i})/Item").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Elements/{flaskItem[i - 1]["Item"]}");
+                if (Convert.ToInt32(flaskItem[i - 1]["Quantity"]) > 1)
                 {
-                    GameObject.Find($"Flask/Inventory/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = Convert.ToString(Hotbar.flaskItem[i - 1]["Quantity"]);
+                    GameObject.Find($"Flask/Inventory/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = Convert.ToString(flaskItem[i - 1]["Quantity"]);
+                }
+                else
+                {
+                    GameObject.Find($"Flask/Inventory/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = "";
                 }
             }
             else
