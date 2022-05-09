@@ -28,6 +28,26 @@ public class QuantityHandler : MonoBehaviour
         UpdateFlask();
     }
 
+    public void UpdateSlider(float value)
+    {
+        GameObject.Find("Quantity Handler/Quantity").GetComponent<TextMeshProUGUI>().text = Convert.ToString(value);
+    }
+
+    public void AddSliderValue()
+    {
+        GameObject.Find("Quantity Handler/Slider").GetComponent<Slider>().value += 1;
+    }
+
+    public void RemoveSliderValue()
+    {
+        GameObject.Find("Quantity Handler/Slider").GetComponent<Slider>().value -= 1;
+    }
+
+    public void MaxSliderValue()
+    {
+        GameObject.Find("Quantity Handler/Slider").GetComponent<Slider>().value = GameObject.Find("Quantity Handler/Slider").GetComponent<Slider>().maxValue;
+    }
+
     public void Add()
     {
         if (Hotbar.slotItem[Hotbar.slotNum - 1] == null)
@@ -38,7 +58,7 @@ public class QuantityHandler : MonoBehaviour
         {
             GameObject quantityHandler = Instantiate(Resources.Load<GameObject>("Inventory/Quantity Handler"), GameObject.Find("Canvas").transform, false);
             quantityHandler.name = "Quantity Handler";
-            quantityHandler.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Convert.ToString(Hotbar.slotItem[Hotbar.slotNum - 1]["Quantity"]);
+            quantityHandler.transform.GetChild(5).GetComponent<Slider>().maxValue = Convert.ToInt32(Hotbar.slotItem[Hotbar.slotNum - 1]["Quantity"]);
         }
         else
         {
