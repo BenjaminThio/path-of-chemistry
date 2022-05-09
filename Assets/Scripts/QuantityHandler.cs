@@ -10,7 +10,11 @@ public class QuantityHandler : MonoBehaviour
     {
         null,
         null,
-        null,
+        new Dictionary<string, object>()
+        {
+            {"Item", "H"},
+            {"Quantity", 5}
+        },
         null,
         null,
         null,
@@ -19,7 +23,7 @@ public class QuantityHandler : MonoBehaviour
         null
     };
 
-    void Start()
+    void Awake()
     {
         UpdateFlask();
     }
@@ -38,17 +42,41 @@ public class QuantityHandler : MonoBehaviour
         }
         else
         {
-            if (flaskItem.Contains(null))
+            List<string> allFlaskItemNames = new List<string>();
+            foreach (var i in flaskItem)
+            {
+                if (i != null)
+                {
+                    allFlaskItemNames.Add(Convert.ToString(i["Item"]));
+                }
+                else
+                {
+                    allFlaskItemNames.Add(null);
+                }
+            }
+            if (allFlaskItemNames.Contains(Convert.ToString(Hotbar.slotItem[Hotbar.slotNum - 1]["Item"])))
+            {
+                for (int i = 0; i < flaskItem.Count; i++)
+                {
+                    if (Convert.ToString(Hotbar.slotItem[Hotbar.slotNum - 1]["Item"]) == allFlaskItemNames[i])
+                    {
+                        flaskItem[i]["Quantity"] = Convert.ToInt32(flaskItem[i]["Quantity"]) + Convert.ToInt32(Hotbar.slotItem[Hotbar.slotNum - 1]["Quantity"]);
+                        Hotbar.slotItem[Hotbar.slotNum - 1] = null;
+                        break;
+                    }
+                }
+            }
+            else if (flaskItem.Contains(null))
             {
                 for (int i = 0; i < flaskItem.Count; i++)
                 {
                     if (flaskItem[i] == null)
                     {
                         flaskItem[i] = new Dictionary<string, object>()
-                    {
-                        {"Item", Hotbar.slotItem[Hotbar.slotNum - 1]["Item"]},
-                        {"Quantity", Hotbar.slotItem[Hotbar.slotNum - 1]["Quantity"]}
-                    };
+                        {
+                            { "Item", Hotbar.slotItem[Hotbar.slotNum - 1]["Item"] },
+                            { "Quantity", Hotbar.slotItem[Hotbar.slotNum - 1]["Quantity"] }
+                        };
                         Hotbar.slotItem[Hotbar.slotNum - 1] = null;
                         break;
                     }
@@ -96,48 +124,31 @@ public class QuantityHandler : MonoBehaviour
             }
         }
     }
-
     private void UpdateHotbar()
     {
         for (int i = 1; i <= GameObject.Find("Hotbar").transform.childCount; i++)
         {
-            if (Hotbar.slotItem[i - 1] == null)
+            GameObject.Find($"Hotbar/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = "";
+            if (GameObject.Find($"Hotbar/Slot ({i})/Item") == null)
+            {
+                GameObject item = Instantiate(Resources.Load<GameObject>("Inventory/Item"), GameObject.Find($"Hotbar/Slot ({i})").transform);
+                item.name = "Item";
+            }
+            if (Hotbar.slotItem[i - 1] != null)
+            {
+                GameObject.Find($"Hotbar/Slot ({i})/Item").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Elements/{Hotbar.slotItem[i - 1]["Item"]}");
+                if (Convert.ToInt32(Hotbar.slotItem[i - 1]["Quantity"]) > 1)
+                {
+                    GameObject.Find($"Hotbar/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = Convert.ToString(Hotbar.slotItem[i - 1]["Quantity"]);
+                }
+                else
+                {
+                    GameObject.Find($"Hotbar/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = "";
+                }
+            }
+            else
             {
                 Destroy(GameObject.Find($"Hotbar/Slot ({i})/Item"));
-            }
-            else
-            {
-                /*
-                if (GameObject.Find($"Hotbar/Slot ({i})/Item") == null)
-                {
-                    GameObject item = Instantiate(Resources.Load<GameObject>("Hotbar/Item"), GameObject.Find($"Hotbar/Slot ({i})").transform);
-                    item.name = "Item";
-                }
-                */
-                GameObject.Find($"Hotbar/Slot ({i})/Item").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Elements/{Convert.ToString(Hotbar.slotItem[i - 1]["Item"])}");
-            }
-            if (Hotbar.slotItem[i - 1] == null || Convert.ToInt32(Hotbar.slotItem[i - 1]["Quantity"]) == 1)
-            {
-                Destroy(GameObject.Find($"Hotbar/Slot ({i})/Quantity"));
-            }
-            else
-            {
-                /*
-                if (GameObject.Find($"Hotbar/Slot ({i})/Quantity") == null)
-                {
-                    GameObject quantity = Instantiate(Resources.Load<GameObject>("Hotbar/Quantity"), GameObject.Find($"Hotbar/Slot ({i})").transform);
-                    quantity.name = "Quantity";
-                }
-                */
-                GameObject.Find($"Hotbar/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = Convert.ToString(Hotbar.slotItem[i - 1]["Quantity"]);
-            }
-            if (i == Hotbar.slotNum)
-            {
-                GameObject.Find($"Hotbar/Slot ({i})").GetComponent<Image>().color = Color.cyan;
-            }
-            else
-            {
-                GameObject.Find($"Hotbar/Slot ({i})").GetComponent<Image>().color = Color.grey;
             }
         }
     }
