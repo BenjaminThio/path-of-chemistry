@@ -109,11 +109,17 @@ public class Hotbar : MonoBehaviour
             {
                 GameObject item = Instantiate(Resources.Load<GameObject>("Inventory/Item"), GameObject.Find($"Hotbar/Slot ({i})").transform);
                 item.name = "Item";
+                item.transform.SetAsFirstSibling();
             }
             if (slotItem[i - 1] != null)
             {
-                GameObject.Find($"Hotbar/Slot ({i})/Item").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Elements/{slotItem[i - 1]["Item"]}");
-                if (Convert.ToInt32(slotItem[i - 1]["Quantity"]) > 1)
+                if (Convert.ToInt32(slotItem[i - 1]["Quantity"]) == 0)
+                {
+                    slotItem[i - 1] = null;
+                    Destroy(GameObject.Find($"Hotbar/Slot ({i})/Item"));
+                    continue;
+                }
+                else if (Convert.ToInt32(slotItem[i - 1]["Quantity"]) > 1)
                 {
                     GameObject.Find($"Hotbar/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = Convert.ToString(slotItem[i - 1]["Quantity"]);
                 }
@@ -121,6 +127,7 @@ public class Hotbar : MonoBehaviour
                 {
                     GameObject.Find($"Hotbar/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = "";
                 }
+                GameObject.Find($"Hotbar/Slot ({i})/Item").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Elements/{slotItem[i - 1]["Item"]}");
             }
             else
             {
