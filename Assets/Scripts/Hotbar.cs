@@ -14,7 +14,7 @@ public class Hotbar : MonoBehaviour
             new Dictionary<string, object>()
             {
                 {"Item", "H"},
-                {"Quantity", 1}
+                {"Quantity", 64}
             }
         },
         {
@@ -63,7 +63,7 @@ public class Hotbar : MonoBehaviour
             new Dictionary<string, object>()
             {
                 {"Item", "H"},
-                {"Quantity", 1}
+                {"Quantity", 64}
             }
         },
         null

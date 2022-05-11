@@ -13,7 +13,7 @@ public class QuantityHandler : MonoBehaviour
         new Dictionary<string, object>()
         {
             {"Item", "H"},
-            {"Quantity", 5}
+            {"Quantity", 64}
         },
         null,
         null,
@@ -66,7 +66,7 @@ public class QuantityHandler : MonoBehaviour
             }
             else
             {
-                AddToFlask(1);
+                RepeatAddToFlask(1);
             }
             UpdateFlask();
             UpdateHotbar();
@@ -75,10 +75,81 @@ public class QuantityHandler : MonoBehaviour
 
     public void Done()
     {
-        AddToFlask(Convert.ToInt32(Mathf.Floor(GameObject.Find("Quantity Handler/Slider").GetComponent<Slider>().value)));
+        RepeatAddToFlask(Convert.ToInt32(Mathf.Floor(GameObject.Find("Quantity Handler/Slider").GetComponent<Slider>().value)));
         UpdateFlask();
         UpdateHotbar();
         Destroy(GameObject.Find("Quantity Handler"));
+    }
+
+    private void RepeatAddToFlask(int quantity)
+    {
+        for (int i = 0; i < quantity; i++)
+        {
+            AddToFlaskBeta();
+        }
+    }
+    private void AddToFlaskBeta()
+    {
+        List<string> allFlaskItemNames = new List<string>();
+        foreach (var i in flaskItem)
+        {
+            if (i != null)
+            {
+                allFlaskItemNames.Add(Convert.ToString(i["Item"]));
+            }
+            else
+            {
+                allFlaskItemNames.Add(null);
+            }
+        }
+        if (allFlaskItemNames.Contains(Convert.ToString(Hotbar.slotItem[Hotbar.slotNum - 1]["Item"])))
+        {
+            for (int i = 0; i < flaskItem.Count; i++)
+            {
+                if (Convert.ToString(Hotbar.slotItem[Hotbar.slotNum - 1]["Item"]) == allFlaskItemNames[i] && Convert.ToInt32(flaskItem[i]["Quantity"]) < 64)
+                {
+                    flaskItem[i]["Quantity"] = Convert.ToInt32(flaskItem[i]["Quantity"]) + 1;
+                    Hotbar.slotItem[Hotbar.slotNum - 1]["Quantity"] = Convert.ToInt32(Hotbar.slotItem[Hotbar.slotNum - 1]["Quantity"]) - 1;
+                    return;
+                }
+            }
+            for (int i = 0; i < flaskItem.Count; i++)
+            {
+                if (Convert.ToString(Hotbar.slotItem[Hotbar.slotNum - 1]["Item"]) == allFlaskItemNames[i] && Convert.ToInt32(flaskItem[i]["Quantity"]) >= 64)
+                {
+                    FlaskTest();
+                    return;
+                }
+            }
+        }
+        else
+        {
+            FlaskTest();
+        }
+    }
+
+    private void FlaskTest()
+    {
+        if (flaskItem.Contains(null))
+        {
+            for (int i = 0; i < flaskItem.Count; i++)
+            {
+                if (flaskItem[i] == null)
+                {
+                    flaskItem[i] = new Dictionary<string, object>()
+                        {
+                            {"Item", Hotbar.slotItem[Hotbar.slotNum - 1]["Item"]},
+                            {"Quantity", 1}
+                        };
+                    Hotbar.slotItem[Hotbar.slotNum - 1]["Quantity"] = Convert.ToInt32(Hotbar.slotItem[Hotbar.slotNum - 1]["Quantity"]) - 1;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            //Alert
+        }
     }
 
     private void AddToFlask(int Quantity)
@@ -114,10 +185,10 @@ public class QuantityHandler : MonoBehaviour
                 if (flaskItem[i] == null)
                 {
                     flaskItem[i] = new Dictionary<string, object>()
-                        {
-                            { "Item", Hotbar.slotItem[Hotbar.slotNum - 1]["Item"] },
-                            { "Quantity", Quantity }
-                        };
+                    {
+                        {"Item", Hotbar.slotItem[Hotbar.slotNum - 1]["Item"]},
+                        {"Quantity", Quantity}
+                    };
                     Hotbar.slotItem[Hotbar.slotNum - 1]["Quantity"] = Convert.ToInt32(Hotbar.slotItem[Hotbar.slotNum - 1]["Quantity"]) - Quantity;
                     break;
                 }
