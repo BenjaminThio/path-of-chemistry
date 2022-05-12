@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class Hotbar : MonoBehaviour
 {
     public static int slotNum = 1;
-    public static List<Dictionary<string, object>> slotItem = new List<Dictionary<string, object>>()
+    public static List<Dictionary<string, object>> hotbarItem = new List<Dictionary<string, object>>()
     {
         {
             new Dictionary<string, object>()
@@ -111,23 +111,23 @@ public class Hotbar : MonoBehaviour
                 item.name = "Item";
                 item.transform.SetAsFirstSibling();
             }
-            if (slotItem[i - 1] != null)
+            if (hotbarItem[i - 1] != null)
             {
-                if (Convert.ToInt32(slotItem[i - 1]["Quantity"]) == 0)
+                if (Convert.ToInt32(hotbarItem[i - 1]["Quantity"]) == 0)
                 {
-                    slotItem[i - 1] = null;
+                    hotbarItem[i - 1] = null;
                     Destroy(GameObject.Find($"Hotbar/Slot ({i})/Item"));
                     continue;
                 }
-                else if (Convert.ToInt32(slotItem[i - 1]["Quantity"]) > 1)
+                else if (Convert.ToInt32(hotbarItem[i - 1]["Quantity"]) > 1)
                 {
-                    GameObject.Find($"Hotbar/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = Convert.ToString(slotItem[i - 1]["Quantity"]);
+                    GameObject.Find($"Hotbar/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = Convert.ToString(hotbarItem[i - 1]["Quantity"]);
                 }
                 else
                 {
                     GameObject.Find($"Hotbar/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = "";
                 }
-                GameObject.Find($"Hotbar/Slot ({i})/Item").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Elements/{slotItem[i - 1]["Item"]}");
+                GameObject.Find($"Hotbar/Slot ({i})/Item").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Elements/{hotbarItem[i - 1]["Item"]}");
             }
             else
             {
