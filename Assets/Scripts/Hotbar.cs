@@ -8,64 +8,47 @@ using UnityEngine.EventSystems;
 public class Hotbar : MonoBehaviour
 {
     public static int slotNum = 1;
-    public static List<Dictionary<string, object>> hotbarItem = new List<Dictionary<string, object>>()
-    {
-        {
+    public static Dictionary<string, object>[] hotbarItem = {
             new Dictionary<string, object>()
             {
                 {"Item", "H"},
                 {"Quantity", 64}
-            }
-        },
-        {
+            },
             new Dictionary<string, object>()
             {
                 {"Item", "O"},
                 {"Quantity", 5}
-            }
-        },
-        {
+            },
             new Dictionary<string, object>()
             {
                 {"Item", "Mg"},
                 {"Quantity", 1}
-            }
-        },
-        {
+            },
             new Dictionary<string, object>()
             {
                 {"Item", "He"},
                 {"Quantity", 1}
-            }
-        },
-        {
+            },
             new Dictionary<string, object>()
             {
                 {"Item", "Na"},
                 {"Quantity", 1}
-            }
-        },
-        {
+            },
             new Dictionary<string, object>()
             {
                 {"Item", "Cm"},
                 {"Quantity", 1}
-            }
-        },
-        {
+            },
             new Dictionary<string, object>()
             {
                 {"Item", "Og"},
                 {"Quantity", 1}
-            }
-        },
-        {
+            },
             new Dictionary<string, object>()
             {
                 {"Item", "H"},
                 {"Quantity", 64}
-            }
-        },
+            },
         null
     };
 
@@ -116,7 +99,7 @@ public class Hotbar : MonoBehaviour
 
     private void UpdateHotbar()
     {
-        for (int i = 1; i <= GameObject.Find("Hotbar").transform.childCount; i++)
+        for (int i = 1; i <= hotbarItem.Length; i++)
         {
             GameObject.Find($"Hotbar/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = "";
             if (GameObject.Find($"Hotbar/Slot ({i})/Item") == null)

@@ -5855,7 +5855,7 @@ GameObject:
   - component: {fileID: 1793687276}
   - component: {fileID: 1793687275}
   m_Layer: 5
-  m_Name: Flask
+  m_Name: Flask Interface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6604,7 +6604,7 @@ GameObject:
   - component: {fileID: 1960619063}
   - component: {fileID: 1960619062}
   m_Layer: 5
-  m_Name: Inventory
+  m_Name: Flask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

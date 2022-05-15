@@ -9,8 +9,7 @@ using TMPro;
 public class QuantityHandler : MonoBehaviour
 {
     public static int selectedSlotNum;
-    public static List<Dictionary<string, object>> flaskItem = new List<Dictionary<string, object>>()
-    {
+    public static Dictionary<string, object>[] flaskItem = {
         null,
         null,
         new Dictionary<string, object>()
@@ -18,8 +17,16 @@ public class QuantityHandler : MonoBehaviour
             {"Item", "H"},
             {"Quantity", 64}
         },
-        null,
-        null,
+        new Dictionary<string, object>()
+        {
+            {"Item", "H"},
+            {"Quantity", 64}
+        },
+        new Dictionary<string, object>()
+        {
+            {"Item", "H"},
+            {"Quantity", 64}
+        },
         null,
         null,
         null,
@@ -59,60 +66,43 @@ public class QuantityHandler : MonoBehaviour
 
     public void TransferHotbarToFlask()
     {
-        if (Hotbar.hotbarItem[Hotbar.slotNum - 1] != null)
-        {
-            if (Convert.ToInt32(Hotbar.hotbarItem[Hotbar.slotNum - 1]["Quantity"]) > 1)
-            {
-                GameObject quantityHandler = Instantiate(Resources.Load<GameObject>("Inventory/Quantity Handler"), GameObject.Find("Canvas").transform, false);
-                quantityHandler.name = "Quantity Handler";
-                quantityHandler.transform.GetChild(5).GetComponent<Slider>().maxValue = Convert.ToInt32(Hotbar.hotbarItem[Hotbar.slotNum - 1]["Quantity"]);
-                quantityHandler.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Done(
-                    new Dictionary<string, List<Dictionary<string, object>>>()
-                    {
-                        {"Hotbar", Hotbar.hotbarItem},
-                        {"Flask", flaskItem}
-                    }, 
-                    Hotbar.slotNum)
-                );
-            }
-            else
-            {
-                Transfer(Hotbar.hotbarItem, flaskItem, Hotbar.slotNum - 1);
-            }
-            UpdateFlask();
-            UpdateHotbar();
-        }
+        Estimation("Hotbar", Hotbar.hotbarItem, "Flask", flaskItem, Hotbar.slotNum);
     }
 
     public void TransferFlaskToHotbar()
     {
         selectedSlotNum = Digitize(EventSystem.current.currentSelectedGameObject.name);
-        if (flaskItem[selectedSlotNum - 1] != null)
+        Estimation("Flask", flaskItem, "Hotbar", Hotbar.hotbarItem, selectedSlotNum);
+    }
+
+    private void Estimation(string srcName, Dictionary<string, object>[] src, string dstName, Dictionary<string, object>[] dst, int slotNum)
+    {
+        if (src[slotNum - 1] != null)
         {
-            if (Convert.ToInt32(flaskItem[selectedSlotNum - 1]["Quantity"]) > 1)
+            if (Convert.ToInt32(src[slotNum - 1]["Quantity"]) > 1)
             {
                 GameObject quantityHandler = Instantiate(Resources.Load<GameObject>("Inventory/Quantity Handler"), GameObject.Find("Canvas").transform, false);
                 quantityHandler.name = "Quantity Handler";
-                quantityHandler.transform.GetChild(5).GetComponent<Slider>().maxValue = Convert.ToInt32(flaskItem[selectedSlotNum - 1]["Quantity"]);
+                quantityHandler.transform.GetChild(5).GetComponent<Slider>().maxValue = Convert.ToInt32(src[slotNum - 1]["Quantity"]);
                 quantityHandler.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Done(
-                    new Dictionary<string, List<Dictionary<string, object>>>()
+                    new Dictionary<string, Dictionary<string, object>[]>()
                     {
-                        {"Flask", flaskItem},
-                        {"Hotbar", Hotbar.hotbarItem}
+                        {srcName, src},
+                        {dstName, dst}
                     },
-                    selectedSlotNum)
+                    slotNum)
                 );
             }
             else
             {
-                Transfer(flaskItem, Hotbar.hotbarItem, selectedSlotNum - 1);
+                Transfer(src, dst, slotNum - 1);
             }
             UpdateFlask();
             UpdateHotbar();
         }
     }
 
-    private void Done(Dictionary<string, List<Dictionary<string, object>>> data, int slotNum)
+    private void Done(Dictionary<string, Dictionary<string, object>[]> data, int slotNum)
     {
         int sliderValue = Convert.ToInt32(Mathf.Floor(GameObject.Find("Quantity Handler/Slider").GetComponent<Slider>().value));
         var newData = RepeatTransfer(data, slotNum, sliderValue);
@@ -123,7 +113,7 @@ public class QuantityHandler : MonoBehaviour
         Destroy(GameObject.Find("Quantity Handler"));
     }
 
-    private Dictionary<string, List<Dictionary<string, object>>> RepeatTransfer(Dictionary<string, List<Dictionary<string, object>>> data, int slotNum, int quantity)
+    private Dictionary<string, Dictionary<string, object>[]> RepeatTransfer(Dictionary<string, Dictionary<string, object>[]> data, int slotNum, int quantity)
     {
         var src = data.ElementAt(0).Value;
         var dst = data.ElementAt(1).Value;
@@ -133,14 +123,14 @@ public class QuantityHandler : MonoBehaviour
             src = newData[0];
             dst = newData[1];
         }
-        return new Dictionary<string, List<Dictionary<string, object>>>()
+        return new Dictionary<string, Dictionary<string, object>[]>()
         {
             {data.ElementAt(0).Key, src},
             {data.ElementAt(1).Key, dst}
         };
     }
 
-    private List<Dictionary<string, object>>[] Transfer(List<Dictionary<string, object>> src, List<Dictionary<string, object>> dst, int slotNum)
+    private List<Dictionary<string, object>[]> Transfer(Dictionary<string, object>[] src, Dictionary<string, object>[] dst, int slotNum)
     {
         List<string> allDstItemNames = new List<string>();
         foreach (var i in dst)
@@ -156,25 +146,25 @@ public class QuantityHandler : MonoBehaviour
         }
         if (allDstItemNames.Contains(Convert.ToString(src[slotNum]["Item"])))
         {
-            for (int i = 0; i < dst.Count; i++)
+            for (int i = 0; i < dst.Length; i++)
             {
                 if (Convert.ToString(src[slotNum]["Item"]) == allDstItemNames[i] && Convert.ToInt32(dst[i]["Quantity"]) < 64)
                 {
                     dst[i]["Quantity"] = Convert.ToInt32(dst[i]["Quantity"]) + 1;
                     src[slotNum]["Quantity"] = Convert.ToInt32(src[slotNum]["Quantity"]) - 1;
-                    return new List<Dictionary<string, object>>[]
+                    return new List<Dictionary<string, object>[]>
                     {
                         src,
                         dst
                     };
                 }
             }
-            for (int i = 0; i < dst.Count; i++)
+            for (int i = 0; i < dst.Length; i++)
             {
                 if (Convert.ToString(src[slotNum]["Item"]) == allDstItemNames[i] && Convert.ToInt32(dst[i]["Quantity"]) >= 64)
                 {
                     var newData = ItemNotFound(src, dst, slotNum);
-                    return new List<Dictionary<string, object>>[]
+                    return new List<Dictionary<string, object>[]>
                     {
                         newData[0],
                         newData[1]
@@ -185,7 +175,7 @@ public class QuantityHandler : MonoBehaviour
         else
         {
             var newData = ItemNotFound(src, dst, slotNum);
-            return new List<Dictionary<string, object>>[]
+            return new List<Dictionary<string, object>[]>
             {
                 newData[0],
                 newData[1]
@@ -194,11 +184,11 @@ public class QuantityHandler : MonoBehaviour
         return null;
     }
 
-    private List<Dictionary<string, object>>[] ItemNotFound(List<Dictionary<string, object>> src, List<Dictionary<string, object>> dst, int slotNum)
+    private List<Dictionary<string, object>[]> ItemNotFound(Dictionary<string, object>[] src, Dictionary<string, object>[] dst, int slotNum)
     {
         if (dst.Contains(null))
         {
-            for (int i = 0; i < dst.Count; i++)
+            for (int i = 0; i < dst.Length; i++)
             {
                 if (dst[i] == null)
                 {
@@ -208,7 +198,7 @@ public class QuantityHandler : MonoBehaviour
                             {"Quantity", 1}
                         };
                     src[slotNum]["Quantity"] = Convert.ToInt32(src[slotNum]["Quantity"]) - 1;
-                    return new List<Dictionary<string, object>>[]
+                    return new List<Dictionary<string, object>[]>
                     {
                         src,
                         dst
@@ -219,6 +209,7 @@ public class QuantityHandler : MonoBehaviour
         else
         {
             //Alert
+            print("No more space");
         }
         return null;
     }
@@ -239,12 +230,12 @@ public class QuantityHandler : MonoBehaviour
 
     private void UpdateFlask()
     {
-        for (int i = 1; i <= GameObject.Find("Flask/Inventory").transform.childCount; i++)
+        for (int i = 1; i <= flaskItem.Length; i++)
         {
-            GameObject.Find($"Flask/Inventory/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = "";
-            if (GameObject.Find($"Flask/Inventory/Slot ({i})/Item") == null)
+            GameObject.Find($"Flask Interface/Flask/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = "";
+            if (GameObject.Find($"Flask Interface/Flask/Slot ({i})/Item") == null)
             {
-                GameObject item = Instantiate(Resources.Load<GameObject>("Inventory/Item"), GameObject.Find($"Flask/Inventory/Slot ({i})").transform);
+                GameObject item = Instantiate(Resources.Load<GameObject>("Inventory/Item"), GameObject.Find($"Flask Interface/Flask/Slot ({i})").transform);
                 item.name = "Item";
                 item.transform.SetAsFirstSibling();
             }
@@ -253,29 +244,29 @@ public class QuantityHandler : MonoBehaviour
                 if (Convert.ToInt32(flaskItem[i - 1]["Quantity"]) == 0)
                 {
                     flaskItem[i - 1] = null;
-                    Destroy(GameObject.Find($"Flask/Inventory/Slot ({i})/Item"));
+                    Destroy(GameObject.Find($"Flask Interface/Flask/Slot ({i})/Item"));
                     continue;
                 }
                 else if (Convert.ToInt32(flaskItem[i - 1]["Quantity"]) > 1)
                 {
-                    GameObject.Find($"Flask/Inventory/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = Convert.ToString(flaskItem[i - 1]["Quantity"]);
+                    GameObject.Find($"Flask Interface/Flask/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = Convert.ToString(flaskItem[i - 1]["Quantity"]);
                 }
                 else
                 {
-                    GameObject.Find($"Flask/Inventory/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = "";
+                    GameObject.Find($"Flask Interface/Flask/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = "";
                 }
-                GameObject.Find($"Flask/Inventory/Slot ({i})/Item").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Elements/{flaskItem[i - 1]["Item"]}");
+                GameObject.Find($"Flask Interface/Flask/Slot ({i})/Item").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Elements/{flaskItem[i - 1]["Item"]}");
             }
             else
             {
-                Destroy(GameObject.Find($"Flask/Inventory/Slot ({i})/Item"));
+                Destroy(GameObject.Find($"Flask Interface/Flask/Slot ({i})/Item"));
             }
         }
     }
 
     private void UpdateHotbar()
     {
-        for (int i = 1; i <= GameObject.Find("Hotbar").transform.childCount; i++)
+        for (int i = 1; i <= Hotbar.hotbarItem.Length; i++)
         {
             GameObject.Find($"Hotbar/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = "";
             if (GameObject.Find($"Hotbar/Slot ({i})/Item") == null)
