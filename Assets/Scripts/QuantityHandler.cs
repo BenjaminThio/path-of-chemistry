@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -62,9 +63,17 @@ public class QuantityHandler : MonoBehaviour
         {
             if (Convert.ToInt32(Hotbar.hotbarItem[Hotbar.slotNum - 1]["Quantity"]) > 1)
             {
-                GameObject quantityHandler = Instantiate(Resources.Load<GameObject>("Inventory/Hotbar Quantity Handler"), GameObject.Find("Canvas").transform, false);
+                GameObject quantityHandler = Instantiate(Resources.Load<GameObject>("Inventory/Quantity Handler"), GameObject.Find("Canvas").transform, false);
                 quantityHandler.name = "Quantity Handler";
                 quantityHandler.transform.GetChild(5).GetComponent<Slider>().maxValue = Convert.ToInt32(Hotbar.hotbarItem[Hotbar.slotNum - 1]["Quantity"]);
+                quantityHandler.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Done(
+                    new Dictionary<string, List<Dictionary<string, object>>>()
+                    {
+                        {"Hotbar", Hotbar.hotbarItem},
+                        {"Flask", flaskItem}
+                    }, 
+                    Hotbar.slotNum)
+                );
             }
             else
             {
@@ -75,16 +84,6 @@ public class QuantityHandler : MonoBehaviour
         }
     }
 
-    public void TransferHotbarToFlaskDone()
-    {
-        var newData = RepeatTransfer(Hotbar.hotbarItem, flaskItem, Hotbar.slotNum, Convert.ToInt32(Mathf.Floor(GameObject.Find("Quantity Handler/Slider").GetComponent<Slider>().value)));
-        Hotbar.hotbarItem = newData[0];
-        flaskItem = newData[1];
-        UpdateFlask();
-        UpdateHotbar();
-        Destroy(GameObject.Find("Quantity Handler"));
-    }
-
     public void TransferFlaskToHotbar()
     {
         selectedSlotNum = Digitize(EventSystem.current.currentSelectedGameObject.name);
@@ -92,9 +91,17 @@ public class QuantityHandler : MonoBehaviour
         {
             if (Convert.ToInt32(flaskItem[selectedSlotNum - 1]["Quantity"]) > 1)
             {
-                GameObject quantityHandler = Instantiate(Resources.Load<GameObject>("Inventory/Flask Quantity Handler"), GameObject.Find("Canvas").transform, false);
+                GameObject quantityHandler = Instantiate(Resources.Load<GameObject>("Inventory/Quantity Handler"), GameObject.Find("Canvas").transform, false);
                 quantityHandler.name = "Quantity Handler";
                 quantityHandler.transform.GetChild(5).GetComponent<Slider>().maxValue = Convert.ToInt32(flaskItem[selectedSlotNum - 1]["Quantity"]);
+                quantityHandler.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Done(
+                    new Dictionary<string, List<Dictionary<string, object>>>()
+                    {
+                        {"Flask", flaskItem},
+                        {"Hotbar", Hotbar.hotbarItem}
+                    },
+                    selectedSlotNum)
+                );
             }
             else
             {
@@ -104,27 +111,33 @@ public class QuantityHandler : MonoBehaviour
             UpdateHotbar();
         }
     }
-    
-    public void TransferFlaskToHotbarDone()
+
+    private void Done(Dictionary<string, List<Dictionary<string, object>>> data, int slotNum)
     {
-        var newData = RepeatTransfer(flaskItem, Hotbar.hotbarItem, selectedSlotNum, Convert.ToInt32(Mathf.Floor(GameObject.Find("Quantity Handler/Slider").GetComponent<Slider>().value)));
-        flaskItem = newData[0];
-        Hotbar.hotbarItem = newData[1];
+        int sliderValue = Convert.ToInt32(Mathf.Floor(GameObject.Find("Quantity Handler/Slider").GetComponent<Slider>().value));
+        var newData = RepeatTransfer(data, slotNum, sliderValue);
+        Hotbar.hotbarItem = newData["Hotbar"];
+        flaskItem = newData["Flask"];
         UpdateFlask();
         UpdateHotbar();
         Destroy(GameObject.Find("Quantity Handler"));
     }
 
-    private List<Dictionary<string, object>>[] RepeatTransfer(List<Dictionary<string, object>> src, List<Dictionary<string, object>> dst, int slotNum, int quantity)
+    private Dictionary<string, List<Dictionary<string, object>>> RepeatTransfer(Dictionary<string, List<Dictionary<string, object>>> data, int slotNum, int quantity)
     {
-        List<Dictionary<string, object>>[] newData = new List<Dictionary<string, object>>[2];
+        var src = data.ElementAt(0).Value;
+        var dst = data.ElementAt(1).Value;
         for (int i = 0; i < quantity; i++)
         {
-            newData = Transfer(src, dst, slotNum - 1);
+            var newData = Transfer(src, dst, slotNum - 1);
             src = newData[0];
             dst = newData[1];
         }
-        return newData;
+        return new Dictionary<string, List<Dictionary<string, object>>>()
+        {
+            {data.ElementAt(0).Key, src},
+            {data.ElementAt(1).Key, dst}
+        };
     }
 
     private List<Dictionary<string, object>>[] Transfer(List<Dictionary<string, object>> src, List<Dictionary<string, object>> dst, int slotNum)
