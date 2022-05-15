@@ -876,7 +876,7 @@ GameObject:
   - component: {fileID: 3411474959516281995}
   - component: {fileID: 3411474959516281996}
   m_Layer: 5
-  m_Name: Quantity Handler Beta
+  m_Name: Hotbar Quantity Handler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1614,7 +1614,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2284255327161379892}
         m_TargetAssemblyTypeName: QuantityHandler, Assembly-CSharp
-        m_MethodName: DoneBeta
+        m_MethodName: TransferHotbarToFlaskDone
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

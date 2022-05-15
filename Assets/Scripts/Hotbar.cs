@@ -85,6 +85,20 @@ public class Hotbar : MonoBehaviour
         }
     }
 
+    private int Digitize(string Text)
+    {
+        List<char> charArr = new List<char>(Text);
+        List<char> digitList = new List<char>();
+        for (int i = 0; i <= charArr.Count - 1; i++)
+        {
+            if (Char.IsDigit(charArr[i]))
+            {
+                digitList.Add(charArr[i]);
+            }
+        }
+        return Convert.ToInt32(new string(digitList.ToArray()));
+    }
+
     private void UpdateSlot()
     {
         for (int i = 1; i <= GameObject.Find("Hotbar").transform.childCount; i++)
@@ -134,19 +148,5 @@ public class Hotbar : MonoBehaviour
                 Destroy(GameObject.Find($"Hotbar/Slot ({i})/Item"));
             }
         }
-    }
-
-    private int Digitize(string Text)
-    {
-        List<char> charArr = new List<char>(Text);
-        List<char> digitList = new List<char>();
-        for (int i = 0; i <= charArr.Count - 1; i++)
-        {
-            if (Char.IsDigit(charArr[i]))
-            {
-                digitList.Add(charArr[i]);
-            }
-        }
-        return Convert.ToInt32(new string(digitList.ToArray()));
     }
 }
