@@ -9,7 +9,7 @@ public class Hotbar : MonoBehaviour
 {
     public static int slotNum = 1;
     public static Dictionary<string, object>[] hotbarItem = {
-            new Dictionary<string, object>()
+        new Dictionary<string, object>()
             {
                 {"Item", "H"},
                 {"Quantity", 64}
@@ -60,11 +60,14 @@ public class Hotbar : MonoBehaviour
 
     public void ToggleSlot()
     {
-        var selectedSlotName = EventSystem.current.currentSelectedGameObject.name;
-        if (Digitize(selectedSlotName) != slotNum)
+        if (!QuantityHandler.pause)
         {
-            slotNum = Digitize(selectedSlotName);
-            UpdateSlot();
+            var selectedSlotName = EventSystem.current.currentSelectedGameObject.name;
+            if (Digitize(selectedSlotName) != slotNum)
+            {
+                slotNum = Digitize(selectedSlotName);
+                UpdateSlot();
+            }
         }
     }
 
