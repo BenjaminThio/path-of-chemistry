@@ -42,6 +42,7 @@ public class QuantityHandler : MonoBehaviour
     public void UpdateQuantity(float value)
     {
         GameObject.Find("Quantity Handler/Quantity").GetComponent<TextMeshProUGUI>().text = Convert.ToString(Mathf.Floor(value));
+        IdentifyQuantity(Mathf.Floor(value));
     }
 
     public void AddSliderValue()
@@ -83,6 +84,18 @@ public class QuantityHandler : MonoBehaviour
         Estimation("Flask", flaskItem, "Hotbar", Hotbar.hotbarItem, selectedSlotNum);
     }
 
+    private void IdentifyQuantity(float quantity)
+    {
+        if (quantity == 0)
+        {
+            GameObject.Find("Quantity Handler/Done/Text").GetComponent<TextMeshProUGUI>().text = "Cancel";
+        }
+        else
+        {
+            GameObject.Find("Quantity Handler/Done/Text").GetComponent<TextMeshProUGUI>().text = "Done";
+        }
+    }
+
     private void Estimation(string srcName, Dictionary<string, object>[] src, string dstName, Dictionary<string, object>[] dst, int slotNum)
     {
         if (!pause)
@@ -95,6 +108,7 @@ public class QuantityHandler : MonoBehaviour
                     GameObject quantityHandler = Instantiate(Resources.Load<GameObject>("Inventory/Quantity Handler"), GameObject.Find("Canvas").transform, false);
                     quantityHandler.name = "Quantity Handler";
                     quantityHandler.transform.GetChild(5).GetComponent<Slider>().maxValue = Convert.ToInt32(src[slotNum - 1]["Quantity"]);
+                    //quantityHandler.transform.GetChild(5).GetComponent<Slider>().value = quantityHandler.transform.GetChild(5).GetComponent<Slider>().maxValue;
                     quantityHandler.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Done(
                         new Dictionary<string, Dictionary<string, object>[]>()
                         {
@@ -103,6 +117,7 @@ public class QuantityHandler : MonoBehaviour
                         },
                         slotNum)
                     );
+                    IdentifyQuantity(quantityHandler.transform.GetChild(5).GetComponent<Slider>().value);
                 }
                 else
                 {
@@ -116,7 +131,7 @@ public class QuantityHandler : MonoBehaviour
 
     private void Done(Dictionary<string, Dictionary<string, object>[]> data, int slotNum)
     {
-        int sliderValue = Convert.ToInt32(Mathf.Floor(GameObject.Find("Quantity Handler/Slider").GetComponent<Slider>().value));
+        float sliderValue = Mathf.Floor(GameObject.Find("Quantity Handler/Slider").GetComponent<Slider>().value);
         var newData = RepeatTransfer(data, slotNum, sliderValue);
         pause = false;
         if (newData.ElementAt(0).Key == "Flask")
@@ -136,7 +151,7 @@ public class QuantityHandler : MonoBehaviour
         Destroy(GameObject.Find("Quantity Handler"));
     }
 
-    private Dictionary<string, Dictionary<string, object>[]> RepeatTransfer(Dictionary<string, Dictionary<string, object>[]> data, int slotNum, int quantity)
+    private Dictionary<string, Dictionary<string, object>[]> RepeatTransfer(Dictionary<string, Dictionary<string, object>[]> data, int slotNum, float quantity)
     {
         var src = data.ElementAt(0).Value;
         var dst = data.ElementAt(1).Value;

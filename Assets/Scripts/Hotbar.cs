@@ -10,45 +10,45 @@ public class Hotbar : MonoBehaviour
     public static int slotNum = 1;
     public static Dictionary<string, object>[] hotbarItem = {
         new Dictionary<string, object>()
-            {
-                {"Item", "H"},
-                {"Quantity", 64}
-            },
-            new Dictionary<string, object>()
-            {
-                {"Item", "O"},
-                {"Quantity", 5}
-            },
-            new Dictionary<string, object>()
-            {
-                {"Item", "Mg"},
-                {"Quantity", 1}
-            },
-            new Dictionary<string, object>()
-            {
-                {"Item", "He"},
-                {"Quantity", 1}
-            },
-            new Dictionary<string, object>()
-            {
-                {"Item", "Na"},
-                {"Quantity", 1}
-            },
-            new Dictionary<string, object>()
-            {
-                {"Item", "Cm"},
-                {"Quantity", 1}
-            },
-            new Dictionary<string, object>()
-            {
-                {"Item", "Og"},
-                {"Quantity", 1}
-            },
-            new Dictionary<string, object>()
-            {
-                {"Item", "H"},
-                {"Quantity", 64}
-            },
+        {
+            {"Item", "H"},
+            {"Quantity", 64}
+        },
+        new Dictionary<string, object>()
+        {
+            {"Item", "O"},
+            {"Quantity", 5}
+        },
+        new Dictionary<string, object>()
+        {
+            {"Item", "Mg"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>()
+        {
+            {"Item", "He"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>()
+        {
+            {"Item", "Na"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>()
+        {
+            {"Item", "Cm"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>()
+        {
+            {"Item", "Og"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>()
+        {
+            {"Item", "H"},
+            {"Quantity", 64}
+        },
         null
     };
 
