@@ -73,13 +73,13 @@ public class Hotbar : MonoBehaviour
 
     private int Digitize(string Text)
     {
-        List<char> charArr = new List<char>(Text);
+        char[] charArr = Text.ToCharArray();
         List<char> digitList = new List<char>();
-        for (int i = 0; i <= charArr.Count - 1; i++)
+        foreach (char i in charArr)
         {
-            if (Char.IsDigit(charArr[i]))
+            if (Char.IsDigit(i))
             {
-                digitList.Add(charArr[i]);
+                digitList.Add(i);
             }
         }
         return Convert.ToInt32(new string(digitList.ToArray()));

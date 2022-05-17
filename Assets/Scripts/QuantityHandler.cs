@@ -68,7 +68,12 @@ public class QuantityHandler : MonoBehaviour
 
     public void TransferHotbarToFlask()
     {
-        Estimation("Hotbar", Hotbar.hotbarItem, "Flask", flaskItem, Hotbar.slotNum);
+        Estimation(new Dictionary<string, Dictionary<string, object>[]>(){
+                {"Hotbar", Hotbar.hotbarItem},
+                {"Flask", flaskItem},
+            },
+            Hotbar.slotNum
+        );
     }
 
     public void TransferFlaskToHotbar()
@@ -81,7 +86,12 @@ public class QuantityHandler : MonoBehaviour
                 GameObject.Find($"Flask/Slot ({selectedSlotNum})").GetComponent<Image>().color = Color.cyan;
             }
         }
-        Estimation("Flask", flaskItem, "Hotbar", Hotbar.hotbarItem, selectedSlotNum);
+        Estimation(new Dictionary<string, Dictionary<string, object>[]>(){
+                {"Flask", flaskItem},
+                {"Hotbar", Hotbar.hotbarItem},
+            },
+            selectedSlotNum
+        );
     }
 
     private void IdentifyQuantity(float quantity)
@@ -96,8 +106,12 @@ public class QuantityHandler : MonoBehaviour
         }
     }
 
-    private void Estimation(string srcName, Dictionary<string, object>[] src, string dstName, Dictionary<string, object>[] dst, int slotNum)
+    private void Estimation(Dictionary<string, Dictionary<string, object>[]> data, int slotNum)
     {
+        string srcName = data.ElementAt(0).Key;
+        Dictionary<string, object>[] src = data.ElementAt(0).Value;
+        string dstName = data.ElementAt(1).Key;
+        Dictionary<string, object>[] dst = data.ElementAt(1).Value;
         if (!pause)
         {
             if (src[slotNum - 1] != null)
@@ -122,6 +136,10 @@ public class QuantityHandler : MonoBehaviour
                 else
                 {
                     Transfer(src, dst, slotNum - 1);
+                    for (int i = 1; i <= flaskItem.Length; i++)
+                    {
+                        GameObject.Find($"Flask Interface/Flask/Slot ({i})").GetComponent<Image>().color = Color.grey;
+                    }
                 }
                 UpdateFlask();
                 UpdateHotbar();
@@ -132,32 +150,31 @@ public class QuantityHandler : MonoBehaviour
     private void Done(Dictionary<string, Dictionary<string, object>[]> data, int slotNum)
     {
         float sliderValue = Mathf.Floor(GameObject.Find("Quantity Handler/Slider").GetComponent<Slider>().value);
-        var newData = RepeatTransfer(data, slotNum, sliderValue);
+        Dictionary<string, Dictionary<string, object>[]> newData = RepeatTransfer(data, slotNum, sliderValue);
         pause = false;
-        if (newData.ElementAt(0).Key == "Flask")
+        for (int i = 1; i <= flaskItem.Length; i++)
         {
-            for (int i = 1; i <= flaskItem.Length; i++)
-            {
-                GameObject.Find($"Flask Interface/Flask/Slot ({i})").GetComponent<Image>().color = Color.grey;
-            }
+            GameObject.Find($"Flask Interface/Flask/Slot ({i})").GetComponent<Image>().color = Color.grey;
         }
         if (newData != null)
         {
             Hotbar.hotbarItem = newData["Hotbar"];
             flaskItem = newData["Flask"];
-            UpdateHotbar();
-            UpdateFlask();
         }
+        UpdateHotbar();
+        UpdateFlask();
         Destroy(GameObject.Find("Quantity Handler"));
     }
 
     private Dictionary<string, Dictionary<string, object>[]> RepeatTransfer(Dictionary<string, Dictionary<string, object>[]> data, int slotNum, float quantity)
     {
-        var src = data.ElementAt(0).Value;
-        var dst = data.ElementAt(1).Value;
+        string srcName = data.ElementAt(0).Key;
+        Dictionary<string, object>[] src = data.ElementAt(0).Value;
+        string dstName = data.ElementAt(1).Key;
+        Dictionary<string, object>[] dst = data.ElementAt(1).Value;
         for (int i = 0; i < quantity; i++)
         {
-            var newData = Transfer(src, dst, slotNum - 1);
+            Dictionary<string, object>[][] newData = Transfer(src, dst, slotNum - 1);
             if (newData != null)
             {
                 src = newData[0];
@@ -170,15 +187,15 @@ public class QuantityHandler : MonoBehaviour
         }
         return new Dictionary<string, Dictionary<string, object>[]>()
         {
-            {data.ElementAt(0).Key, src},
-            {data.ElementAt(1).Key, dst}
+            {srcName, src},
+            {dstName, dst}
         };
     }
 
-    private List<Dictionary<string, object>[]> Transfer(Dictionary<string, object>[] src, Dictionary<string, object>[] dst, int slotNum)
+    private Dictionary<string, object>[][] Transfer(Dictionary<string, object>[] src, Dictionary<string, object>[] dst, int slotNum)
     {
-        List<string> allDstItemNames = new List<string>();
-        foreach (var i in dst)
+        /*List<string> allDstItemNames = new List<string>();
+        foreach (Dictionary<string, object> i in dst)
         {
             if (i != null)
             {
@@ -187,6 +204,14 @@ public class QuantityHandler : MonoBehaviour
             else
             {
                 allDstItemNames.Add(null);
+            }
+        }*/
+        string[] allDstItemNames = new string[dst.Length];
+        for (int i = 0; i < dst.Length; i++)
+        {
+            if (dst[i] != null)
+            {
+                allDstItemNames[i] = Convert.ToString(dst[i]["Item"]);
             }
         }
         if (allDstItemNames.Contains(Convert.ToString(src[slotNum]["Item"])))
@@ -197,7 +222,7 @@ public class QuantityHandler : MonoBehaviour
                 {
                     dst[i]["Quantity"] = Convert.ToInt32(dst[i]["Quantity"]) + 1;
                     src[slotNum]["Quantity"] = Convert.ToInt32(src[slotNum]["Quantity"]) - 1;
-                    return new List<Dictionary<string, object>[]>
+                    return new Dictionary<string, object>[][]
                     {
                         src,
                         dst
@@ -208,10 +233,10 @@ public class QuantityHandler : MonoBehaviour
             {
                 if (Convert.ToString(src[slotNum]["Item"]) == allDstItemNames[i] && Convert.ToInt32(dst[i]["Quantity"]) >= 64)
                 {
-                    var newData = ItemNotFound(src, dst, slotNum);
+                    Dictionary<string, object>[][] newData = ItemNotFound(src, dst, slotNum);
                     if (newData != null)
                     {
-                        return new List<Dictionary<string, object>[]>
+                        return new Dictionary<string, object>[][]
                         {
                             newData[0],
                             newData[1]
@@ -226,10 +251,10 @@ public class QuantityHandler : MonoBehaviour
         }
         else
         {
-            var newData = ItemNotFound(src, dst, slotNum);
+            Dictionary<string, object>[][] newData = ItemNotFound(src, dst, slotNum);
             if (newData != null)
             {
-                return new List<Dictionary<string, object>[]>
+                return new Dictionary<string, object>[][]
                 {
                     newData[0],
                     newData[1]
@@ -239,7 +264,7 @@ public class QuantityHandler : MonoBehaviour
         return null;
     }
 
-    private List<Dictionary<string, object>[]> ItemNotFound(Dictionary<string, object>[] src, Dictionary<string, object>[] dst, int slotNum)
+    private Dictionary<string, object>[][] ItemNotFound(Dictionary<string, object>[] src, Dictionary<string, object>[] dst, int slotNum)
     {
         if (dst.Contains(null))
         {
@@ -253,7 +278,7 @@ public class QuantityHandler : MonoBehaviour
                             {"Quantity", 1}
                         };
                     src[slotNum]["Quantity"] = Convert.ToInt32(src[slotNum]["Quantity"]) - 1;
-                    return new List<Dictionary<string, object>[]>
+                    return new Dictionary<string, object>[][]
                     {
                         src,
                         dst
@@ -271,13 +296,13 @@ public class QuantityHandler : MonoBehaviour
 
     private int Digitize(string Text)
     {
-        List<char> charArr = new List<char>(Text);
+        char[] charArr = Text.ToCharArray();
         List<char> digitList = new List<char>();
-        for (int i = 0; i <= charArr.Count - 1; i++)
+        foreach (char i in charArr)
         {
-            if (Char.IsDigit(charArr[i]))
+            if (Char.IsDigit(i))
             {
-                digitList.Add(charArr[i]);
+                digitList.Add(i);
             }
         }
         return Convert.ToInt32(new string(digitList.ToArray()));
