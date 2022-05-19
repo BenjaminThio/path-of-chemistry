@@ -5,11 +5,13 @@ using Newtonsoft.Json;
 public class Database
 {
     private static readonly object threadLock = new object();
-    private static Database database;
+    public static Database database;
+    public string hello { get; set; }
     public int[] intArr { get; set; }
     
     public Database()
     {
+        hello = "Hello World!";
         intArr = new int[]
         {
             1,
@@ -30,50 +32,52 @@ public class Database
         }
     }
 
-    public void updateDatabase(Database data)
+    public Database updateDatabase(Database data)
     {
         database = data;
+        return database;
     }
 }
 
 public class Recipes : MonoBehaviour
 {
+    public Database db;
     void Awake()
     {
+        db = Load();
+        db.hello = "ABCDEFG";
+        db.intArr = new int[] {
+            5,
+            4,
+            3,
+            2,
+            1
+        };
         Save();
+    }
+
+    private Database Load()
+    {
+        string filePath = $"{Application.persistentDataPath}/Path Of Chemistry/Data/Saves.json";
+        string fileContent = File.ReadAllText(filePath);
+        Database data = JsonConvert.DeserializeObject<Database>(fileContent);
+        return Database.Data().updateDatabase(data);
     }
 
     private void Save()
     {
         print(Application.persistentDataPath);
         Database database = Database.Data();
-        string gameDataPath = $"{Application.persistentDataPath}/Path Of Chemistry";
+        string directory = $"{Application.persistentDataPath}/Path Of Chemistry/Data";
         JsonSerializerSettings settings = new JsonSerializerSettings();
         settings.Formatting = Formatting.Indented;
         settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-        var json = JsonConvert.SerializeObject(database, settings);
-        foreach (string i in new string[]
+        string data = JsonConvert.SerializeObject(database, settings);
+        if (!Directory.Exists(directory))
         {
-            "Data"
-            //"Freeze Data"
-        })
-        {
-            string directory = $"{gameDataPath}/{i}";
-            if (!Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-            }
-            string filePath = Path.Combine(directory, "Saves.json");
-            string data = JsonConvert.SerializeObject(new int[]
-            {
-                1,
-                2,
-                3,
-                4,
-                5
-            },
-            settings);
-            File.WriteAllText(filePath, json);
+            Directory.CreateDirectory(directory);
         }
+        string filePath = Path.Combine(directory, "Saves.json");
+        File.WriteAllText(filePath, data);
     }
 }
