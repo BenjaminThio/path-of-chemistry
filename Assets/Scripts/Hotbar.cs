@@ -71,7 +71,7 @@ public class Hotbar : MonoBehaviour
         }
     }
 
-    private int Digitize(string Text)
+    public static int Digitize(string Text)
     {
         char[] charArr = Text.ToCharArray();
         List<char> digitList = new List<char>();
@@ -100,7 +100,7 @@ public class Hotbar : MonoBehaviour
         }
     }
 
-    private void UpdateHotbar()
+    public static void UpdateHotbar()
     {
         for (int i = 1; i <= hotbarItem.Length; i++)
         {
