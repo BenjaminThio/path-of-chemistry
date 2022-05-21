@@ -7,55 +7,18 @@ using UnityEngine.EventSystems;
 
 public class Hotbar : MonoBehaviour
 {
+    public Database db;
     public static int slotNum = 1;
-    public static Dictionary<string, object>[] hotbarItem = {
-        new Dictionary<string, object>()
-        {
-            {"Item", "H"},
-            {"Quantity", 64}
-        },
-        new Dictionary<string, object>()
-        {
-            {"Item", "O"},
-            {"Quantity", 5}
-        },
-        new Dictionary<string, object>()
-        {
-            {"Item", "Mg"},
-            {"Quantity", 1}
-        },
-        new Dictionary<string, object>()
-        {
-            {"Item", "He"},
-            {"Quantity", 1}
-        },
-        new Dictionary<string, object>()
-        {
-            {"Item", "Na"},
-            {"Quantity", 1}
-        },
-        new Dictionary<string, object>()
-        {
-            {"Item", "Cm"},
-            {"Quantity", 1}
-        },
-        new Dictionary<string, object>()
-        {
-            {"Item", "Og"},
-            {"Quantity", 1}
-        },
-        new Dictionary<string, object>()
-        {
-            {"Item", "H"},
-            {"Quantity", 64}
-        },
-        null
-    };
-
     private void Awake()
     {
+        db = Database.Load();
         UpdateSlot();
-        UpdateHotbar();
+        QuantityHandler.UpdateInventory("Hotbar", db.hotbarItem);
+    }
+
+    public void Save()
+    {
+        Database.Save();
     }
 
     public void ToggleSlot()
@@ -77,7 +40,7 @@ public class Hotbar : MonoBehaviour
         List<char> digitList = new List<char>();
         foreach (char i in charArr)
         {
-            if (Char.IsDigit(i))
+            if (char.IsDigit(i))
             {
                 digitList.Add(i);
             }
@@ -96,42 +59,6 @@ public class Hotbar : MonoBehaviour
             else
             {
                 GameObject.Find($"Hotbar/Slot ({i})").GetComponent<Image>().color = Color.grey;
-            }
-        }
-    }
-
-    public static void UpdateHotbar()
-    {
-        for (int i = 1; i <= hotbarItem.Length; i++)
-        {
-            GameObject.Find($"Hotbar/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = "";
-            if (GameObject.Find($"Hotbar/Slot ({i})/Item") == null)
-            {
-                GameObject item = Instantiate(Resources.Load<GameObject>("Inventory/Item"), GameObject.Find($"Hotbar/Slot ({i})").transform);
-                item.name = "Item";
-                item.transform.SetAsFirstSibling();
-            }
-            if (hotbarItem[i - 1] != null)
-            {
-                if (Convert.ToInt32(hotbarItem[i - 1]["Quantity"]) == 0)
-                {
-                    hotbarItem[i - 1] = null;
-                    Destroy(GameObject.Find($"Hotbar/Slot ({i})/Item"));
-                    continue;
-                }
-                else if (Convert.ToInt32(hotbarItem[i - 1]["Quantity"]) > 1)
-                {
-                    GameObject.Find($"Hotbar/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = Convert.ToString(hotbarItem[i - 1]["Quantity"]);
-                }
-                else
-                {
-                    GameObject.Find($"Hotbar/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = "";
-                }
-                GameObject.Find($"Hotbar/Slot ({i})/Item").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Elements/{hotbarItem[i - 1]["Item"]}");
-            }
-            else
-            {
-                Destroy(GameObject.Find($"Hotbar/Slot ({i})/Item"));
             }
         }
     }

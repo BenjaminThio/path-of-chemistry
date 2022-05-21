@@ -6,17 +6,19 @@ using TMPro;
 
 public class Experience : MonoBehaviour
 {
-    public int exp = 1;
+    public Database db;
+    public int addExp = 1;
     public Gradient gradient;
-    private int expLevel = 0;
+
     private void Awake()
     {
+        db = Database.Load();
         CheckExp();
     }
 
     public void AddExpButton()
     {
-        StartCoroutine(AddExp(exp));
+        StartCoroutine(AddExp(addExp));
     }
 
     private IEnumerator AddExp(int quantity)
@@ -25,13 +27,14 @@ public class Experience : MonoBehaviour
         for (int i = 0; i < quantity; i++)
         {
             yield return new WaitForSeconds(.3f);
-            expBar.value += 1;
-            if (expBar.value == expBar.maxValue)
+            db.exp += 1;
+            if (db.exp == expBar.maxValue)
             {
                 yield return new WaitForSeconds(.3f);
-                expBar.value = 0;
-                expLevel += 1;
+                db.exp = 0;
+                db.expLevel += 1;
             }
+
             CheckExp();
         } 
     }
@@ -39,8 +42,9 @@ public class Experience : MonoBehaviour
     private void CheckExp()
     {
         Slider expBar = GameObject.Find("Experience/Bar").GetComponent<Slider>();
-        GameObject.Find("Experience/Level").GetComponent<TextMeshProUGUI>().text = Convert.ToString(expLevel);
-        expBar.maxValue = (expLevel + 1) * 3;
+        GameObject.Find("Experience/Level").GetComponent<TextMeshProUGUI>().text = Convert.ToString(db.expLevel);
+        expBar.maxValue = (db.expLevel + 1) * 3;
+        expBar.value = db.exp;
         GameObject.Find("Experience/Bar/Fill Area/Fill").GetComponent<Image>().color = gradient.Evaluate(expBar.normalizedValue);
     }
 }

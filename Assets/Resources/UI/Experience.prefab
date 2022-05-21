@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2980cda54378504dab01ff77805c1f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exp: 5
+  addExp: 5
   gradient:
     serializedVersion: 2
     key0: {r: 1, g: 0, b: 0, a: 1}

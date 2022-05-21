@@ -1,49 +1,91 @@
 using System.IO;
+using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 
 public class Database
 {
+    public static readonly object threadLock = new object();
     public static Database db;
-    public string hello = "Hello World!";
-    public int[] intArr = new int[]
-    {
-        1, 2, 3, 4, 5
+    public int expLevel = 0;
+    public int exp;
+    public Dictionary<string, object>[] hotbarItem = {
+        new Dictionary<string, object>()
+        {
+            {"Item", "H"},
+            {"Quantity", 64}
+        },
+        new Dictionary<string, object>()
+        {
+            {"Item", "O"},
+            {"Quantity", 5}
+        },
+        new Dictionary<string, object>()
+        {
+            {"Item", "Mg"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>()
+        {
+            {"Item", "He"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>()
+        {
+            {"Item", "Na"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>()
+        {
+            {"Item", "Cm"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>()
+        {
+            {"Item", "Og"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>()
+        {
+            {"Item", "H"},
+            {"Quantity", 64}
+        },
+        null
+    };
+    public Dictionary<string, object>[] flaskItem = {
+        null,
+        null,
+        new Dictionary<string, object>()
+        {
+            {"Item", "H"},
+            {"Quantity", 64}
+        },
+        new Dictionary<string, object>()
+        {
+            {"Item", "H"},
+            {"Quantity", 64}
+        },
+        new Dictionary<string, object>()
+        {
+            {"Item", "H"},
+            {"Quantity", 64}
+        },
+        null,
+        null,
+        null,
+        null
     };
 
-    public static Database UpdateDatabase(Database data)
-    {
-        db = data;
-        return db;
-    }
-}
-
-public class DataStore : MonoBehaviour
-{
-    public Database db;
-    private void Awake()
-    {
-        db = Load();
-        db.hello = "Gay!";
-        db.intArr = new int[] {
-            7, 17, 27, 37, 47, 57, 67, 77
-        };
-        Save();
-    }
-
-    public void Click()
-    {
-        db.hello = "Edmund";
-        Save();
-    }
-    
     public static Database Load()
     {
         string directory = $"{Application.persistentDataPath}/Path Of Chemistry/Data";
         string filePath = $"{directory}/Saves.json";
-        if (Database.db == null)
+        lock (threadLock)
         {
-            Database.db = new Database();
+            if (db == null)
+            {
+                db = new Database();
+            }
         }
         if (!Directory.Exists(directory))
         {
@@ -55,16 +97,19 @@ public class DataStore : MonoBehaviour
         }
         string fileContent = File.ReadAllText(filePath);
         Database data = JsonConvert.DeserializeObject<Database>(fileContent);
-        return Database.UpdateDatabase(data);
+        db = data;
+        return db;
     }
 
     public static void Save()
     {
         string filePath = $"{Application.persistentDataPath}/Path Of Chemistry/Data/Saves.json";
-        JsonSerializerSettings settings = new JsonSerializerSettings();
-        settings.Formatting = Formatting.Indented;
-        settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-        string data = JsonConvert.SerializeObject(Database.db, settings);
+        JsonSerializerSettings settings = new JsonSerializerSettings()
+        {
+            Formatting = Formatting.Indented,
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        };
+        string data = JsonConvert.SerializeObject(db, settings);
         File.WriteAllText(filePath, data);
     }
 }
