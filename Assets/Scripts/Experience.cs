@@ -6,13 +6,13 @@ using TMPro;
 
 public class Experience : MonoBehaviour
 {
-    public Database db;
+    private Database db;
     public int addExp = 1;
     public Gradient gradient;
 
-    private void Awake()
+    private void Start()
     {
-        db = Database.Load();
+        db = Database.db;
         CheckExp();
     }
 

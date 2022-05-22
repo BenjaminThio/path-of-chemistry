@@ -7,8 +7,9 @@ public class Database
 {
     public static readonly object threadLock = new object();
     public static Database db;
-    public int expLevel = 0;
-    public int exp;
+    public int expLevel = 1;
+    public int exp = 0;
+    public int slotNum = 1;
     public Dictionary<string, object>[] hotbarItem = {
         new Dictionary<string, object>()
         {
@@ -76,7 +77,7 @@ public class Database
         null
     };
 
-    public static Database Load()
+    public static void Load()
     {
         string directory = $"{Application.persistentDataPath}/Path Of Chemistry/Data";
         string filePath = $"{directory}/Saves.json";
@@ -98,7 +99,6 @@ public class Database
         string fileContent = File.ReadAllText(filePath);
         Database data = JsonConvert.DeserializeObject<Database>(fileContent);
         db = data;
-        return db;
     }
 
     public static void Save()
@@ -111,5 +111,19 @@ public class Database
         };
         string data = JsonConvert.SerializeObject(db, settings);
         File.WriteAllText(filePath, data);
+    }
+
+    public static void SaveAndQuit()
+    {
+        Save();
+        db = null;
+    }
+}
+
+public class DataStore : MonoBehaviour
+{
+    private void Awake()
+    {
+        Database.Load();
     }
 }
