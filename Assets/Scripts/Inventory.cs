@@ -31,7 +31,6 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 1; i <= inventory.Length; i++)
         {
-            GameObject.Find($"{path}/Slot ({i})").GetComponent<Image>().color = Color.grey;
             GameObject.Find($"{path}/Slot ({i})/Quantity").GetComponent<TextMeshProUGUI>().text = "";
             if (GameObject.Find($"{path}/Slot ({i})/Item") == null)
             {

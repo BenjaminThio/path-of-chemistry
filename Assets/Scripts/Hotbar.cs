@@ -28,7 +28,7 @@ public class Hotbar : MonoBehaviour
 
     private void UpdateSlot()
     {
-        for (int i = 1; i <= GameObject.Find("Hotbar").transform.childCount; i++)
+        for (int i = 1; i <= db.hotbarItem.Length; i++)
         {
             if (i == db.slotNum)
             {

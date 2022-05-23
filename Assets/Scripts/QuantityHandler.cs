@@ -94,6 +94,10 @@ public class QuantityHandler : MonoBehaviour
                 else
                 {
                     Transfer(src, dst, slotNum - 1);
+                    for (int i = 1; i <= db.flaskItem.Length; i++)
+                    {
+                        GameObject.Find($"Flask/Slot ({i})").GetComponent<Image>().color = Color.grey;
+                    }
                 }
                 Inventory.UpdateInventory("Hotbar", db.hotbarItem);
                 Inventory.UpdateInventory("Flask", db.flaskItem);
@@ -105,6 +109,10 @@ public class QuantityHandler : MonoBehaviour
     {
         float sliderValue = Mathf.Floor(GameObject.Find("Quantity Handler/Slider").GetComponent<Slider>().value);
         RepeatTransfer(src, dst, slotNum, sliderValue);
+        for (int i = 1; i <= db.flaskItem.Length; i++)
+        {
+            GameObject.Find($"Flask/Slot ({i})").GetComponent<Image>().color = Color.grey;
+        }
         pause = false;
         Inventory.UpdateInventory("Hotbar", db.hotbarItem);
         Inventory.UpdateInventory("Flask", db.flaskItem);
