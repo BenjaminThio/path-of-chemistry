@@ -10,16 +10,24 @@ public class Experiment : MonoBehaviour
     {
         new Dictionary<string, int>()
         {
+            {"K", 1}
+        },
+        new Dictionary<string, int>()
+        {
+            {"K", 1}
+        },
+        new Dictionary<string, int>()
+        {
             {"Cm", 1},
             {"Og", 1}
         },
         new Dictionary<string, int>()
         {
-            {"K", 1},
+            {"K", 1}
         },
         new Dictionary<string, int>()
         {
-            {"K", 1},
+            {"K", 1}
         }
     };
 
@@ -46,27 +54,47 @@ public class Experiment : MonoBehaviour
                 }
             }
         }
-        foreach (Dictionary<string, int> recipe in recipes)
+        if (flaskItemProps.Count == 0)
         {
-            foreach (KeyValuePair<string, int> material in recipe)
-            {
-                if (!flaskItemProps.Count.Equals(recipe.Count) || !(flaskItemProps.ContainsKey(material.Key) && flaskItemProps[material.Key].Equals(material.Value)))
-                {
-                    //Alert
-                    print("Pls refer to Chemidex's recipes.");
-                    return;
-                }
-            }
-            print("Reaction!");
-            LevelUp();
-            UpdateLevel();
+            //Alert
+            print("Nothing to react!");
             return;
         }
+        for (int recipeIndex = 0; recipeIndex < recipes.Length; recipeIndex++)
+        {
+            if (flaskItemProps.Count.Equals(recipes[recipeIndex].Count) && ContainsProps(recipes[recipeIndex], flaskItemProps))
+            {
+                if (recipeIndex == db.level - 1)
+                {
+                    print("Reaction!");
+                    db.flaskItem = new Dictionary<string, object>[db.flaskItem.Length];
+                    db.level += 1;
+                    UpdateLevel();
+                    Inventory.UpdateInventory("Flask", db.flaskItem);
+                }
+                else if (recipeIndex > db.level - 1)
+                {
+                    //Alert
+                    print("Experiement locked.");
+                    return;
+                }
+                //Add exp
+                return;
+            }
+        }
+        print("Pls refer to the recipes of Chemidex!");
     }
 
-    private void LevelUp()
+    private bool ContainsProps(Dictionary<string, int> recipe, Dictionary<string, int> props)
     {
-        db.level += 1;
+        foreach (KeyValuePair<string, int> material in recipe)
+        {
+            if (!(props.ContainsKey(material.Key) && props[material.Key].Equals(material.Value)))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void UpdateLevel()
