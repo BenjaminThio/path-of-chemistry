@@ -18,11 +18,6 @@ public class QuantityHandler : MonoBehaviour
         Inventory.UpdateInventory("Flask", db.flaskItem);
     }
 
-    public void Save()
-    {
-        Database.Save();
-    }
-
     public void UpdateQuantity(float value)
     {
         GameObject.Find("Quantity Handler/Quantity").GetComponent<TextMeshProUGUI>().text = Convert.ToString(Mathf.Floor(value));

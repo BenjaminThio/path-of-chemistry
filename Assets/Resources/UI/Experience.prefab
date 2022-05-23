@@ -599,7 +599,7 @@ GameObject:
   - component: {fileID: 2881576599336198032}
   - component: {fileID: 2881576599336198047}
   m_Layer: 5
-  m_Name: Level
+  m_Name: EXP Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

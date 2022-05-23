@@ -5,9 +5,10 @@ using Newtonsoft.Json;
 
 public class Database
 {
-    public static readonly object threadLock = new object();
+    private static readonly object threadLock = new object();
     public static Database db;
-    public int expLevel = 1;
+    public int level = 1;
+    public int expLevel = 0;
     public int exp = 0;
     public int slotNum = 1;
     public Dictionary<string, object>[] hotbarItem = {
@@ -117,6 +118,17 @@ public class Database
     {
         Save();
         db = null;
+    }
+
+    public static string Log(object rawData)
+    {
+        JsonSerializerSettings settings = new JsonSerializerSettings()
+        {
+            Formatting = Formatting.Indented,
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        };
+        string newData = JsonConvert.SerializeObject(rawData, settings);
+        return newData;
     }
 }
 

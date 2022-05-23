@@ -42,7 +42,14 @@ public class Experience : MonoBehaviour
     private void CheckExp()
     {
         Slider expBar = GameObject.Find("Experience/Bar").GetComponent<Slider>();
-        GameObject.Find("Experience/Level").GetComponent<TextMeshProUGUI>().text = Convert.ToString(db.expLevel);
+        if (db.expLevel > 0)
+        {
+            GameObject.Find("Experience/EXP Level").GetComponent<TextMeshProUGUI>().text = Convert.ToString(db.expLevel);
+        }
+        else
+        {
+            GameObject.Find("Experience/EXP Level").GetComponent<TextMeshProUGUI>().text = "";
+        }
         expBar.maxValue = (db.expLevel + 1) * 3;
         expBar.value = db.exp;
         GameObject.Find("Experience/Bar/Fill Area/Fill").GetComponent<Image>().color = gradient.Evaluate(expBar.normalizedValue);
