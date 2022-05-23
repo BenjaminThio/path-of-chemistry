@@ -7,7 +7,6 @@ using TMPro;
 public class Experience : MonoBehaviour
 {
     private Database db;
-    public int addExp = 1;
     public Gradient gradient;
 
     private void Start()
@@ -16,12 +15,7 @@ public class Experience : MonoBehaviour
         CheckExp();
     }
 
-    public void AddExpButton()
-    {
-        StartCoroutine(AddExp(addExp));
-    }
-
-    private IEnumerator AddExp(int quantity)
+    public IEnumerator AddExp(int quantity)
     {
         Slider expBar = GameObject.Find("Experience/Bar").GetComponent<Slider>();
         for (int i = 0; i < quantity; i++)

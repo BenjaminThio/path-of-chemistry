@@ -10,11 +10,11 @@ public class Experiment : MonoBehaviour
     {
         new Dictionary<string, int>()
         {
-            {"K", 1}
+            {"H", 1}
         },
         new Dictionary<string, int>()
         {
-            {"K", 1}
+            {"H", 2}
         },
         new Dictionary<string, int>()
         {
@@ -23,11 +23,11 @@ public class Experiment : MonoBehaviour
         },
         new Dictionary<string, int>()
         {
-            {"K", 1}
+            {"He", 1}
         },
         new Dictionary<string, int>()
         {
-            {"K", 1}
+            {"O", 5}
         }
     };
 
@@ -67,10 +67,8 @@ public class Experiment : MonoBehaviour
                 if (recipeIndex == db.level - 1)
                 {
                     print("Reaction!");
-                    db.flaskItem = new Dictionary<string, object>[db.flaskItem.Length];
                     db.level += 1;
                     UpdateLevel();
-                    Inventory.UpdateInventory("Flask", db.flaskItem);
                 }
                 else if (recipeIndex > db.level - 1)
                 {
@@ -78,7 +76,10 @@ public class Experiment : MonoBehaviour
                     print("Experiement locked.");
                     return;
                 }
-                //Add exp
+                db.flaskItem = new Dictionary<string, object>[db.flaskItem.Length];
+                Inventory.UpdateInventory("Flask", db.flaskItem);
+                Experience experience = gameObject.GetComponent<Experience>();
+                StartCoroutine(experience.AddExp((recipeIndex + 1) * 5));
                 return;
             }
         }
