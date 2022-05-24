@@ -5,8 +5,8 @@ using TMPro;
 
 public class Experiment : MonoBehaviour
 {
-    Database db;
-    Dictionary<string, int>[] recipes =
+    private Database db;
+    private Dictionary<string, int>[] recipes =
     {
         new Dictionary<string, int>()
         {
