@@ -369,7 +369,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2137794556689680943}
         m_TargetAssemblyTypeName: ElementConstructor, Assembly-CSharp
-        m_MethodName: Remove
+        m_MethodName: AddOrRemove
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1129,7 +1129,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8458342489969414698}
         m_TargetAssemblyTypeName: ElementConstructor, Assembly-CSharp
-        m_MethodName: Remove
+        m_MethodName: AddOrRemove
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1161,6 +1161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2751811819130858428}
   - component: {fileID: 908291401398370973}
+  - component: {fileID: 7771210061124421179}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -1240,7 +1241,31 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7771210061124421179}
+        m_TargetAssemblyTypeName: ElementConstructor, Assembly-CSharp
+        m_MethodName: UpdateParticles
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7771210061124421179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188345765005156235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 767e49018a09fdf4dab6e00f12aedfaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1591973919672308931
 GameObject:
   m_ObjectHideFlags: 0
@@ -1540,7 +1565,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2317738473370235723}
         m_TargetAssemblyTypeName: ElementConstructor, Assembly-CSharp
-        m_MethodName: Add
+        m_MethodName: AddOrRemove
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1572,6 +1597,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4140959170943936241}
   - component: {fileID: 7235042020959084484}
+  - component: {fileID: 5537037072738907142}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -1651,7 +1677,31 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5537037072738907142}
+        m_TargetAssemblyTypeName: ElementConstructor, Assembly-CSharp
+        m_MethodName: UpdateParticles
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5537037072738907142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923091699558052805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 767e49018a09fdf4dab6e00f12aedfaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2043198222725298192
 GameObject:
   m_ObjectHideFlags: 0
@@ -1776,7 +1826,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4212615460591766143}
         m_TargetAssemblyTypeName: ElementConstructor, Assembly-CSharp
-        m_MethodName: Add
+        m_MethodName: AddOrRemove
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3951,7 +4001,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1782110344710915440}
         m_TargetAssemblyTypeName: ElementConstructor, Assembly-CSharp
-        m_MethodName: Add
+        m_MethodName: AddOrRemove
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4204,6 +4254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7153317269076413785}
   - component: {fileID: 4774401944978621127}
+  - component: {fileID: 8100576445663881236}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -4283,7 +4334,31 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8100576445663881236}
+        m_TargetAssemblyTypeName: ElementConstructor, Assembly-CSharp
+        m_MethodName: UpdateParticles
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8100576445663881236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7816283584735801527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 767e49018a09fdf4dab6e00f12aedfaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7850651711655726308
 GameObject:
   m_ObjectHideFlags: 0
@@ -4697,7 +4772,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5934635523027129596}
         m_TargetAssemblyTypeName: ElementConstructor, Assembly-CSharp
-        m_MethodName: Remove
+        m_MethodName: AddOrRemove
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
