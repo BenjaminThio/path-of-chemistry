@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class Inventory : MonoBehaviour
+public class Global : MonoBehaviour
 {
     private Database db;
 
@@ -13,9 +13,10 @@ public class Inventory : MonoBehaviour
         db = Database.db;
     }
 
-    public static int GetSlotNum(string Text)
+    public static int Digitize(string text)
     {
-        char[] charArr = Text.ToCharArray();
+        text = text.Trim();
+        char[] charArr = text.ToCharArray();
         List<char> digitList = new List<char>();
         foreach (char i in charArr)
         {
@@ -24,7 +25,29 @@ public class Inventory : MonoBehaviour
                 digitList.Add(i);
             }
         }
+        if (digitList.Count == 0)
+        {
+            return 0;
+        }
         return Convert.ToInt32(new string(digitList.ToArray()));
+    }
+
+    public static bool IsDigit(string text)
+    {
+        text = text.Trim();
+        if (text == "")
+        {
+            return false;
+        }
+        char[] charArr = text.ToCharArray();
+        foreach (char i in charArr)
+        {
+            if (!char.IsDigit(i))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static void UpdateInventory(string path, Dictionary<string, object>[] inventory)

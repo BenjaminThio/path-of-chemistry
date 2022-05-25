@@ -10,7 +10,7 @@ public class Hotbar : MonoBehaviour
     {
         db = Database.db;
         UpdateSlot();
-        Inventory.UpdateInventory("Hotbar", db.hotbarItem);
+        Global.UpdateInventory("Hotbar", db.hotbarItem);
     }
 
     public void ToggleSlot()
@@ -18,9 +18,9 @@ public class Hotbar : MonoBehaviour
         if (!QuantityHandler.pause)
         {
             var selectedSlotName = EventSystem.current.currentSelectedGameObject.name;
-            if (Inventory.GetSlotNum(selectedSlotName) != db.slotNum)
+            if (Global.Digitize(selectedSlotName) != db.slotNum)
             {
-                db.slotNum = Inventory.GetSlotNum(selectedSlotName);
+                db.slotNum = Global.Digitize(selectedSlotName);
                 UpdateSlot();
             }
         }

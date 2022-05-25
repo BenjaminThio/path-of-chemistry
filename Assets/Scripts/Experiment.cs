@@ -77,7 +77,7 @@ public class Experiment : MonoBehaviour
                     return;
                 }
                 db.flaskItem = new Dictionary<string, object>[db.flaskItem.Length];
-                Inventory.UpdateInventory("Flask", db.flaskItem);
+                Global.UpdateInventory("Flask", db.flaskItem);
                 Experience experience = gameObject.GetComponent<Experience>();
                 StartCoroutine(experience.AddExp((recipeIndex + 1) * 5));
                 return;

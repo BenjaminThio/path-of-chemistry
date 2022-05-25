@@ -15,7 +15,7 @@ public class QuantityHandler : MonoBehaviour
     private void Start()
     {
         db = Database.db;
-        Inventory.UpdateInventory("Flask", db.flaskItem);
+        Global.UpdateInventory("Flask", db.flaskItem);
     }
 
     public void UpdateQuantity(float value)
@@ -66,7 +66,7 @@ public class QuantityHandler : MonoBehaviour
     {
         if (!pause)
         {
-            selectedSlotNum = Inventory.GetSlotNum(EventSystem.current.currentSelectedGameObject.name);
+            selectedSlotNum = Global.Digitize(EventSystem.current.currentSelectedGameObject.name);
             if (db.flaskItem[selectedSlotNum - 1] != null)
             {
                 GameObject.Find($"Flask/Slot ({selectedSlotNum})").GetComponent<Image>().color = Color.cyan;
@@ -99,8 +99,8 @@ public class QuantityHandler : MonoBehaviour
                         GameObject.Find($"Flask/Slot ({i})").GetComponent<Image>().color = Color.grey;
                     }
                 }
-                Inventory.UpdateInventory("Hotbar", db.hotbarItem);
-                Inventory.UpdateInventory("Flask", db.flaskItem);
+                Global.UpdateInventory("Hotbar", db.hotbarItem);
+                Global.UpdateInventory("Flask", db.flaskItem);
             }
         }
     }
@@ -114,8 +114,8 @@ public class QuantityHandler : MonoBehaviour
             GameObject.Find($"Flask/Slot ({i})").GetComponent<Image>().color = Color.grey;
         }
         pause = false;
-        Inventory.UpdateInventory("Hotbar", db.hotbarItem);
-        Inventory.UpdateInventory("Flask", db.flaskItem);
+        Global.UpdateInventory("Hotbar", db.hotbarItem);
+        Global.UpdateInventory("Flask", db.flaskItem);
         Destroy(GameObject.Find("Quantity Handler"));
     }
 

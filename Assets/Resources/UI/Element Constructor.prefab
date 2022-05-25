@@ -493,6 +493,7 @@ GameObject:
   - component: {fileID: 635741919379943096}
   - component: {fileID: 635741919379943095}
   - component: {fileID: 635741919379943094}
+  - component: {fileID: 3280642960043121615}
   m_Layer: 5
   m_Name: Input
   m_TagString: Untagged
@@ -637,14 +638,26 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3280642960043121615}
+        m_TargetAssemblyTypeName: ElementConstructor, Assembly-CSharp
+        m_MethodName: OnInputChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTouchScreenKeyboardStatusChanged:
     m_PersistentCalls:
       m_Calls: []
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 
+  m_Text: 118
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -656,6 +669,18 @@ MonoBehaviour:
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
   m_InputValidator: {fileID: 0}
+--- !u!114 &3280642960043121615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635741919379943092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 767e49018a09fdf4dab6e00f12aedfaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &635741919838282537
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,7 +827,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u200B"
+  m_text: "118\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1236,7 +1261,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 5036490341363098634}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 118
+  m_MaxValue: 0
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -1244,7 +1269,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7771210061124421179}
         m_TargetAssemblyTypeName: ElementConstructor, Assembly-CSharp
-        m_MethodName: UpdateParticles
+        m_MethodName: OnSliderValueChanged
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1278,6 +1303,7 @@ GameObject:
   - component: {fileID: 170145579869120305}
   - component: {fileID: 8039519241353147465}
   - component: {fileID: 2513153312353813736}
+  - component: {fileID: 411380095009092455}
   m_Layer: 5
   m_Name: Input
   m_TagString: Untagged
@@ -1422,14 +1448,26 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 411380095009092455}
+        m_TargetAssemblyTypeName: ElementConstructor, Assembly-CSharp
+        m_MethodName: OnInputChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTouchScreenKeyboardStatusChanged:
     m_PersistentCalls:
       m_Calls: []
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 
+  m_Text: 118
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -1441,6 +1479,18 @@ MonoBehaviour:
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
   m_InputValidator: {fileID: 0}
+--- !u!114 &411380095009092455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591973919672308931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 767e49018a09fdf4dab6e00f12aedfaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1690263339332966221
 GameObject:
   m_ObjectHideFlags: 0
@@ -1672,7 +1722,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 4028509718519911280}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 118
+  m_MaxValue: 0
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -1680,7 +1730,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5537037072738907142}
         m_TargetAssemblyTypeName: ElementConstructor, Assembly-CSharp
-        m_MethodName: UpdateParticles
+        m_MethodName: OnSliderValueChanged
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2024,7 +2074,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u200B"
+  m_text: "118\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4124,7 +4174,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u200B"
+  m_text: "118\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4329,7 +4379,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 435952661893088196}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 118
+  m_MaxValue: 0
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -4337,7 +4387,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8100576445663881236}
         m_TargetAssemblyTypeName: ElementConstructor, Assembly-CSharp
-        m_MethodName: UpdateParticles
+        m_MethodName: OnSliderValueChanged
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4371,6 +4421,7 @@ GameObject:
   - component: {fileID: 1165160979578636548}
   - component: {fileID: 2828687271590101826}
   - component: {fileID: 737951559716557591}
+  - component: {fileID: 1349773397510328868}
   m_Layer: 5
   m_Name: Input
   m_TagString: Untagged
@@ -4515,14 +4566,26 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1349773397510328868}
+        m_TargetAssemblyTypeName: ElementConstructor, Assembly-CSharp
+        m_MethodName: OnInputChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTouchScreenKeyboardStatusChanged:
     m_PersistentCalls:
       m_Calls: []
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 
+  m_Text: 118
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -4534,6 +4597,18 @@ MonoBehaviour:
   m_isRichTextEditingAllowed: 0
   m_LineLimit: 0
   m_InputValidator: {fileID: 0}
+--- !u!114 &1349773397510328868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7850651711655726308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 767e49018a09fdf4dab6e00f12aedfaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8160294977583913123
 GameObject:
   m_ObjectHideFlags: 0
