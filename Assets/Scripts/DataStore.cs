@@ -77,7 +77,7 @@ public class Database
         null,
         null
     };
-    private readonly Dictionary<string, object>[] elements = {
+    public readonly Dictionary<string, object>[] elements = {
         new Dictionary<string, object>()
         {
             {"symbol", "H"},

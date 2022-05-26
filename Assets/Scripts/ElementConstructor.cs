@@ -26,6 +26,7 @@ public class ElementConstructor : MonoBehaviour
         string particleName = gameObject.transform.parent.name;
         GameObject.Find($"Element Constructor/{particleName}/Slider").GetComponent<Slider>().maxValue = particlesMaxValue[particleName];
         GameObject.Find($"Element Constructor/{particleName}/Input").GetComponent<TMP_InputField>().text = Convert.ToString(particles[particleName]);
+        UpdatePreview();
     }
 
     public void OnInputChanged(string value)
@@ -50,6 +51,7 @@ public class ElementConstructor : MonoBehaviour
         string particleName = gameObject.transform.parent.name;
         particles[particleName] = Convert.ToInt32(Mathf.Floor(value));
         GameObject.Find($"Element Constructor/{particleName}/Input").GetComponent<TMP_InputField>().text = Convert.ToString(particles[particleName]);
+        UpdatePreview();
     }
 
     public void AddOrRemove()
@@ -78,5 +80,22 @@ public class ElementConstructor : MonoBehaviour
         particles[particleName] = value;
         GameObject.Find($"Element Constructor/{particleName}/Slider").GetComponent<Slider>().value = particles[particleName];
         GameObject.Find($"Element Constructor/{particleName}/Input").GetComponent<TMP_InputField>().text = Convert.ToString(particles[particleName]);
+        UpdatePreview();
+    }
+
+    private void UpdatePreview()
+    {
+        foreach (Dictionary<string, object> element in db.elements)
+        {
+            if (particles["Proton"] == Convert.ToInt32(element["protons"]) && particles["Electron"] == Convert.ToInt32(element["electrons"]) && particles["Neutron"] == Convert.ToInt32(element["neutrons"]))
+            {
+                GameObject.Find("Preview/Item").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Elements/{element["symbol"]}");
+                return;
+            }
+            else
+            {
+                GameObject.Find("Preview/Item").GetComponent<Image>().sprite = Resources.Load<Sprite>("None");
+            }
+        }
     }
 }
