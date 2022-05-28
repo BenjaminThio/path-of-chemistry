@@ -77,7 +77,64 @@ public class Database
         null,
         null
     };
-    public readonly Dictionary<string, object>[] elements = {
+
+    public static void Load()
+    {
+        string directory = $"{Application.persistentDataPath}/Path Of Chemistry/Data";
+        string filePath = $"{directory}/Saves.json";
+        lock (threadLock)
+        {
+            if (db == null)
+            {
+                db = new Database();
+            }
+        }
+        if (!Directory.Exists(directory))
+        {
+            Directory.CreateDirectory(directory);
+        }
+        if (!File.Exists(filePath))
+        {
+            Save();
+        }
+        string fileContent = File.ReadAllText(filePath);
+        Database data = JsonConvert.DeserializeObject<Database>(fileContent);
+        db = data;
+    }
+
+    public static void Save()
+    {
+        string filePath = $"{Application.persistentDataPath}/Path Of Chemistry/Data/Saves.json";
+        JsonSerializerSettings settings = new JsonSerializerSettings()
+        {
+            Formatting = Formatting.Indented,
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        };
+        string data = JsonConvert.SerializeObject(db, settings);
+        File.WriteAllText(filePath, data);
+    }
+
+    public static void SaveAndQuit()
+    {
+        Save();
+        db = null;
+    }
+
+    public static string Log(object rawData)
+    {
+        JsonSerializerSettings settings = new JsonSerializerSettings()
+        {
+            Formatting = Formatting.Indented,
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        };
+        string newData = JsonConvert.SerializeObject(rawData, settings);
+        return newData;
+    }
+}
+
+public static class ReadOnly
+{
+    public static readonly Dictionary<string, object>[] elements = {
         new Dictionary<string, object>()
         {
             {"symbol", "H"},
@@ -1259,59 +1316,6 @@ public class Database
             {"weight", 294}
         }
     };
-
-    public static void Load()
-    {
-        string directory = $"{Application.persistentDataPath}/Path Of Chemistry/Data";
-        string filePath = $"{directory}/Saves.json";
-        lock (threadLock)
-        {
-            if (db == null)
-            {
-                db = new Database();
-            }
-        }
-        if (!Directory.Exists(directory))
-        {
-            Directory.CreateDirectory(directory);
-        }
-        if (!File.Exists(filePath))
-        {
-            Save();
-        }
-        string fileContent = File.ReadAllText(filePath);
-        Database data = JsonConvert.DeserializeObject<Database>(fileContent);
-        db = data;
-    }
-
-    public static void Save()
-    {
-        string filePath = $"{Application.persistentDataPath}/Path Of Chemistry/Data/Saves.json";
-        JsonSerializerSettings settings = new JsonSerializerSettings()
-        {
-            Formatting = Formatting.Indented,
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-        };
-        string data = JsonConvert.SerializeObject(db, settings);
-        File.WriteAllText(filePath, data);
-    }
-
-    public static void SaveAndQuit()
-    {
-        Save();
-        db = null;
-    }
-
-    public static string Log(object rawData)
-    {
-        JsonSerializerSettings settings = new JsonSerializerSettings()
-        {
-            Formatting = Formatting.Indented,
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-        };
-        string newData = JsonConvert.SerializeObject(rawData, settings);
-        return newData;
-    }
 }
 
 public class DataStore : MonoBehaviour

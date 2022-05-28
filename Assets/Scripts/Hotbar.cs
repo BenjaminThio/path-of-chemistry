@@ -17,7 +17,7 @@ public class Hotbar : MonoBehaviour
     {
         if (!QuantityHandler.pause)
         {
-            var selectedSlotName = EventSystem.current.currentSelectedGameObject.name;
+            string selectedSlotName = EventSystem.current.currentSelectedGameObject.name;
             if (Global.Digitize(selectedSlotName) != db.slotNum)
             {
                 db.slotNum = Global.Digitize(selectedSlotName);

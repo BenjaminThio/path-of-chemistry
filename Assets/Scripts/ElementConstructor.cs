@@ -2,15 +2,15 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class ElementConstructor : MonoBehaviour
 {
-    private Database db;
     private static Dictionary<string, int> particles = new Dictionary<string, int>()
     {
-        {"Proton", 0},
-        {"Electron", 0},
+        {"Proton", 1},
+        {"Electron", 1},
         {"Neutron", 0}
     };
     private readonly Dictionary<string, int> particlesMaxValue = new Dictionary<string, int>()
@@ -22,79 +22,113 @@ public class ElementConstructor : MonoBehaviour
 
     private void Start()
     {
-        db = Database.db;
-        string particleName = gameObject.transform.parent.name;
+        string particleName = gameObject.name;
         GameObject.Find($"Element Constructor/{particleName}/Slider").GetComponent<Slider>().maxValue = particlesMaxValue[particleName];
-        GameObject.Find($"Element Constructor/{particleName}/Input").GetComponent<TMP_InputField>().text = Convert.ToString(particles[particleName]);
+        GameObject.Find($"Element Constructor/{particleName}/Add").GetComponent<Button>().GetComponent<Button>().onClick.AddListener(AddOrRemove);
+        GameObject.Find($"Element Constructor/{particleName}/Remove").GetComponent<Button>().GetComponent<Button>().onClick.AddListener(AddOrRemove);
+        AddSliderListener(false);
+        AddInputListener(false);
         UpdatePreview();
     }
 
-    public void OnInputChanged(string value)
+    private void AddSliderListener(bool requireRemoveAllListeners)
     {
-        string particleName = gameObject.transform.parent.name;
+        string particleName = gameObject.name;
+        Slider slider = GameObject.Find($"Element Constructor/{particleName}/Slider").GetComponent<Slider>();
+        if (requireRemoveAllListeners)
+        {
+            slider.onValueChanged.RemoveAllListeners();
+        }
+        slider.value = particles[particleName];
+        slider.onValueChanged.AddListener(OnSliderValueChanged);
+    }
+
+    private void OnSliderValueChanged(float value)
+    {
+        string particleName = gameObject.name;
+        particles[particleName] = Convert.ToInt32(Mathf.Floor(value));
+        AddInputListener(true);
+        UpdatePreview();
+    }
+
+    private void AddInputListener(bool requireRemoveAllListeners)
+    {
+        string particleName = gameObject.name; 
+        TMP_InputField input = GameObject.Find($"Element Constructor/{particleName}/Input").GetComponent<TMP_InputField>();
+        if (requireRemoveAllListeners)
+        {
+            input.onValueChanged.RemoveAllListeners();
+        }
+        input.text = Convert.ToString(particles[particleName]);
+        input.onValueChanged.AddListener(OnInputValueChanged);
+    }
+
+    private void OnInputValueChanged(string value)
+    {
+        string particleName = gameObject.name;
         if (!Global.IsDigit(value))
         {
             UpdateParticle(Global.Digitize(value));
-            GameObject.Find($"Element Constructor/{particleName}/Input").GetComponent<TMP_InputField>().MoveTextEnd(true);
-            return;
+            if (value == "")
+            {
+                GameObject.Find($"Element Constructor/{particleName}/Input").GetComponent<TMP_InputField>().MoveTextEnd(true);
+            }
         }
         else if (Convert.ToInt64(value) > particlesMaxValue[particleName])
         {
             UpdateParticle(particlesMaxValue[particleName]);
-            return;
         }
-        UpdateParticle(Convert.ToInt32(value));
+        else
+        {
+            UpdateParticle(Convert.ToInt32(value));
+        }
     }
 
-    public void OnSliderValueChanged(float value)
+    private void UpdateParticle(int value)
     {
-        string particleName = gameObject.transform.parent.name;
-        particles[particleName] = Convert.ToInt32(Mathf.Floor(value));
-        GameObject.Find($"Element Constructor/{particleName}/Input").GetComponent<TMP_InputField>().text = Convert.ToString(particles[particleName]);
+        string particleName = gameObject.name;
+        particles[particleName] = value;
+        AddSliderListener(true);
+        AddInputListener(true);
         UpdatePreview();
     }
 
     public void AddOrRemove()
     {
-        string particleName = gameObject.transform.parent.name;
-        if (gameObject.name == "Add")
+        string particleName = gameObject.name;
+        string buttonPressedName = EventSystem.current.currentSelectedGameObject.name;
+        if (buttonPressedName == "Add")
         {
             if (particles[particleName] + 1 <= particlesMaxValue[particleName])
             {
                 particles[particleName] += 1;
             }
         }
-        else if (gameObject.name == "Remove")
+        else if (buttonPressedName == "Remove")
         {
             if (particles[particleName] - 1 >= 0)
             {
                 particles[particleName] -= 1;
             }
         }
-        GameObject.Find($"Element Constructor/{particleName}/Slider").GetComponent<Slider>().value = particles[particleName];
-    }
-
-    private void UpdateParticle(int value)
-    {
-        string particleName = gameObject.transform.parent.name;
-        particles[particleName] = value;
-        GameObject.Find($"Element Constructor/{particleName}/Slider").GetComponent<Slider>().value = particles[particleName];
-        GameObject.Find($"Element Constructor/{particleName}/Input").GetComponent<TMP_InputField>().text = Convert.ToString(particles[particleName]);
+        AddSliderListener(true);
+        AddInputListener(true);
         UpdatePreview();
     }
 
     private void UpdatePreview()
     {
-        foreach (Dictionary<string, object> element in db.elements)
+        Image preview = GameObject.Find("Preview/Item").GetComponent<Image>();
+        foreach (Dictionary<string, object> element in ReadOnly.elements)
         {
             if (particles["Proton"] == Convert.ToInt32(element["protons"]) && particles["Electron"] == Convert.ToInt32(element["electrons"]) && particles["Neutron"] == Convert.ToInt32(element["neutrons"]))
             {
-                GameObject.Find("Preview/Item").GetComponent<Image>().sprite = Resources.Load<Sprite>($"Elements/{element["symbol"]}");
+                preview.sprite = Resources.Load<Sprite>($"Elements/{element["symbol"]}");
                 return;
             }
             else
             {
-                GameObject.Find("Preview/Item").GetComponent<Image>().sprite = Resources.Load<Sprite>("None");
+                preview.sprite = Resources.Load<Sprite>("None");
             }
         }
     }
