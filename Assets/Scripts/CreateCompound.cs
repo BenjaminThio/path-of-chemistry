@@ -5,10 +5,10 @@ using UnityEngine;
 public class CreateCompound : MonoBehaviour
 {
     private Database db;
-    private readonly Dictionary<string, Dictionary<string, int>> recipes = new Dictionary<string, Dictionary<string, int>>()
+    private readonly Dictionary<KeyValuePair<string, int>, Dictionary<string, int>> recipes = new Dictionary<KeyValuePair<string, int>, Dictionary<string, int>>()
     {
         { 
-            "At", new Dictionary<string, int>()
+            new KeyValuePair<string, int>("At", 5), new Dictionary<string, int>()
             {
                 {"H", 2},
                 {"O", 2}
@@ -44,16 +44,16 @@ public class CreateCompound : MonoBehaviour
             print("Nothing to create!");
             return;
         }
-        foreach (string product in recipes.Keys)
+        foreach (KeyValuePair<string, int> product in recipes.Keys)
         {
             if (compoundCreatorItemProps.Count.Equals(recipes[product].Count) && ContainsProps(recipes[product], compoundCreatorItemProps))
             {
-                print($"{product} Created!");
+                print($"{product.Key} Created!");
                 db.compoundCreatorItem = new Dictionary<string, object>[db.compoundCreatorItem.Length];
                 db.compoundCreatorItem[0] = new Dictionary<string, object>()
                 {
-                    {"Item", product},
-                    {"Quantity", 1}
+                    {"Item", product.Key},
+                    {"Quantity", product.Value}
                 };
                 Global.UpdateInventory("Compound Creator", db.compoundCreatorItem);
                 StartCoroutine(gameObject.GetComponent<Experience>().AddExp(5));
