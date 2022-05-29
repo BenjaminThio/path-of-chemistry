@@ -6,30 +6,6 @@ using TMPro;
 public class Experiment : MonoBehaviour
 {
     private Database db;
-    private readonly Dictionary<string, int>[] recipes =
-    {
-        new Dictionary<string, int>()
-        {
-            {"H", 1}
-        },
-        new Dictionary<string, int>()
-        {
-            {"H", 2}
-        },
-        new Dictionary<string, int>()
-        {
-            {"Cm", 1},
-            {"Og", 1}
-        },
-        new Dictionary<string, int>()
-        {
-            {"He", 1}
-        },
-        new Dictionary<string, int>()
-        {
-            {"O", 5}
-        }
-    };
 
     private void Start()
     {
@@ -39,30 +15,16 @@ public class Experiment : MonoBehaviour
 
     public void React()
     {
-        Dictionary<string, int> flaskItemProps = new Dictionary<string, int>();
-        foreach (Dictionary<string, object> prop in db.flaskItem)
-        {
-            if (prop != null)
-            {
-                if (!flaskItemProps.ContainsKey(Convert.ToString(prop["Item"])))
-                {
-                    flaskItemProps.Add(Convert.ToString(prop["Item"]), Convert.ToInt32(prop["Quantity"]));
-                }
-                else
-                {
-                    flaskItemProps[Convert.ToString(prop["Item"])] += Convert.ToInt32(prop["Quantity"]);
-                }
-            }
-        }
-        if (flaskItemProps.Count == 0)
+        Dictionary<string, int> itemProps = Global.CreateVirtualProps(db.flaskItem);
+        if (itemProps.Count == 0)
         {
             //Alert
             print("Nothing to react!");
             return;
         }
-        for (int recipeIndex = 0; recipeIndex < recipes.Length; recipeIndex++)
+        for (int recipeIndex = 0; recipeIndex < Recipe.experiments.Length; recipeIndex++)
         {
-            if (flaskItemProps.Count.Equals(recipes[recipeIndex].Count) && ContainsProps(recipes[recipeIndex], flaskItemProps))
+            if (itemProps.Count.Equals(Recipe.experiments[recipeIndex].Count) && Global.ContainsProps(Recipe.experiments[recipeIndex], itemProps))
             {
                 if (recipeIndex == db.level - 1)
                 {
@@ -84,18 +46,6 @@ public class Experiment : MonoBehaviour
         }
         //Alert
         print("Pls refer to the experiment's recipes of Chemidex!");
-    }
-
-    private bool ContainsProps(Dictionary<string, int> recipe, Dictionary<string, int> props)
-    {
-        foreach (KeyValuePair<string, int> material in recipe)
-        {
-            if (!(props.ContainsKey(material.Key) && props[material.Key].Equals(material.Value)))
-            {
-                return false;
-            }
-        }
-        return true;
     }
 
     private void UpdateLevel()

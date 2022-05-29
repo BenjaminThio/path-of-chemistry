@@ -50,6 +50,38 @@ public class Global : MonoBehaviour
         return true;
     }
 
+    public static Dictionary<string, int> CreateVirtualProps(Dictionary<string, object>[] inventoryItems)
+    {
+        Dictionary<string, int> props = new Dictionary<string, int>();
+        foreach (Dictionary<string, object> prop in inventoryItems)
+        {
+            if (prop != null)
+            {
+                if (!props.ContainsKey(Convert.ToString(prop["Item"])))
+                {
+                    props.Add(Convert.ToString(prop["Item"]), Convert.ToInt32(prop["Quantity"]));
+                }
+                else
+                {
+                    props[Convert.ToString(prop["Item"])] += Convert.ToInt32(prop["Quantity"]);
+                }
+            }
+        }
+        return props;
+    }
+
+    public static bool ContainsProps(Dictionary<string, int> recipe, Dictionary<string, int> props)
+    {
+        foreach (KeyValuePair<string, int> material in recipe)
+        {
+            if (!(props.ContainsKey(material.Key) && props[material.Key].Equals(material.Value)))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static void UpdateInventory(string path, Dictionary<string, object>[] inventory)
     {
         for (int i = 1; i <= inventory.Length; i++)
