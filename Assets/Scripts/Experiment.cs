@@ -6,7 +6,7 @@ using TMPro;
 public class Experiment : MonoBehaviour
 {
     private Database db;
-    private Dictionary<string, int>[] recipes =
+    private readonly Dictionary<string, int>[] recipes =
     {
         new Dictionary<string, int>()
         {
@@ -78,12 +78,12 @@ public class Experiment : MonoBehaviour
                 }
                 db.flaskItem = new Dictionary<string, object>[db.flaskItem.Length];
                 Global.UpdateInventory("Flask", db.flaskItem);
-                Experience experience = gameObject.GetComponent<Experience>();
-                StartCoroutine(experience.AddExp((recipeIndex + 1) * 5));
+                StartCoroutine(gameObject.GetComponent<Experience>().AddExp((recipeIndex + 1) * 5));
                 return;
             }
         }
-        print("Pls refer to the recipes of Chemidex!");
+        //Alert
+        print("Pls refer to the experiment's recipes of Chemidex!");
     }
 
     private bool ContainsProps(Dictionary<string, int> recipe, Dictionary<string, int> props)

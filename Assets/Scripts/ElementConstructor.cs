@@ -24,8 +24,8 @@ public class ElementConstructor : MonoBehaviour
     {
         string particleName = gameObject.name;
         GameObject.Find($"Element Constructor/{particleName}/Slider").GetComponent<Slider>().maxValue = particlesMaxValue[particleName];
-        GameObject.Find($"Element Constructor/{particleName}/Add").GetComponent<Button>().GetComponent<Button>().onClick.AddListener(AddOrRemove);
-        GameObject.Find($"Element Constructor/{particleName}/Remove").GetComponent<Button>().GetComponent<Button>().onClick.AddListener(AddOrRemove);
+        GameObject.Find($"Element Constructor/{particleName}/Add").GetComponent<Button>().onClick.AddListener(AddOrRemove);
+        GameObject.Find($"Element Constructor/{particleName}/Remove").GetComponent<Button>().onClick.AddListener(AddOrRemove);
         AddSliderListener(false);
         AddInputListener(false);
         UpdatePreview();

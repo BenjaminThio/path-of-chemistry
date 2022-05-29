@@ -3,19 +3,16 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using TMPro;
 
 public class QuantityHandler : MonoBehaviour
 {
     private Database db;
     public static bool pause = false;
-    public static int selectedSlotNum;
 
     private void Start()
     {
         db = Database.db;
-        Global.UpdateInventory("Flask", db.flaskItem);
     }
 
     public void UpdateQuantity(float value)
@@ -57,25 +54,7 @@ public class QuantityHandler : MonoBehaviour
         }
     }
 
-    public void TransferHotbarToFlask()
-    {
-        Estimation(db.hotbarItem, db.flaskItem, db.slotNum);
-    }
-
-    public void TransferFlaskToHotbar()
-    {
-        if (!pause)
-        {
-            selectedSlotNum = Global.Digitize(EventSystem.current.currentSelectedGameObject.name);
-            if (db.flaskItem[selectedSlotNum - 1] != null)
-            {
-                GameObject.Find($"Flask/Slot ({selectedSlotNum})").GetComponent<Image>().color = Color.cyan;
-            }
-        }
-        Estimation(db.flaskItem, db.hotbarItem, selectedSlotNum);
-    }
-
-    private void Estimation(Dictionary<string, object>[] src, Dictionary<string, object>[] dst, int slotNum)
+    public void Estimation(string srcName, Dictionary<string, object>[] src, string dstName, Dictionary<string, object>[] dst, int slotNum)
     {
         if (!pause)
         {
@@ -88,34 +67,40 @@ public class QuantityHandler : MonoBehaviour
                     quantityHandler.name = "Quantity Handler";
                     quantityHandler.transform.GetChild(5).GetComponent<Slider>().maxValue = Convert.ToInt32(src[slotNum - 1]["Quantity"]);
                     //quantityHandler.transform.GetChild(5).GetComponent<Slider>().value = quantityHandler.transform.GetChild(5).GetComponent<Slider>().maxValue;
-                    quantityHandler.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Done(src, dst, slotNum));
+                    quantityHandler.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Done(srcName, src, dstName, dst, slotNum));
                     IdentifyQuantity(quantityHandler.transform.GetChild(5).GetComponent<Slider>().value);
                 }
                 else
                 {
                     Transfer(src, dst, slotNum - 1);
-                    for (int i = 1; i <= db.flaskItem.Length; i++)
+                    if (srcName != "Hotbar")
                     {
-                        GameObject.Find($"Flask/Slot ({i})").GetComponent<Image>().color = Color.grey;
+                        for (int i = 1; i <= src.Length; i++)
+                        {
+                            GameObject.Find($"{srcName}/Slot ({i})").GetComponent<Image>().color = Color.grey;
+                        }
                     }
                 }
-                Global.UpdateInventory("Hotbar", db.hotbarItem);
-                Global.UpdateInventory("Flask", db.flaskItem);
+                Global.UpdateInventory(srcName, src);
+                Global.UpdateInventory(dstName, dst);
             }
         }
     }
 
-    private void Done(Dictionary<string, object>[] src, Dictionary<string, object>[] dst, int slotNum)
+    private void Done(string srcName, Dictionary<string, object>[] src, string dstName, Dictionary<string, object>[] dst, int slotNum)
     {
         float sliderValue = Mathf.Floor(GameObject.Find("Quantity Handler/Slider").GetComponent<Slider>().value);
         RepeatTransfer(src, dst, slotNum, sliderValue);
-        for (int i = 1; i <= db.flaskItem.Length; i++)
+        if (srcName != "Hotbar")
         {
-            GameObject.Find($"Flask/Slot ({i})").GetComponent<Image>().color = Color.grey;
+            for (int i = 1; i <= src.Length; i++)
+            {
+                GameObject.Find($"{srcName}/Slot ({i})").GetComponent<Image>().color = Color.grey;
+            }
         }
         pause = false;
-        Global.UpdateInventory("Hotbar", db.hotbarItem);
-        Global.UpdateInventory("Flask", db.flaskItem);
+        Global.UpdateInventory(srcName, src);
+        Global.UpdateInventory(dstName, dst);
         Destroy(GameObject.Find("Quantity Handler"));
     }
 

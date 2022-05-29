@@ -9,6 +9,10 @@ public class Hotbar : MonoBehaviour
     private void Start()
     {
         db = Database.db;
+        for (int i = 1; i <= db.hotbarItem.Length; i++)
+        {
+            GameObject.Find($"Hotbar/Slot ({i})").GetComponent<Button>().onClick.AddListener(ToggleSlot);
+        }
         UpdateSlot();
         Global.UpdateInventory("Hotbar", db.hotbarItem);
     }
@@ -24,6 +28,16 @@ public class Hotbar : MonoBehaviour
                 UpdateSlot();
             }
         }
+    }
+
+    public void TransferHotbarToFlask()
+    {
+        gameObject.GetComponent<QuantityHandler>().Estimation("Hotbar", db.hotbarItem, "Flask", db.flaskItem, db.slotNum);
+    }
+
+    public void TransferHotbarToCompoundCreator()
+    {
+        gameObject.GetComponent<QuantityHandler>().Estimation("Hotbar", db.hotbarItem, "Compound Creator", db.compoundCreatorItem, db.slotNum);
     }
 
     private void UpdateSlot()

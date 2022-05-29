@@ -77,6 +77,29 @@ public class Database
         null,
         null
     };
+    public Dictionary<string, object>[] compoundCreatorItem = {
+        new Dictionary<string, object>()
+        {
+            {"Item", "Og"},
+            {"Quantity", 64}
+        },
+        new Dictionary<string, object>()
+        {
+            {"Item", "He"},
+            {"Quantity", 64}
+        },
+        new Dictionary<string, object>()
+        {
+            {"Item", "Mg"},
+            {"Quantity", 64}
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+    };
 
     public static void Load()
     {
