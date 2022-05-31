@@ -67,6 +67,13 @@ public class Recipe : MonoBehaviour
         {
             GetRecipe("Experiment");
         }
+        else if (Input.GetKeyDown(KeyCode.Delete))
+        {
+            if (GameObject.Find("Recipe Interface") != null)
+            {
+                Destroy(GameObject.Find("Recipe Interface"));
+            }
+        }
     }
 
     public void ToggleRecipeSlot()
@@ -78,33 +85,40 @@ public class Recipe : MonoBehaviour
             if (digitizedSelectedSlotName != selectedSlotNum)
             {
                 selectedSlotNum = digitizedSelectedSlotName;
-                UpdateRecipeSlot();
+                UpdateRecipe();
             }
         }
     }
 
     private void GetRecipe(string recipeName)
     {
-        if (GameObject.Find("Recipe Interface/Scroll View/Viewport/Content").transform.childCount > 0)
+        if (GameObject.Find("Recipe Interface") == null)
         {
-            foreach (Transform child in GameObject.Find("Recipe Interface/Scroll View/Viewport/Content").transform)
+            recipeActive = recipeName;
+            GameObject recipeInterface = Instantiate(Resources.Load<GameObject>("UI/Recipe Interface"), GameObject.Find("Canvas").transform, false);
+            recipeInterface.name = "Recipe Interface";
+            for (int i = 1; i <= recipeLength[recipeName]; i++)
             {
-                Destroy(child.gameObject);
+                GameObject recipeSlot = Instantiate(Resources.Load<GameObject>("UI/Recipe Slot"), GameObject.Find("Recipe Interface/Scroll View/Viewport/Content").transform);
+                recipeSlot.name = $"Recipe Slot ({i})";
+                GameObject.Find($"Recipe Slot ({i})").GetComponent<Button>().onClick.AddListener(ToggleRecipeSlot);
             }
-            selectedSlotNum = 1;
+            UpdateRecipe();
         }
-        recipeActive = recipeName;
-        for (int i = 1; i <= recipeLength[recipeName]; i++)
-        {
-            GameObject recipeSlot = Instantiate(Resources.Load<GameObject>("UI/Recipe Slot"), GameObject.Find("Recipe Interface/Scroll View/Viewport/Content").transform);
-            recipeSlot.name = $"Recipe Slot ({i})";
-            GameObject.Find($"Recipe Slot ({i})").GetComponent<Button>().onClick.AddListener(ToggleRecipeSlot);
-        }
-        UpdateRecipeSlot();
     }
 
-    private void UpdateRecipeSlot()
+    private void UpdateRecipe()
     {
+        string info = "";
+        Dictionary<string, int> recipeItems = new Dictionary<string, int>();
+        if (recipeActive == "Compound")
+        {
+            recipeItems = compounds[compounds.ElementAt(selectedSlotNum - 1).Key];
+        }
+        else if (recipeActive == "Experiment")
+        {
+            recipeItems = experiments[selectedSlotNum - 1];
+        }
         for (int i = 1; i <= recipeLength[recipeActive]; i++)
         {
             if (i == selectedSlotNum)
@@ -115,7 +129,11 @@ public class Recipe : MonoBehaviour
             {
                 GameObject.Find($"Recipe Slot ({i})").GetComponent<Image>().color = Color.grey;
             }
-            if (recipeActive == "Experiment")
+            if (recipeActive == "Compound")
+            {
+                GameObject.Find($"Recipe Slot ({i})/Text").GetComponent<TextMeshProUGUI>().text = compounds.ElementAt(i - 1).Key.Key;
+            }
+            else if (recipeActive == "Experiment")
             {
                 if (i <= db.level)
                 {
@@ -126,23 +144,22 @@ public class Recipe : MonoBehaviour
                     GameObject.Find($"Recipe Slot ({i})/Text").GetComponent<TextMeshProUGUI>().text = "Locked";
                 }
             }
-            else if (recipeActive == "Compound")
+        }
+        for (int itemNum = 0; itemNum < recipeItems.Count; itemNum++)
+        {
+            KeyValuePair<string, int> item = recipeItems.ElementAt(itemNum);
+            info += $"{item.Key} x {item.Value}";
+            if (itemNum < recipeItems.Count - 1)
             {
-                GameObject.Find($"Recipe Slot ({i})/Text").GetComponent<TextMeshProUGUI>().text = compounds.ElementAt(i - 1).Key.Key;
+                info += " + ";
             }
         }
-        string info = "";
-        if (recipeActive == "Experiment")
+        if (recipeActive == "Compound")
         {
-            for (int itemNum = 0; itemNum < experiments[selectedSlotNum - 1].Count; itemNum++)
-            {
-                KeyValuePair<string, int> item = experiments[selectedSlotNum - 1].ElementAt(itemNum);
-                info += $"{item.Key} x {item.Value}";
-                if (itemNum < experiments[selectedSlotNum - 1].Count - 1)
-                {
-                    info += " + ";
-                }
-            }
+            GameObject.Find("Recipe Interface/Info").GetComponent<TextMeshProUGUI>().text = info;
+        }
+        else if (recipeActive == "Experiment")
+        {
             if (selectedSlotNum <= db.level)
             {
                 GameObject.Find("Recipe Interface/Info").GetComponent<TextMeshProUGUI>().text = info;
@@ -151,19 +168,6 @@ public class Recipe : MonoBehaviour
             {
                 GameObject.Find("Recipe Interface/Info").GetComponent<TextMeshProUGUI>().text = "?";
             }
-        }
-        else if (recipeActive == "Compound")
-        {
-            for (int itemNum = 0; itemNum < compounds[compounds.ElementAt(selectedSlotNum - 1).Key].Count; itemNum++)
-            {
-                KeyValuePair<string, int> item = compounds[compounds.ElementAt(selectedSlotNum - 1).Key].ElementAt(itemNum);
-                info += $"{item.Key} x {item.Value}";
-                if (itemNum < compounds[compounds.ElementAt(selectedSlotNum - 1).Key].Count - 1)
-                {
-                    info += " + ";
-                }
-            }
-            GameObject.Find("Recipe Interface/Info").GetComponent<TextMeshProUGUI>().text = info;
         }
     }
 }
