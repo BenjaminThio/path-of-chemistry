@@ -94,6 +94,7 @@ public class Recipe : MonoBehaviour
     {
         if (GameObject.Find("Recipe Interface") == null)
         {
+            selectedSlotNum = 1;
             recipeActive = recipeName;
             GameObject recipeInterface = Instantiate(Resources.Load<GameObject>("UI/Recipe Interface"), GameObject.Find("Canvas").transform, false);
             recipeInterface.name = "Recipe Interface";
