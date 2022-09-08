@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -51,29 +52,33 @@ public class Player : MonoBehaviour
                 GameObject.Find("Crosshair").GetComponent<Image>().sprite = Resources.Load<Sprite>("Crosshair");
             }
         }
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f || Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
-            if (db.slotNum + 1 <= db.hotbarItem.Length)
+            Hotbar hotbar = GameObject.FindGameObjectWithTag("Hotbar").GetComponent<Hotbar>();
+            if (Input.GetAxis("Mouse ScrollWheel") > 0f)
             {
-                db.slotNum += 1;
+                if (db.slotNum + 1 <= db.hotbarItem.Length)
+                {
+                    db.slotNum += 1;
+                }
+                else
+                {
+                    db.slotNum = 1;
+                }
             }
-            else
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
             {
-                db.slotNum = 1;
+                if (db.slotNum - 1 > 0)
+                {
+                    db.slotNum -= 1;
+                }
+                else
+                {
+                    db.slotNum += db.hotbarItem.Length - 1;
+                }
             }
-            Hotbar.UpdateSlot();
-        }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-        {
-            if (db.slotNum - 1 > 0)
-            {
-                db.slotNum -= 1;
-            }
-            else
-            {
-                db.slotNum += db.hotbarItem.Length - 1;
-            }
-            Hotbar.UpdateSlot();
+            hotbar.UpdateSlot();
+            hotbar.ItemNameAppear(Convert.ToString(db.hotbarItem[db.slotNum - 1]["Item"]));
         }
         if (Input.GetKeyDown(KeyCode.T))
         {

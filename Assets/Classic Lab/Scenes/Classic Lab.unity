@@ -705,7 +705,7 @@ PrefabInstance:
     - target: {fileID: 2881576597837897798, guid: 6117a6bed1e86e144bc74e06c75b64b2,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 2881576597837897798, guid: 6117a6bed1e86e144bc74e06c75b64b2,
         type: 3}
@@ -2456,7 +2456,7 @@ PrefabInstance:
     - target: {fileID: 20984922632376073, guid: a0d7ca8eeea7f6e448b014b49dc03316,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -450
+      value: -477.5
       objectReference: {fileID: 0}
     - target: {fileID: 20984922632376073, guid: a0d7ca8eeea7f6e448b014b49dc03316,
         type: 3}
@@ -3242,7 +3242,7 @@ GameObject:
   - component: {fileID: 1324111348}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: Canvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3754,7 +3754,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1663017203}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

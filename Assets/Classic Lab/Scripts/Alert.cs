@@ -9,7 +9,7 @@ public class Alert : MonoBehaviour
 
     public static void OpenAlertInterface()
     {
-        if (GameObject.FindGameObjectWithTag("Alert Interface") == null)
+        if (!Player.pause && GameObject.FindGameObjectWithTag("Alert Interface") == null)
         {
             Player.Pause();
             GameObject alertInterface = Instantiate(Resources.Load<GameObject>("UI/Alert Interface"), GameObject.Find("Canvas").transform, false);
@@ -31,7 +31,6 @@ public class Alert : MonoBehaviour
         {
             foreach (Transform child in GameObject.Find("Alert Interface/Scroll View/Viewport/Content").transform)
             {
-                print("IN");
                 Destroy(GameObject.Find(child.name));
             }
             for (int i = 0; i < messages.Count; i++)

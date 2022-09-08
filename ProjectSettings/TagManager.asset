@@ -5,6 +5,16 @@ TagManager:
   serializedVersion: 2
   tags:
   - Shootable
+  - Compound Creator & Reducer
+  - Element Constructor
+  - Flask
+  - Item Name
+  - Canvas
+  - Alert Interface
+  - Element Constructor Interface
+  - Compound Creator & Reducer Interface
+  - Flask Interface
+  - Hotbar
   layers:
   - Default
   - TransparentFX

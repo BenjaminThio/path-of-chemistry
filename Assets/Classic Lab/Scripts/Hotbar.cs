@@ -1,6 +1,9 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class Hotbar : MonoBehaviour
 {
@@ -26,6 +29,7 @@ public class Hotbar : MonoBehaviour
             {
                 db.slotNum = Global.Digitize(selectedSlotName);
                 UpdateSlot();
+                ItemNameAppear(Convert.ToString(db.hotbarItem[db.slotNum - 1]["Item"]));
             }
         }
     }
@@ -40,7 +44,7 @@ public class Hotbar : MonoBehaviour
         gameObject.GetComponent<QuantityHandler>().Estimation("Hotbar", db.hotbarItem, "Compound Creator", db.compoundCreatorItem, db.slotNum);
     }
 
-    public static void UpdateSlot()
+    public void UpdateSlot()
     {
         for (int i = 1; i <= Database.db.hotbarItem.Length; i++)
         {
@@ -50,8 +54,34 @@ public class Hotbar : MonoBehaviour
             }
             else
             {
-                GameObject.Find($"Hotbar/Slot ({i})").GetComponent<Image>().color = Color.grey;
+                GameObject.Find($"Hotbar/Slot ({i})").GetComponent<Image>().color = Color.white;
             }
+        }
+    }
+    public void ItemNameAppear(string itemName)
+    {
+        StopAllCoroutines();
+        DeleteItemName();
+        if (GameObject.FindGameObjectWithTag("Item Name") != null)
+        {
+            Destroy(GameObject.FindGameObjectWithTag("Item Name"));
+        }
+        GameObject itemNameContainer = Instantiate(Resources.Load<GameObject>("UI/Black Container"), GameObject.FindGameObjectWithTag("Canvas").transform, false);
+        itemNameContainer.GetComponentInChildren<TextMeshProUGUI>().text = itemName;
+        StartCoroutine(WaitAndDeleteItemName(3f));
+    }
+
+    private IEnumerator WaitAndDeleteItemName(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        DeleteItemName();
+    }
+
+    private void DeleteItemName()
+    {
+        if (GameObject.FindGameObjectWithTag("Item Name") != null)
+        {
+            Destroy(GameObject.FindGameObjectWithTag("Item Name"));
         }
     }
 }
