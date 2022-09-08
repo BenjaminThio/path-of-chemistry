@@ -29,7 +29,10 @@ public class Hotbar : MonoBehaviour
             {
                 db.slotNum = Global.Digitize(selectedSlotName);
                 UpdateSlot();
-                ItemNameAppear(Convert.ToString(db.hotbarItem[db.slotNum - 1]["Item"]));
+                if (db.hotbarItem[db.slotNum - 1] != null)
+                {
+                    ItemNameAppear(Convert.ToString(db.hotbarItem[db.slotNum - 1]["Item"]));
+                }
             }
         }
     }
@@ -60,15 +63,18 @@ public class Hotbar : MonoBehaviour
     }
     public void ItemNameAppear(string itemName)
     {
-        StopAllCoroutines();
-        DeleteItemName();
-        if (GameObject.FindGameObjectWithTag("Item Name") != null)
+        if (itemName != null)
         {
-            Destroy(GameObject.FindGameObjectWithTag("Item Name"));
+            StopAllCoroutines();
+            DeleteItemName();
+            if (GameObject.FindGameObjectWithTag("Item Name") != null)
+            {
+                Destroy(GameObject.FindGameObjectWithTag("Item Name"));
+            }
+            GameObject itemNameContainer = Instantiate(Resources.Load<GameObject>("UI/Black Container"), GameObject.FindGameObjectWithTag("Canvas").transform, false);
+            itemNameContainer.GetComponentInChildren<TextMeshProUGUI>().text = itemName;
+            StartCoroutine(WaitAndDeleteItemName(3f));
         }
-        GameObject itemNameContainer = Instantiate(Resources.Load<GameObject>("UI/Black Container"), GameObject.FindGameObjectWithTag("Canvas").transform, false);
-        itemNameContainer.GetComponentInChildren<TextMeshProUGUI>().text = itemName;
-        StartCoroutine(WaitAndDeleteItemName(3f));
     }
 
     private IEnumerator WaitAndDeleteItemName(float waitTime)

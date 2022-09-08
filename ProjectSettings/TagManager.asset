@@ -15,6 +15,11 @@ TagManager:
   - Compound Creator & Reducer Interface
   - Flask Interface
   - Hotbar
+  - Experience Bar UI
+  - Recipe Interface
+  - Alert Button
+  - Red Dot
+  - Quantity Handler
   layers:
   - Default
   - TransparentFX

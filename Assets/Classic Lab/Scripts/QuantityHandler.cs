@@ -7,13 +7,7 @@ using TMPro;
 
 public class QuantityHandler : MonoBehaviour
 {
-    private Database db;
     public static bool pause = false;
-
-    private void Start()
-    {
-        db = Database.db;
-    }
 
     public void UpdateQuantity(float value)
     {
@@ -182,8 +176,7 @@ public class QuantityHandler : MonoBehaviour
         }
         else
         {
-            //Alert
-            print("No more space");
+            Alert.AddAlert("No enough space.");
         }
         return false;
     }

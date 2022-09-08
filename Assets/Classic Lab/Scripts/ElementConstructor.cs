@@ -19,6 +19,7 @@ public class ElementConstructor : MonoBehaviour
         {"Electron", 120},
         {"Neutron", 180}
     };
+    public static string constructedElement;
 
     private void Start()
     {
@@ -123,11 +124,13 @@ public class ElementConstructor : MonoBehaviour
         {
             if (particles["Proton"] == Convert.ToInt32(element["protons"]) && particles["Electron"] == Convert.ToInt32(element["electrons"]) && particles["Neutron"] == Convert.ToInt32(element["neutrons"]))
             {
-                preview.sprite = Resources.Load<Sprite>($"Elements/{element["symbol"]}");
+                constructedElement = Convert.ToString(element["symbol"]);
+                preview.sprite = Resources.Load<Sprite>($"Elements/{constructedElement}");
                 return;
             }
             else
             {
+                constructedElement = null;
                 preview.sprite = Resources.Load<Sprite>("None");
             }
         }

@@ -14,10 +14,163 @@ public class Recipe : MonoBehaviour
     public static readonly Dictionary<KeyValuePair<string, int>, Dictionary<string, int>> compounds = new Dictionary<KeyValuePair<string, int>, Dictionary<string, int>>()
     {
         {
-            new KeyValuePair<string, int>("At", 5),
+            new KeyValuePair<string, int>("H2O", 1),
             new Dictionary<string, int>()
             {
                 {"H", 2},
+                {"O", 1}
+            }
+        },
+        {
+            new KeyValuePair<string, int>("NaCl", 1),
+            new Dictionary<string, int>()
+            {
+                {"Na", 1},
+                {"Cl", 1}
+            }
+        },
+        {
+            new KeyValuePair<string, int>("HCl", 1),
+            new Dictionary<string, int>()
+            {
+                {"H", 2},
+                {"Cl", 1}
+            }
+        },
+        {
+            new KeyValuePair<string, int>("NH3", 1),
+            new Dictionary<string, int>()
+            {
+                {"N", 1},
+                {"H", 3}
+            }
+        },
+        {
+            new KeyValuePair<string, int>("H2O2", 1),
+            new Dictionary<string, int>()
+            {
+                {"H", 2},
+                {"O", 2}
+            }
+        },
+        {
+            new KeyValuePair<string, int>("NaI", 1),
+            new Dictionary<string, int>()
+            {
+                {"Na", 1},
+                {"I", 2}
+            }
+        },
+        {
+            new KeyValuePair<string, int>("Na2S", 1),
+            new Dictionary<string, int>()
+            {
+                {"Na", 2},
+                {"S", 1}
+            }
+        },
+        {
+            new KeyValuePair<string, int>("KI", 1),
+            new Dictionary<string, int>()
+            {
+                {"K", 1},
+                {"I", 1}
+            }
+        },
+        {
+            new KeyValuePair<string, int>("N2H4", 1),
+            new Dictionary<string, int>()
+            {
+                {"N", 2},
+                {"H", 4}
+            }
+        },
+        {
+            new KeyValuePair<string, int>("AgNO3", 1),
+            new Dictionary<string, int>()
+            {
+                {"Ag", 1},
+                {"N", 1},
+                {"O", 3}
+            }
+        },
+        {
+            new KeyValuePair<string, int>("Na3P", 1),
+            new Dictionary<string, int>()
+            {
+                {"Na", 3},
+                {"P", 1}
+            }
+        },
+        {
+            new KeyValuePair<string, int>("NaH", 1),
+            new Dictionary<string, int>()
+            {
+                {"Na", 1},
+                {"H", 1}
+            }
+        },
+        {
+            new KeyValuePair<string, int>("IO3", 1),
+            new Dictionary<string, int>()
+            {
+                {"I", 1},
+                {"O", 3}
+            }
+        },
+        {
+            new KeyValuePair<string, int>("C3H8O", 1),
+            new Dictionary<string, int>()
+            {
+                {"C", 3},
+                {"H", 8},
+                {"O", 1}
+            }
+        },
+        {
+            new KeyValuePair<string, int>("HNO3", 1),
+            new Dictionary<string, int>()
+            {
+                {"H", 1},
+                {"N", 1},
+                {"O", 3}
+            }
+        },
+        {
+            new KeyValuePair<string, int>("NaClO", 1),
+            new Dictionary<string, int>()
+            {
+                {"Na", 1},
+                {"Cl", 1},
+                {"O", 1}
+            }
+        },
+        {
+            new KeyValuePair<string, int>("NaCN", 1),
+            new Dictionary<string, int>()
+            {
+                {"Na", 1},
+                {"C", 1},
+                {"N", 1}
+            }
+        },
+        {
+            new KeyValuePair<string, int>("C2H3NaO2", 1),
+            new Dictionary<string, int>()
+            {
+                {"C", 2},
+                {"H", 3},
+                {"Na", 1},
+                {"O", 2}
+            }
+        },
+        {
+            new KeyValuePair<string, int>("C18H35NaO2", 1),
+            new Dictionary<string, int>()
+            {
+                {"C", 18},
+                {"H", 35},
+                {"Na", 1},
                 {"O", 2}
             }
         }

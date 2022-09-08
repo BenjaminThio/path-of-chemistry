@@ -78,7 +78,10 @@ public class Player : MonoBehaviour
                 }
             }
             hotbar.UpdateSlot();
-            hotbar.ItemNameAppear(Convert.ToString(db.hotbarItem[db.slotNum - 1]["Item"]));
+            if (db.hotbarItem[db.slotNum - 1] != null)
+            {
+                hotbar.ItemNameAppear(Convert.ToString(db.hotbarItem[db.slotNum - 1]["Item"]));
+            }
         }
         if (Input.GetKeyDown(KeyCode.T))
         {

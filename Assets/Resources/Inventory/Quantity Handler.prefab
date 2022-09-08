@@ -877,7 +877,7 @@ GameObject:
   - component: {fileID: 3411474959516281996}
   m_Layer: 5
   m_Name: Quantity Handler
-  m_TagString: Untagged
+  m_TagString: Quantity Handler
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

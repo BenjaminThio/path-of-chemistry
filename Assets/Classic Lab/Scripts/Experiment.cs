@@ -17,8 +17,7 @@ public class Experiment : MonoBehaviour
         Dictionary<string, int> itemProps = Global.CreateVirtualProps(db.flaskItem);
         if (itemProps.Count == 0)
         {
-            //Alert
-            print("Nothing to react!");
+            Alert.AddAlert("Nothing to react!");
             return;
         }
         for (int recipeIndex = 0; recipeIndex < Recipe.experiments.Length; recipeIndex++)
@@ -27,14 +26,13 @@ public class Experiment : MonoBehaviour
             {
                 if (recipeIndex == db.level - 1)
                 {
-                    print("Reaction!");
+                    //print("Reaction!");
                     db.level += 1;
                     LevelHandler.UpdateLevel();
                 }
                 else if (recipeIndex > db.level - 1)
                 {
-                    //Alert
-                    print("Experiement locked.");
+                    Alert.AddAlert("Experiement locked.");
                     return;
                 }
                 db.flaskItem = new Dictionary<string, object>[db.flaskItem.Length];
@@ -43,7 +41,6 @@ public class Experiment : MonoBehaviour
                 return;
             }
         }
-        //Alert
-        print("Pls refer to the experiment's recipes of Chemidex!");
+        Alert.AddAlert("Please refer to the experiment's recipes of Chemidex!");
     }
 }

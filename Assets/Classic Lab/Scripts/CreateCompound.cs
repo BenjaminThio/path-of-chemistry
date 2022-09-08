@@ -15,15 +15,14 @@ public class CreateCompound : MonoBehaviour
         Dictionary<string, int> itemProps = Global.CreateVirtualProps(db.compoundCreatorItem);
         if (itemProps.Count == 0)
         {
-            //Alert
-            print("Nothing to create!");
+            Alert.AddAlert("Nothing to create!");
             return;
         }
         foreach (KeyValuePair<string, int> product in Recipe.compounds.Keys)
         {
             if (itemProps.Count.Equals(Recipe.compounds[product].Count) && Global.ContainsProps(Recipe.compounds[product], itemProps))
             {
-                print($"{product.Key} Created!");
+                //print($"{product.Key} Created!");
                 db.compoundCreatorItem = new Dictionary<string, object>[db.compoundCreatorItem.Length];
                 db.compoundCreatorItem[0] = new Dictionary<string, object>()
                 {
@@ -31,11 +30,10 @@ public class CreateCompound : MonoBehaviour
                     {"Quantity", product.Value}
                 };
                 Global.UpdateInventory("Compound Creator", db.compoundCreatorItem);
-                StartCoroutine(gameObject.GetComponent<Experience>().AddExp(5));
+                StartCoroutine(GameObject.FindGameObjectWithTag("Experience Bar UI").GetComponent<Experience>().AddExp(5));
                 return;
             }
         }
-        //Alert
-        print("Pls refer to the compound's recipes of Chemidex!");
+        Alert.AddAlert("Please refer to the compound's recipes of Chemidex!");
     }
 }

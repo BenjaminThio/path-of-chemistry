@@ -11,6 +11,10 @@ public class Alert : MonoBehaviour
     {
         if (!Player.pause && GameObject.FindGameObjectWithTag("Alert Interface") == null)
         {
+            if (GameObject.FindGameObjectWithTag("Red Dot") != null)
+            {
+                Destroy(GameObject.FindGameObjectWithTag("Red Dot"));
+            }
             Player.Pause();
             GameObject alertInterface = Instantiate(Resources.Load<GameObject>("UI/Alert Interface"), GameObject.Find("Canvas").transform, false);
             alertInterface.name = "Alert Interface";
@@ -29,15 +33,18 @@ public class Alert : MonoBehaviour
         }
         else
         {
-            foreach (Transform child in GameObject.Find("Alert Interface/Scroll View/Viewport/Content").transform)
+            if (GameObject.FindGameObjectWithTag("Alert Interface") != null)
             {
-                Destroy(GameObject.Find(child.name));
-            }
-            for (int i = 0; i < messages.Count; i++)
-            {
-                GameObject Message = Instantiate(Resources.Load<GameObject>("UI/Message"), GameObject.Find("Alert Interface/Scroll View/Viewport/Content").transform);
-                Message.name = $"Message ({i})";
-                Message.GetComponent<TextMeshProUGUI>().text = $"{i + 1}. {messages[i]}";
+                foreach (Transform child in GameObject.Find("Alert Interface/Scroll View/Viewport/Content").transform)
+                {
+                    Destroy(GameObject.Find(child.name));
+                }
+                for (int i = 0; i < messages.Count; i++)
+                {
+                    GameObject Message = Instantiate(Resources.Load<GameObject>("UI/Message"), GameObject.Find("Alert Interface/Scroll View/Viewport/Content").transform);
+                    Message.name = $"Message ({i})";
+                    Message.GetComponent<TextMeshProUGUI>().text = $"{i + 1}. {messages[i]}";
+                }
             }
         }
     }
@@ -49,5 +56,9 @@ public class Alert : MonoBehaviour
             messages.RemoveAt(0);
         }
         messages.Add(message);
+        if (GameObject.FindGameObjectWithTag("Alert Interface") == null && GameObject.FindGameObjectWithTag("Red Dot") == null)
+        {
+            Instantiate(Resources.Load<GameObject>("UI/Red Dot"), GameObject.FindGameObjectWithTag("Alert Button").transform, false);
+        }
     }
 }
