@@ -6,7 +6,9 @@ public class Player : MonoBehaviour
 {
     private Database db;
     private float raycastRange = 10f;
+    private string[] allowTags = {"Flask", "Compound Creator & Reducer", "Element Constructor", "Door"};
     public static bool pause = false;
+    public LayerMask playerLayerMask;
 
     private void Start()
     {
@@ -19,8 +21,13 @@ public class Player : MonoBehaviour
         RaycastHit hit;
         if (!pause)
         {
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, raycastRange))
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, raycastRange, playerLayerMask))
             {
+                if (!Global.isExist(hit.transform.tag, allowTags))
+                {
+                    GameObject.Find("Crosshair").GetComponent<Image>().sprite = Resources.Load<Sprite>("Crosshair");
+                    return;
+                }
                 GameObject.Find("Crosshair").GetComponent<Image>().sprite = Resources.Load<Sprite>("Press");
                 if (Input.GetMouseButtonDown(1))
                 {

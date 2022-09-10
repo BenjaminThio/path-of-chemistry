@@ -20,6 +20,10 @@ TagManager:
   - Alert Button
   - Red Dot
   - Quantity Handler
+  - Door
+  - Flask_Pour
+  - Reaction
+  - Cylinder Beaker
   layers:
   - Default
   - TransparentFX
@@ -32,9 +36,9 @@ TagManager:
   - Lighting
   - Ground
   - Postprocessing
-  - 
-  - 
-  - 
+  - Sun
+  - Interactable
+  - Uninteractable
   - 
   - 
   - 

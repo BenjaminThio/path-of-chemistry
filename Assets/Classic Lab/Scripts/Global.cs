@@ -13,6 +13,18 @@ public class Global : MonoBehaviour
         db = Database.db;
     }
 
+    public static bool isExist(string originalTag, string[] allowTags)
+    {
+        foreach (string tag in allowTags)
+        {
+            if (originalTag == tag)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static int Digitize(string text)
     {
         text = text.Trim();

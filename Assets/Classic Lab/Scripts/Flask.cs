@@ -28,5 +28,11 @@ public class Flask : MonoBehaviour
             }
         }
         gameObject.GetComponent<QuantityHandler>().Estimation("Flask", db.flaskItem, "Hotbar", db.hotbarItem, selectedSlotNum);
+        fillLiquid();
+    }
+
+    private void fillLiquid()
+    {
+        Instantiate(Resources.Load<GameObject>("Liquids/Magenta"), GameObject.Find("Cylinder Beaker (1)").transform, false);
     }
 }

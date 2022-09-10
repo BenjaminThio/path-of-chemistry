@@ -27,6 +27,7 @@ public class Experiment : MonoBehaviour
                 if (recipeIndex == db.level - 1)
                 {
                     //print("Reaction!");
+                    GameObject.FindGameObjectWithTag("Reaction").GetComponent<Reaction>().PlayPourAnimation();
                     db.level += 1;
                     LevelHandler.UpdateLevel();
                 }
