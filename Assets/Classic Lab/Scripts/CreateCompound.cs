@@ -30,7 +30,7 @@ public class CreateCompound : MonoBehaviour
                     {"Quantity", product.Value}
                 };
                 Global.UpdateInventory("Compound Creator", db.compoundCreatorItem);
-                StartCoroutine(GameObject.FindGameObjectWithTag("Experience Bar UI").GetComponent<Experience>().AddExp(5));
+                StartCoroutine(GameObject.FindGameObjectWithTag("Experience").GetComponent<Experience>().AddExp(5));
                 return;
             }
         }

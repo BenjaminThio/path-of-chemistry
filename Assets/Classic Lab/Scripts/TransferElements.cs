@@ -48,17 +48,20 @@ public class TransferElements : MonoBehaviour
 
     public void TransferElementsToHotbar()
     {
-        if (ElementConstructor.constructedElement == null)
+        if (!QuantityHandler.pause)
         {
-            Alert.AddAlert("Nothing to construct in element constructor!");
-            return;
+            if (ElementConstructor.constructedElement == null)
+            {
+                Alert.AddAlert("Nothing to construct in element constructor!");
+                return;
+            }
+            QuantityHandler.pause = true;
+            GameObject quantityHandler = Instantiate(Resources.Load<GameObject>("Inventory/Element Constructor Quantity Handler"), GameObject.Find("Canvas").transform, false);
+            quantityHandler.name = "Element Constructor Quantity Handler";
+            quantityHandler.transform.GetChild(5).GetComponent<Slider>().maxValue = 64;
+            quantityHandler.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Done(Database.db.hotbarItem));
+            IdentifyQuantity(quantityHandler.transform.GetChild(5).GetComponent<Slider>().value);
         }
-        QuantityHandler.pause = true;
-        GameObject quantityHandler = Instantiate(Resources.Load<GameObject>("Inventory/Element Constructor Quantity Handler"), GameObject.Find("Canvas").transform, false);
-        quantityHandler.name = "Element Constructor Quantity Handler";
-        quantityHandler.transform.GetChild(5).GetComponent<Slider>().maxValue = 64;
-        quantityHandler.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Done(Database.db.hotbarItem));
-        IdentifyQuantity(quantityHandler.transform.GetChild(5).GetComponent<Slider>().value);
     }
 
     private void Done(Dictionary<string, object>[] dst)

@@ -15,15 +15,22 @@ TagManager:
   - Compound Creator & Reducer Interface
   - Flask Interface
   - Hotbar
-  - Experience Bar UI
   - Recipe Interface
   - Alert Button
   - Red Dot
   - Quantity Handler
   - Door
-  - Flask_Pour
   - Reaction
-  - Cylinder Beaker
+  - Rack
+  - Experience
+  - Flask Fill
+  - Dusbin
+  - Faucet
+  - Experience Bar UI
+  - Flask_Pour
+  - Sprint
+  - CCR Confirm
+  - Compound Reducer Interface
   layers:
   - Default
   - TransparentFX

@@ -67,7 +67,7 @@ public class QuantityHandler : MonoBehaviour
                 else
                 {
                     Transfer(src, dst, slotNum - 1);
-                    if (srcName != "Hotbar")
+                    if (srcName != "Hotbar" && srcName != "Original")
                     {
                         for (int i = 1; i <= src.Length; i++)
                         {
@@ -77,6 +77,14 @@ public class QuantityHandler : MonoBehaviour
                 }
                 Global.UpdateInventory(srcName, src);
                 Global.UpdateInventory(dstName, dst);
+                if (srcName == "Hotbar" && dstName == "Flask" || srcName == "Flask" && dstName == "Hotbar")
+                {
+                    GameObject.FindGameObjectWithTag("Rack").GetComponent<FillLiquidToCylinderBeaker>().FillLiquid();
+                }
+            }
+            else
+            {
+                Alert.AddAlert($"Nothing to add to \"{dstName}\".");
             }
         }
     }
@@ -85,17 +93,21 @@ public class QuantityHandler : MonoBehaviour
     {
         float sliderValue = Mathf.Floor(GameObject.Find("Quantity Handler/Slider").GetComponent<Slider>().value);
         RepeatTransfer(src, dst, slotNum, sliderValue);
-        if (srcName != "Hotbar")
+        if (srcName != "Hotbar" && srcName != "Original")
         {
             for (int i = 1; i <= src.Length; i++)
             {
                 GameObject.Find($"{srcName}/Slot ({i})").GetComponent<Image>().color = Color.grey;
             }
         }
-        pause = false;
         Global.UpdateInventory(srcName, src);
         Global.UpdateInventory(dstName, dst);
         Destroy(GameObject.Find("Quantity Handler"));
+        if (srcName == "Hotbar" && dstName == "Flask" || srcName == "Flask" && dstName == "Hotbar")
+        {
+            GameObject.FindGameObjectWithTag("Rack").GetComponent<FillLiquidToCylinderBeaker>().FillLiquid();
+        }
+        pause = false;
     }
 
     private bool RepeatTransfer(Dictionary<string, object>[] src, Dictionary<string, object>[] dst, int slotNum, float quantity)

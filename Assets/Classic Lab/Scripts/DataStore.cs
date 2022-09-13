@@ -100,6 +100,28 @@ public class Database
         null,
         null
     };
+    public Dictionary<string, object>[] compoundReducerOriginalItem = {
+        null
+    };
+    public Dictionary<string, object>[] compoundReducerReducedItem = {
+        new Dictionary<string, object>()
+        {
+            {"Item", "Mg"},
+            {"Quantity", 64}
+        },
+        new Dictionary<string, object>()
+        {
+            {"Item", "H"},
+            {"Quantity", 64}
+        },
+        null,
+        new Dictionary<string, object>()
+        {
+            {"Item", "He"},
+            {"Quantity", 64}
+        },
+        null
+    };
 
     public static void Load()
     {

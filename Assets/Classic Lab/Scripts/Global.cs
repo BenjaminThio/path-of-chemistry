@@ -6,18 +6,11 @@ using TMPro;
 
 public class Global : MonoBehaviour
 {
-    private Database db;
-
-    private void Start()
+    public static bool IsItemExist(string itemName, string[] itemNameList)
     {
-        db = Database.db;
-    }
-
-    public static bool isExist(string originalTag, string[] allowTags)
-    {
-        foreach (string tag in allowTags)
+        foreach (string itemNameInList in itemNameList)
         {
-            if (originalTag == tag)
+            if (itemName == itemNameInList)
             {
                 return true;
             }

@@ -202,7 +202,8 @@ public class Recipe : MonoBehaviour
     private readonly Dictionary<string, int> recipeLength = new Dictionary<string, int>()
     {
         {"Compound", compounds.Count},
-        {"Experiment", experiments.Length}
+        {"Experiment", experiments.Length},
+        {"Element", ReadOnly.elements.Length}
     };
 
     private void Start()
@@ -222,6 +223,12 @@ public class Recipe : MonoBehaviour
         {
             Player.Pause();
             GetRecipe("Experiment");
+            GameObject.FindGameObjectWithTag("Recipe Interface").GetComponent<Animator>().SetTrigger("Glitch");
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Player.Pause();
+            GetRecipe("Element");
             GameObject.FindGameObjectWithTag("Recipe Interface").GetComponent<Animator>().SetTrigger("Glitch");
         }
     }
@@ -280,6 +287,11 @@ public class Recipe : MonoBehaviour
             {
                 GameObject.Find($"Recipe Slot ({i})").GetComponent<Image>().color = Color.grey;
             }
+            if (recipeActive == "Element")
+            {
+                string symbol = Convert.ToString(ReadOnly.elements[i - 1]["symbol"]);
+                GameObject.Find($"Recipe Slot ({i})/Text").GetComponent<TextMeshProUGUI>().text = symbol;
+            }
             if (recipeActive == "Compound")
             {
                 GameObject.Find($"Recipe Slot ({i})/Text").GetComponent<TextMeshProUGUI>().text = compounds.ElementAt(i - 1).Key.Key;
@@ -296,13 +308,16 @@ public class Recipe : MonoBehaviour
                 }
             }
         }
-        for (int itemNum = 0; itemNum < recipeItems.Count; itemNum++)
+        if (recipeActive != "Element")
         {
-            KeyValuePair<string, int> item = recipeItems.ElementAt(itemNum);
-            info += $"{item.Key} x {item.Value}";
-            if (itemNum < recipeItems.Count - 1)
+            for (int itemNum = 0; itemNum < recipeItems.Count; itemNum++)
             {
-                info += " + ";
+                KeyValuePair<string, int> item = recipeItems.ElementAt(itemNum);
+                info += $"{item.Key} x {item.Value}";
+                if (itemNum < recipeItems.Count - 1)
+                {
+                    info += " + ";
+                }
             }
         }
         if (recipeActive == "Compound")
@@ -319,6 +334,18 @@ public class Recipe : MonoBehaviour
             {
                 GameObject.Find("Recipe Interface/Info").GetComponent<TextMeshProUGUI>().text = "?";
             }
+        }
+        else if (recipeActive == "Element")
+        {
+            Dictionary<string, object> selectedElement = ReadOnly.elements[selectedSlotNum - 1];
+            foreach (string key in selectedElement.Keys)
+            {
+                if (key != "symbol")
+                {
+                    info += $"{key.ToUpper()}: {selectedElement[key]}\n";
+                }
+            }
+            GameObject.Find("Recipe Interface/Info").GetComponent<TextMeshProUGUI>().text = info;
         }
     }
 }

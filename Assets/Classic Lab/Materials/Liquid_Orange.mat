@@ -78,7 +78,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Fill: -0.01
+    - Fill: 0
     - FresnelPower: 3
     - WobbleX: 0
     - WobbleZ: 0

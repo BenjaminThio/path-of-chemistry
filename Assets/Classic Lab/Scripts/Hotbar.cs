@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -45,6 +47,26 @@ public class Hotbar : MonoBehaviour
     public void TransferHotbarToCompoundCreator()
     {
         gameObject.GetComponent<QuantityHandler>().Estimation("Hotbar", db.hotbarItem, "Compound Creator", db.compoundCreatorItem, db.slotNum);
+    }
+
+    public void TransferHotbarToCompoundReducer()
+    {
+        string[] compounds = new string[Recipe.compounds.Count];
+        for (int i = 0; i < Recipe.compounds.Count; i++)
+        {
+            compounds[i] = Recipe.compounds.ElementAt(i).Key.Key;
+        }
+        if (db.hotbarItem[db.slotNum - 1] != null)
+        {
+            if (Global.IsItemExist(Convert.ToString(db.hotbarItem[db.slotNum - 1]["Item"]), compounds))
+            {
+                gameObject.GetComponent<QuantityHandler>().Estimation("Hotbar", db.hotbarItem, "Original", db.compoundReducerOriginalItem, db.slotNum);
+            } 
+            else
+            {
+                Alert.AddAlert("Compound only.");
+            }
+        }
     }
 
     public void UpdateSlot()

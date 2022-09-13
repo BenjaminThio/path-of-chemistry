@@ -838,7 +838,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -250, y: -150}
-  m_SizeDelta: {x: 155, y: 75}
+  m_SizeDelta: {x: 200, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4564668759461782513
 CanvasRenderer:
@@ -3184,7 +3184,7 @@ GameObject:
   - component: {fileID: 8698936324771678841}
   - component: {fileID: 8698936324771678838}
   - component: {fileID: 8698936324771678839}
-  - component: {fileID: 8698936324771678833}
+  - component: {fileID: 8126905172230954808}
   - component: {fileID: 8698936324771678832}
   m_Layer: 5
   m_Name: Compound Creator
@@ -3283,7 +3283,7 @@ MonoBehaviour:
   m_Spacing: {x: 10, y: 10}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!114 &8698936324771678833
+--- !u!114 &8126905172230954808
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3677,7 +3677,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 250, y: -150}
-  m_SizeDelta: {x: 155, y: 75}
+  m_SizeDelta: {x: 200, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8698936325933874824
 CanvasRenderer:
