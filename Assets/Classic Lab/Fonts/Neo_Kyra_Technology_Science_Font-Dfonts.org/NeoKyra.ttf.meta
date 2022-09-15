@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 5d78159ff3197ed40936198ff3d35c22
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Neo Kyra
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: ba3cc1bbdfcec134ca1c28939dd1d647, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

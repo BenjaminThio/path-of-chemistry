@@ -31,6 +31,9 @@ TagManager:
   - Sprint
   - CCR Confirm
   - Compound Reducer Interface
+  - Clear
+  - Menu Canvas
+  - Title
   layers:
   - Default
   - TransparentFX

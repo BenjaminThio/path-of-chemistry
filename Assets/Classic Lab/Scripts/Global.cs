@@ -6,6 +6,18 @@ using TMPro;
 
 public class Global : MonoBehaviour
 {
+    public static bool IsNull(Dictionary<string, object>[] inventory)
+    {
+        foreach (Dictionary<string, object> item in inventory)
+        {
+            if (item != null)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static bool IsItemExist(string itemName, string[] itemNameList)
     {
         foreach (string itemNameInList in itemNameList)
