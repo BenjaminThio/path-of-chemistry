@@ -96,6 +96,7 @@ public class Hotbar : MonoBehaviour
             GameObject itemNameContainer = Instantiate(Resources.Load<GameObject>("UI/Black Container"), GameObject.FindGameObjectWithTag("Canvas").transform, false);
             itemNameContainer.GetComponentInChildren<TextMeshProUGUI>().text = itemName;
             StartCoroutine(WaitAndDeleteItemName(3f));
+            GameObject.FindGameObjectWithTag("Hand").GetComponent<Hand>().ChangeItemOnHand();
         }
     }
 

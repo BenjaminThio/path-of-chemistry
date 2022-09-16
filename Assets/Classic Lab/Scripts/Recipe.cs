@@ -211,28 +211,6 @@ public class Recipe : MonoBehaviour
         db = Database.db;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            Player.Pause();
-            GetRecipe("Compound");
-            GameObject.FindGameObjectWithTag("Recipe Interface").GetComponent<Animator>().SetTrigger("Glitch");
-        }
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
-            Player.Pause();
-            GetRecipe("Experiment");
-            GameObject.FindGameObjectWithTag("Recipe Interface").GetComponent<Animator>().SetTrigger("Glitch");
-        }
-        else if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Player.Pause();
-            GetRecipe("Element");
-            GameObject.FindGameObjectWithTag("Recipe Interface").GetComponent<Animator>().SetTrigger("Glitch");
-        }
-    }
-
     public void ToggleRecipeSlot()
     {
         if (!QuantityHandler.pause)
@@ -247,7 +225,7 @@ public class Recipe : MonoBehaviour
         }
     }
 
-    private void GetRecipe(string recipeName)
+    public void GetRecipe(string recipeName)
     {
         if (GameObject.Find("Recipe Interface") == null)
         {
@@ -255,6 +233,7 @@ public class Recipe : MonoBehaviour
             recipeActive = recipeName;
             GameObject recipeInterface = Instantiate(Resources.Load<GameObject>("UI/Recipe Interface"), GameObject.Find("Canvas").transform, false);
             recipeInterface.name = "Recipe Interface";
+            GameObject.FindGameObjectWithTag("Recipe Interface").GetComponent<Animator>().SetTrigger("Glitch");
             for (int i = 1; i <= recipeLength[recipeName]; i++)
             {
                 GameObject recipeSlot = Instantiate(Resources.Load<GameObject>("UI/Recipe Slot"), GameObject.Find("Recipe Interface/Scroll View/Viewport/Content").transform);

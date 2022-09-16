@@ -34,6 +34,10 @@ TagManager:
   - Clear
   - Menu Canvas
   - Title
+  - Credits Background
+  - Menu UI
+  - Back
+  - Hand
   layers:
   - Default
   - TransparentFX
@@ -49,8 +53,8 @@ TagManager:
   - Sun
   - Interactable
   - Uninteractable
-  - 
-  - 
+  - World Canvas
+  - Guide
   - 
   - 
   - 

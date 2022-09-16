@@ -118,6 +118,7 @@ public class Player : MonoBehaviour
                 {
                     hotbar.ItemNameAppear(Convert.ToString(db.hotbarItem[db.slotNum - 1]["Item"]));
                 }
+                GameObject.FindGameObjectWithTag("Hand").GetComponent<Hand>().ChangeItemOnHand();
             }
         }
         if (Input.GetKeyDown(KeyCode.T))

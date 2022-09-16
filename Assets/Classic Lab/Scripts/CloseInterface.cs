@@ -33,7 +33,7 @@ public class CloseInterface : MonoBehaviour
         if (!QuantityHandler.pause)
         {
             Destroy(GameObject.FindGameObjectWithTag("Recipe Interface"));
-            Resume();
+            QuantityHandler.pause = false;
         }
     }
 
@@ -53,6 +53,12 @@ public class CloseInterface : MonoBehaviour
             Destroy(GameObject.FindGameObjectWithTag("Compound Reducer Interface"));
             Resume();
         }
+    }
+
+    public void CloseCCRConfirmInterface()
+    {
+        Destroy(GameObject.FindGameObjectWithTag("CCR Confirm"));
+        Resume();
     }
 
     private static void Resume()

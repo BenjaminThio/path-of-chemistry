@@ -1,24 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
-    //private bool onMenu = true;
-
     void Start()
     {
-        gameObject.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(Play);
-        gameObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(Quit);
-        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(6, 5, 72);
-    }
-
-    private void BackToMenu()
-    {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().enabled = false;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
-        GameObject.FindGameObjectWithTag("Main Camera").GetComponent<PlayerController>().enabled = false;
+        AddFunctionToMenuUI();
+        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(6, 5.09707f, 72);
     }
 
     public void Play()
@@ -28,15 +17,7 @@ public class Menu : MonoBehaviour
 
     private IEnumerator IntoGame()
     {
-        for (int i = 0; i < gameObject.transform.childCount; i++)
-        {
-            
-        }
-        Destroy(GameObject.Find("Title"));
-        Destroy(GameObject.Find("Play"));
-        Destroy(GameObject.Find("Credits"));
-        Destroy(GameObject.Find("Quit"));
-        //Destroy(GameObject.FindGameObjectWithTag("Menu UI"));
+        Destroy(GameObject.FindGameObjectWithTag("Menu UI"));
         GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>().enabled = true;
         yield return new WaitForSeconds(5f);
         GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>().enabled = false;
@@ -48,8 +29,30 @@ public class Menu : MonoBehaviour
         Destroy(GameObject.FindGameObjectWithTag("Menu Canvas"));
     }
 
+    private void Credits()
+    {
+        Destroy(GameObject.FindGameObjectWithTag("Menu UI"));
+        Instantiate(Resources.Load<GameObject>("UI/Credits Background"), GameObject.FindGameObjectWithTag("Menu Canvas").transform, false);
+        GameObject.FindGameObjectWithTag("Back").GetComponent<Button>().onClick.AddListener(Back);
+    }
+
+    private void Back()
+    {
+        Destroy(GameObject.FindGameObjectWithTag("Credits Background"));
+        Instantiate(Resources.Load<GameObject>("UI/Menu UI"), GameObject.FindGameObjectWithTag("Menu Canvas").transform, false);
+        AddFunctionToMenuUI();
+    }
+
     private void Quit()
     {
         Application.Quit();
+    }
+
+    private void AddFunctionToMenuUI()
+    {
+        GameObject menuUi = GameObject.FindGameObjectWithTag("Menu UI");
+        menuUi.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(Play);
+        menuUi.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(Credits);
+        menuUi.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(Quit);
     }
 }

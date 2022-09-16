@@ -71,7 +71,7 @@ public class QuantityHandler : MonoBehaviour
                     {
                         for (int i = 1; i <= src.Length; i++)
                         {
-                            GameObject.Find($"{srcName}/Slot ({i})").GetComponent<Image>().color = Color.grey;
+                            GameObject.Find($"{srcName}/Slot ({i})").GetComponent<Image>().color = Color.white;
                         }
                     }
                 }
@@ -97,7 +97,7 @@ public class QuantityHandler : MonoBehaviour
         {
             for (int i = 1; i <= src.Length; i++)
             {
-                GameObject.Find($"{srcName}/Slot ({i})").GetComponent<Image>().color = Color.grey;
+                GameObject.Find($"{srcName}/Slot ({i})").GetComponent<Image>().color = Color.white;
             }
         }
         Global.UpdateInventory(srcName, src);
