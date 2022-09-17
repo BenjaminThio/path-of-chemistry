@@ -12,87 +12,31 @@ public class Database
     public int exp = 0;
     public int slotNum = 1;
     public Dictionary<string, object>[] hotbarItem = {
-        new Dictionary<string, object>()
-        {
-            {"Item", "H"},
-            {"Quantity", 64}
-        },
-        new Dictionary<string, object>()
-        {
-            {"Item", "O"},
-            {"Quantity", 5}
-        },
-        new Dictionary<string, object>()
-        {
-            {"Item", "Mg"},
-            {"Quantity", 1}
-        },
-        new Dictionary<string, object>()
-        {
-            {"Item", "He"},
-            {"Quantity", 1}
-        },
-        new Dictionary<string, object>()
-        {
-            {"Item", "Na"},
-            {"Quantity", 1}
-        },
-        new Dictionary<string, object>()
-        {
-            {"Item", "Cm"},
-            {"Quantity", 1}
-        },
-        new Dictionary<string, object>()
-        {
-            {"Item", "Og"},
-            {"Quantity", 1}
-        },
-        new Dictionary<string, object>()
-        {
-            {"Item", "H"},
-            {"Quantity", 64}
-        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
         null
     };
     public Dictionary<string, object>[] flaskItem = {
         null,
         null,
-        new Dictionary<string, object>()
-        {
-            {"Item", "H"},
-            {"Quantity", 64}
-        },
-        new Dictionary<string, object>()
-        {
-            {"Item", "H"},
-            {"Quantity", 64}
-        },
-        new Dictionary<string, object>()
-        {
-            {"Item", "H"},
-            {"Quantity", 64}
-        },
+        null,
+        null,
+        null,
         null,
         null,
         null,
         null
     };
     public Dictionary<string, object>[] compoundCreatorItem = {
-        new Dictionary<string, object>()
-        {
-            {"Item", "Og"},
-            {"Quantity", 64}
-        },
-        new Dictionary<string, object>()
-        {
-            {"Item", "He"},
-            {"Quantity", 64}
-        },
-        new Dictionary<string, object>()
-        {
-            {"Item", "Mg"},
-            {"Quantity", 64}
-        },
+        null,
+        null,
+        null,
         null,
         null,
         null,
@@ -104,22 +48,10 @@ public class Database
         null
     };
     public Dictionary<string, object>[] compoundReducerReducedItem = {
-        new Dictionary<string, object>()
-        {
-            {"Item", "Mg"},
-            {"Quantity", 64}
-        },
-        new Dictionary<string, object>()
-        {
-            {"Item", "H"},
-            {"Quantity", 64}
-        },
         null,
-        new Dictionary<string, object>()
-        {
-            {"Item", "He"},
-            {"Quantity", 64}
-        },
+        null,
+        null,
+        null,
         null
     };
 

@@ -48,6 +48,7 @@ TagManager:
   - Action
   - Joystick
   - Jump
+  - Guide
   layers:
   - Default
   - TransparentFX

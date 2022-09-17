@@ -30,35 +30,33 @@ public class Reaction : MonoBehaviour
             if (itemProps.Count.Equals(Recipe.experiments[recipeIndex].Count) && Global.ContainsProps(Recipe.experiments[recipeIndex], itemProps))
             {
                 GameObject flaskPour = GameObject.FindGameObjectWithTag("Flask");
+                CloseInterface.CloseFlaskInterface();
+                flaskPour.layer = LayerMask.NameToLayer("Uninteractable");
+                int counter = 0;
+                for (int i = 0; i < db.flaskItem.Length; i++)
+                {
+                    if (db.flaskItem[i] != null)
+                    {
+                        counter++;
+                        GameObject beaker = GameObject.Find($"Cylinder Beaker ({i + 1})");
+                        Transform beakerLiquid = beaker.transform.GetChild(0);
+                        Transform flaskLiquid = flaskPour.transform.GetChild(0);
+                        beakerLiquid.GetComponent<Animator>().enabled = true;
+                        beaker.GetComponent<Animator>().SetTrigger("Pour");
+                        flaskLiquid.GetComponent<Animator>().SetTrigger($"Fill{counter}");
+                        beakerLiquid.GetComponent<Animator>().SetTrigger("Fill");
+                        yield return new WaitForSeconds(7f);
+                    }
+                }
+                for (int i = 1; i <= db.flaskItem.Length; i++)
+                {
+                    if (GameObject.Find($"Cylinder Beaker ({i})/Liquid") != null)
+                    {
+                        Destroy(GameObject.Find($"Cylinder Beaker ({i})/Liquid"));
+                    }
+                }
                 if (recipeIndex == db.level - 1)
                 {
-                    CloseInterface.CloseFlaskInterface();
-                    flaskPour.layer = LayerMask.NameToLayer("Uninteractable");
-                    int counter = 0;
-                    for (int i = 0; i < db.flaskItem.Length; i++)
-                    {
-                        if (db.flaskItem[i] != null)
-                        {
-                            counter++;
-                            GameObject beaker = GameObject.Find($"Cylinder Beaker ({i + 1})");
-                            Transform beakerLiquid = beaker.transform.GetChild(0);
-                            Transform flaskLiquid = flaskPour.transform.GetChild(0);
-                            beakerLiquid.GetComponent<Animator>().enabled = true;
-                            beaker.GetComponent<Animator>().SetTrigger("Pour");
-                            flaskLiquid.GetComponent<Animator>().SetTrigger($"Fill{counter}");
-                            beakerLiquid.GetComponent<Animator>().SetTrigger("Fill");
-                            yield return new WaitForSeconds(7f);
-                            flaskLiquid.GetComponent<Animator>().enabled = false;
-                            flaskLiquid.GetComponent<MeshRenderer>().material.SetFloat("Fill", 0.25f * counter);
-                        }
-                    }
-                    for (int i = 1; i <= db.flaskItem.Length; i++)
-                    {
-                        if (GameObject.Find($"Cylinder Beaker ({i})/Liquid") != null)
-                        {
-                            Destroy(GameObject.Find($"Cylinder Beaker ({i})/Liquid"));
-                        }
-                    }
                     db.level += 1;
                     LevelHandler.UpdateLevel();
                 }
@@ -73,9 +71,15 @@ public class Reaction : MonoBehaviour
                     Global.UpdateInventory("Flask", db.flaskItem);
                 }
                 StartCoroutine(GameObject.FindGameObjectWithTag("Experience").GetComponent<Experience>().AddExp((recipeIndex + 1) * 5));
+                flaskPour.layer = LayerMask.NameToLayer("Interactable");
                 yield break;
             }
         }
         Alert.AddAlert("Please refer to the experiment's recipes of Chemidex!");
     }
 }
+/*
+flaskLiquid.GetComponent<Animator>().enabled = false;
+flaskLiquid.GetComponent<MeshRenderer>().material.SetFloat("Fill", 0.25f * counter);
+flaskLiquid.GetComponent<Animator>().enabled = true;
+*/

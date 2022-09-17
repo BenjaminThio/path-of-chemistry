@@ -133,5 +133,6 @@ public class Global : MonoBehaviour
                 Destroy(GameObject.Find($"{path}/Slot ({i})/Item"));
             }
         }
+        GameObject.FindGameObjectWithTag("Hand").GetComponent<Hand>().ChangeItemOnHand();
     }
 }

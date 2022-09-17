@@ -653,7 +653,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 500, y: 100}
-  m_Spacing: {x: 0, y: 0}
+  m_Spacing: {x: 0, y: 10}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!1 &3511543143778145398
@@ -669,8 +669,8 @@ GameObject:
   - component: {fileID: 8934770899284746182}
   - component: {fileID: 6250359849063909008}
   m_Layer: 5
-  m_Name: New Game
-  m_TagString: New Game
+  m_Name: Play
+  m_TagString: Play
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -722,7 +722,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Game
+  m_text: Play
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf01d1eaeb9d65b439c0fdeea49fe820, type: 2}
   m_sharedMaterial: {fileID: -2115354019194531962, guid: cf01d1eaeb9d65b439c0fdeea49fe820,

@@ -81,7 +81,6 @@ public class Hotbar : MonoBehaviour
                 GameObject.Find($"Hotbar/Slot ({i})").GetComponent<Image>().color = Color.white;
             }
         }
-        GameObject.FindGameObjectWithTag("Hand").GetComponent<Hand>().ChangeItemOnHand();
     }
     public void ItemNameAppear(string itemName)
     {

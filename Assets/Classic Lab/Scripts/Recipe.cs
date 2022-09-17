@@ -179,25 +179,104 @@ public class Recipe : MonoBehaviour
     {
         new Dictionary<string, int>()
         {
-            {"H", 1}
+            {"K", 1},
+            {"H2O", 1}
         },
         new Dictionary<string, int>()
         {
-            {"H", 2}
+            {"HCl", 1},
+            {"NH3", 1}
         },
         new Dictionary<string, int>()
         {
-            {"Cm", 1},
-            {"Og", 1}
+            {"IO3", 1},
+            {"C3H8O", 1}
         },
         new Dictionary<string, int>()
         {
-            {"He", 1}
+            {"Na3P", 1},
+            {"H2O", 1}
         },
         new Dictionary<string, int>()
         {
-            {"O", 5}
+            {"HCl", 1},
+            {"NH2S", 1}
+        },
+        new Dictionary<string, int>()
+        {
+            {"HCl", 1},
+            {"NaCN", 1}
+        },
+        new Dictionary<string, int>()
+        {
+            {"NaH", 1},
+            {"H2O", 1}
+        },
+        new Dictionary<string, int>()
+        {
+            {"HNO3", 1},
+            {"N2H4", 1}
+        },
+        new Dictionary<string, int>()
+        {
+            {"HCl", 1},
+            {"NaClO", 1}
+        },
+        new Dictionary<string, int>()
+        {
+            {"NH3", 1},
+            {"NaClO", 1}
+        },
+        new Dictionary<string, int>()
+        {
+            {"HNO3", 1},
+            {"C3H8O", 1}
+        },
+        new Dictionary<string, int>()
+        {
+            {"AgNO3", 1},
+            {"NH3", 1}
+        },
+        new Dictionary<string, int>()
+        {
+            {"C2H3NaO2", 1},
+            {"H2O", 1}
+        },
+        new Dictionary<string, int>()
+        {
+            {"KI", 1},
+            {"H2O2", 1},
+            {"C18H35NaO2", 1}
+        },
+        new Dictionary<string, int>()
+        {
+            {"H2O2", 1},
+            {"NaI", 1}
+        },
+        new Dictionary<string, int>()
+        {
+            {"NaCl", 1},
+            {"H2O", 1}
         }
+    };
+    private string[] effectsInfo =
+    {
+        "May form flammable hydrogen gas.",
+        "Generates smoke.",
+        "May result in a fire.",
+        "May form highly toxic phosphine gas.",
+        "Generates highly toxic hydrogen cyanide gas.",
+        "Generates highly toxic hydrogen sulfide gas.",
+        "May form flammable hydrogen gas.",
+        "May cause fires or explosions.",
+        "Generates highly toxic chlorine gas.",
+        "Releases toxic chloramine vapors.",
+        "May result in a fire",
+        "May generate an explosively unstable solid",
+        "Hot Ice.",
+        "Element Toothpaste.",
+        "Under Construction!",
+        "Under Construction!"
     };
     private readonly Dictionary<string, int> recipeLength = new Dictionary<string, int>()
     {
@@ -307,6 +386,7 @@ public class Recipe : MonoBehaviour
         {
             if (selectedSlotNum <= db.level)
             {
+                info += $" = {effectsInfo[selectedSlotNum - 1]}";
                 GameObject.Find("Recipe Interface/Info").GetComponent<TextMeshProUGUI>().text = info;
             }
             else
