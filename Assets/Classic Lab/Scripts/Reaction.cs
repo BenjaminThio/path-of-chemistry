@@ -30,29 +30,39 @@ public class Reaction : MonoBehaviour
             if (itemProps.Count.Equals(Recipe.experiments[recipeIndex].Count) && Global.ContainsProps(Recipe.experiments[recipeIndex], itemProps))
             {
                 GameObject flaskPour = GameObject.FindGameObjectWithTag("Flask");
-                CloseInterface.CloseFlaskInterface();
-                flaskPour.layer = LayerMask.NameToLayer("Uninteractable");
-                int counter = 0;
-                for (int i = 0; i < db.flaskItem.Length; i++)
+                if (recipeIndex >= 0 && recipeIndex < db.level - 1 || recipeIndex == db.level - 1)
                 {
-                    if (db.flaskItem[i] != null)
+                    CloseInterface.CloseFlaskInterface();
+                    flaskPour.layer = LayerMask.NameToLayer("Uninteractable");
+                    int counter = 0;
+                    for (int i = 0; i < db.flaskItem.Length; i++)
                     {
-                        counter++;
-                        GameObject beaker = GameObject.Find($"Cylinder Beaker ({i + 1})");
-                        Transform beakerLiquid = beaker.transform.GetChild(0);
-                        Transform flaskLiquid = flaskPour.transform.GetChild(0);
-                        beakerLiquid.GetComponent<Animator>().enabled = true;
-                        beaker.GetComponent<Animator>().SetTrigger("Pour");
-                        flaskLiquid.GetComponent<Animator>().SetTrigger($"Fill{counter}");
-                        beakerLiquid.GetComponent<Animator>().SetTrigger("Fill");
-                        yield return new WaitForSeconds(7f);
+                        if (db.flaskItem[i] != null)
+                        {
+                            GameObject beaker = GameObject.Find($"Cylinder Beaker ({i + 1})");
+                            if (beaker.GetComponent<Animator>() != null)
+                            {
+                                Transform beakerLiquid = beaker.transform.GetChild(0);
+                                beaker.GetComponent<Animator>().SetTrigger("Pour");
+                                beakerLiquid.GetComponent<Animator>().enabled = true;
+                                beakerLiquid.GetComponent<Animator>().SetTrigger("Fill");
+                            }
+                            else
+                            {
+                                Alert.AddAlert($"There is no animation inbeaker {i + 1} in early access.");
+                            }
+                            counter++;
+                            Transform flaskLiquid = flaskPour.transform.GetChild(0);
+                            flaskLiquid.GetComponent<Animator>().SetTrigger($"Fill{counter}");
+                            yield return new WaitForSeconds(7f);
+                        }
                     }
-                }
-                for (int i = 1; i <= db.flaskItem.Length; i++)
-                {
-                    if (GameObject.Find($"Cylinder Beaker ({i})/Liquid") != null)
+                    for (int i = 1; i <= db.flaskItem.Length; i++)
                     {
-                        Destroy(GameObject.Find($"Cylinder Beaker ({i})/Liquid"));
+                        if (GameObject.Find($"Cylinder Beaker ({i})/Liquid") != null)
+                        {
+                            Destroy(GameObject.Find($"Cylinder Beaker ({i})/Liquid"));
+                        }
                     }
                 }
                 if (recipeIndex == db.level - 1)

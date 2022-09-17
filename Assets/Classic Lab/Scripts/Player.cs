@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
                     }
                     else if (hit.transform.tag == "Door")
                     {
-                        Application.Quit();
+                        StartCoroutine(QuitLight());
                     }
                     isCrosshairPressed = false;
                 }
@@ -159,7 +159,7 @@ public class Player : MonoBehaviour
     {
         isCoroutineRunning = true;
         Database.Save();
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1f);
         isCoroutineRunning = false;
     }
 
@@ -182,5 +182,13 @@ public class Player : MonoBehaviour
     private void PressCrosshair()
     {
         isCrosshairPressed = true;
+    }
+
+    private IEnumerator QuitLight()
+    {
+        pause = true;
+        Instantiate(Resources.Load<GameObject>("UI/Light"), GameObject.FindGameObjectWithTag("Canvas").transform, false);
+        yield return new WaitForSeconds(3f);
+        Application.Quit();
     }
 }

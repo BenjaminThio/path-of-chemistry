@@ -57,7 +57,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3456296446025312211, guid: dc7967bca0dcda948b85227d01a8e756, type: 2}
+  - {fileID: -8858728580624461734, guid: 2fcb2ce36e592664db06ef7e01d53ec9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101,8 +101,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Experiment
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dc7967bca0dcda948b85227d01a8e756, type: 2}
-  m_sharedMaterial: {fileID: -3456296446025312211, guid: dc7967bca0dcda948b85227d01a8e756,
+  m_fontAsset: {fileID: 11400000, guid: 2fcb2ce36e592664db06ef7e01d53ec9, type: 2}
+  m_sharedMaterial: {fileID: -8858728580624461734, guid: 2fcb2ce36e592664db06ef7e01d53ec9,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &7906323012670310146
 MonoBehaviour:
   m_ObjectHideFlags: 0

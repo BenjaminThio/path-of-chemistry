@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
+    public GameObject menuUi;
+
     void Start()
     {
         AddFunctionToMenuUI();

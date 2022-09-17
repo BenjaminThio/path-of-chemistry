@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Door
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dc7967bca0dcda948b85227d01a8e756, type: 2}
-  m_sharedMaterial: {fileID: -3456296446025312211, guid: dc7967bca0dcda948b85227d01a8e756,
+  m_fontAsset: {fileID: 11400000, guid: 2fcb2ce36e592664db06ef7e01d53ec9, type: 2}
+  m_sharedMaterial: {fileID: -8858728580624461734, guid: 2fcb2ce36e592664db06ef7e01d53ec9,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
