@@ -1,3 +1,4 @@
+using System.IO;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +9,17 @@ public class Menu : MonoBehaviour
     {
         AddFunctionToMenuUI();
         GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(6, 5.09707f, 72);
+    }
+
+    private void NewGame()
+    {
+        string filePath = $"{Application.persistentDataPath}/Path Of Chemistry/Data/Saves.json";
+        if (File.Exists(filePath))
+        {
+            File.Delete(filePath);
+            Database.Save();
+        }
+        Play();
     }
 
     public void Play()
@@ -50,9 +62,18 @@ public class Menu : MonoBehaviour
 
     private void AddFunctionToMenuUI()
     {
-        GameObject menuUi = GameObject.FindGameObjectWithTag("Menu UI");
-        menuUi.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(Play);
-        menuUi.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(Credits);
-        menuUi.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(Quit);
+        string filePath = $"{Application.persistentDataPath}/Path Of Chemistry/Data/Saves.json";
+        if (File.Exists(filePath))
+        {
+            GameObject playButton = Instantiate(Resources.Load<GameObject>("UI/Play"), GameObject.FindGameObjectWithTag("UI Buttons").transform, false);
+            playButton.transform.SetAsFirstSibling();
+        }
+        if (GameObject.FindGameObjectWithTag("Play") != null)
+        {
+            GameObject.FindGameObjectWithTag("Play").GetComponent<Button>().onClick.AddListener(Play);
+        }
+        GameObject.FindGameObjectWithTag("New Game").GetComponent<Button>().onClick.AddListener(NewGame);
+        GameObject.FindGameObjectWithTag("Credits").GetComponent<Button>().onClick.AddListener(Credits);
+        GameObject.FindGameObjectWithTag("Quit").GetComponent<Button>().onClick.AddListener(Quit);
     }
 }

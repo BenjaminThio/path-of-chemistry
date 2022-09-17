@@ -38,6 +38,16 @@ TagManager:
   - Menu UI
   - Back
   - Hand
+  - Tag
+  - Pause Interface
+  - New Game
+  - Credits
+  - Quit
+  - Play
+  - UI Buttons
+  - Action
+  - Joystick
+  - Jump
   layers:
   - Default
   - TransparentFX

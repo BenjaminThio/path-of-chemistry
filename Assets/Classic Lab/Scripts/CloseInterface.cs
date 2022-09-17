@@ -61,6 +61,12 @@ public class CloseInterface : MonoBehaviour
         Resume();
     }
 
+    public void ClosePauseInterface()
+    {
+        Destroy(GameObject.FindGameObjectWithTag("Pause Interface"));
+        Resume();
+    }
+
     private static void Resume()
     {
         Player.pause = false;

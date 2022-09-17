@@ -192,9 +192,8 @@ Transform:
   m_Children:
   - {fileID: 1309815908}
   - {fileID: 601941888}
-  - {fileID: 1461444906}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &132024679
 MonoBehaviour:
@@ -490,12 +489,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.4174998, y: 0.6874689, z: 0.399}
   m_Center: {x: -0.012183994, y: -0.13384818, z: 0.17002776}
---- !u!224 &306326025 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4349866203214485133, guid: c8e109d5464a75448a6cf689d9a19f2e,
-    type: 3}
-  m_PrefabInstance: {fileID: 4349866203453439108}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &328307464 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5119612842038724669, guid: f92b886f97e23b94bbdffd567b6e1086,
@@ -615,7 +608,7 @@ RectTransform:
   m_LocalScale: {x: 5, y: 3.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -996,7 +989,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &677917106
 GameObject:
@@ -1119,75 +1112,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.80077696, y: 0.82821137, z: 0.48350447}
   m_Center: {x: 0.000000014901161, y: -0.07964945, z: 0}
---- !u!1001 &751131523
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 306326025}
-    m_Modifications:
-    - target: {fileID: 57869704766651300, guid: c6d3f24fe72c8434c8f42365d4723cdb,
-        type: 3}
-      propertyPath: m_Name
-      value: Menu UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 57869704766651301, guid: c6d3f24fe72c8434c8f42365d4723cdb,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 57869704766651301, guid: c6d3f24fe72c8434c8f42365d4723cdb,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -517.059
-      objectReference: {fileID: 0}
-    - target: {fileID: 57869704766651301, guid: c6d3f24fe72c8434c8f42365d4723cdb,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -145.74438
-      objectReference: {fileID: 0}
-    - target: {fileID: 57869704766651301, guid: c6d3f24fe72c8434c8f42365d4723cdb,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -983.40656
-      objectReference: {fileID: 0}
-    - target: {fileID: 57869704766651301, guid: c6d3f24fe72c8434c8f42365d4723cdb,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 57869704766651301, guid: c6d3f24fe72c8434c8f42365d4723cdb,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 57869704766651301, guid: c6d3f24fe72c8434c8f42365d4723cdb,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 57869704766651301, guid: c6d3f24fe72c8434c8f42365d4723cdb,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 57869704766651301, guid: c6d3f24fe72c8434c8f42365d4723cdb,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 57869704766651301, guid: c6d3f24fe72c8434c8f42365d4723cdb,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 57869704766651301, guid: c6d3f24fe72c8434c8f42365d4723cdb,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c6d3f24fe72c8434c8f42365d4723cdb, type: 3}
 --- !u!1 &754780135 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1522387322661938790, guid: f92b886f97e23b94bbdffd567b6e1086,
@@ -1359,7 +1283,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f92b886f97e23b94bbdffd567b6e1086,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f92b886f97e23b94bbdffd567b6e1086,
         type: 3}
@@ -3214,7 +3138,7 @@ Transform:
   - {fileID: 677917107}
   - {fileID: 1242869430}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: -125, z: -64}
 --- !u!23 &1192536988
 MeshRenderer:
@@ -3509,7 +3433,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1461444906}
   m_Father: {fileID: 132024678}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4001,12 +3926,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1461444905}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.19, y: 3.5, z: 2.58}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.19, y: -1.4999995, z: 2.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 132024678}
-  m_RootOrder: 2
+  m_Father: {fileID: 1309815908}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1465640921 stripped
 GameObject:
@@ -4040,7 +3965,7 @@ GameObject:
   - component: {fileID: 1472649242}
   - component: {fileID: 1472649241}
   m_Layer: 12
-  m_Name: Flask Sphere.005 (1)
+  m_Name: CCR
   m_TagString: Compound Creator & Reducer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4058,7 +3983,7 @@ Transform:
   m_LocalScale: {x: 0.5204655, y: 0.5204655, z: 0.5204655}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1472649241
 MeshCollider:
@@ -4401,7 +4326,7 @@ RectTransform:
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4648,7 +4573,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1702051205 stripped
 GameObject:
@@ -4702,7 +4627,7 @@ RectTransform:
   m_Children:
   - {fileID: 1530850386}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4891,7 +4816,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1833734041 stripped
 GameObject:
@@ -5140,9 +5065,9 @@ GameObject:
   - component: {fileID: 3048257461524900760}
   - component: {fileID: 7459872840006675880}
   - component: {fileID: 2014334114723889883}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Cylinder Beaker (2)
-  m_TagString: Flask
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5166,80 +5091,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!1001 &2156105701770130617
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1237767963640797224, guid: 98f68bcd40876884f9d28b7699ee1361,
-        type: 3}
-      propertyPath: m_Name
-      value: Wooden Separatory Funnel Rack
-      objectReference: {fileID: 0}
-    - target: {fileID: 1237767963640797224, guid: 98f68bcd40876884f9d28b7699ee1361,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1902418772042138258, guid: 98f68bcd40876884f9d28b7699ee1361,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1902418772042138258, guid: 98f68bcd40876884f9d28b7699ee1361,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.47
-      objectReference: {fileID: 0}
-    - target: {fileID: 1902418772042138258, guid: 98f68bcd40876884f9d28b7699ee1361,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -22.194
-      objectReference: {fileID: 0}
-    - target: {fileID: 1902418772042138258, guid: 98f68bcd40876884f9d28b7699ee1361,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -20.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 1902418772042138258, guid: 98f68bcd40876884f9d28b7699ee1361,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1902418772042138258, guid: 98f68bcd40876884f9d28b7699ee1361,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1902418772042138258, guid: 98f68bcd40876884f9d28b7699ee1361,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1902418772042138258, guid: 98f68bcd40876884f9d28b7699ee1361,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1902418772042138258, guid: 98f68bcd40876884f9d28b7699ee1361,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1902418772042138258, guid: 98f68bcd40876884f9d28b7699ee1361,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1902418772042138258, guid: 98f68bcd40876884f9d28b7699ee1361,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 98f68bcd40876884f9d28b7699ee1361, type: 3}
 --- !u!23 &2593280956012376249
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5294,9 +5145,9 @@ GameObject:
   - component: {fileID: 7566769116018057442}
   - component: {fileID: 8321901189029894976}
   - component: {fileID: 2809009870547574585}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Cylinder Beaker (3)
-  m_TagString: Flask
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5596,9 +5447,9 @@ GameObject:
   - component: {fileID: 5472133828021040386}
   - component: {fileID: 6000866414410551544}
   - component: {fileID: 8017463584875495541}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Cylinder Beaker (6)
-  m_TagString: Flask
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5690,6 +5541,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2113316728265990627, guid: c8e109d5464a75448a6cf689d9a19f2e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087923326407975106, guid: c8e109d5464a75448a6cf689d9a19f2e,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087923326407975106, guid: c8e109d5464a75448a6cf689d9a19f2e,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087923326407975106, guid: c8e109d5464a75448a6cf689d9a19f2e,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087923326407975106, guid: c8e109d5464a75448a6cf689d9a19f2e,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087923326407975106, guid: c8e109d5464a75448a6cf689d9a19f2e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087923326407975106, guid: c8e109d5464a75448a6cf689d9a19f2e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4349866203214485121, guid: c8e109d5464a75448a6cf689d9a19f2e,
         type: 3}
       propertyPath: m_Name
@@ -5713,7 +5599,7 @@ PrefabInstance:
     - target: {fileID: 4349866203214485133, guid: c8e109d5464a75448a6cf689d9a19f2e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4349866203214485133, guid: c8e109d5464a75448a6cf689d9a19f2e,
         type: 3}
@@ -5805,6 +5691,66 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7928684451249243932, guid: c8e109d5464a75448a6cf689d9a19f2e,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7928684451249243932, guid: c8e109d5464a75448a6cf689d9a19f2e,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7928684451249243932, guid: c8e109d5464a75448a6cf689d9a19f2e,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7928684451249243932, guid: c8e109d5464a75448a6cf689d9a19f2e,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7928684451249243932, guid: c8e109d5464a75448a6cf689d9a19f2e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7928684451249243932, guid: c8e109d5464a75448a6cf689d9a19f2e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7928684452334221564, guid: c8e109d5464a75448a6cf689d9a19f2e,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7928684452334221564, guid: c8e109d5464a75448a6cf689d9a19f2e,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7928684452334221564, guid: c8e109d5464a75448a6cf689d9a19f2e,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7928684452334221564, guid: c8e109d5464a75448a6cf689d9a19f2e,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7928684452334221564, guid: c8e109d5464a75448a6cf689d9a19f2e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7928684452334221564, guid: c8e109d5464a75448a6cf689d9a19f2e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8e109d5464a75448a6cf689d9a19f2e, type: 3}
 --- !u!23 &4410679564269202479
@@ -5861,9 +5807,9 @@ GameObject:
   - component: {fileID: 7090498513526957106}
   - component: {fileID: 4410679564269202479}
   - component: {fileID: 4570115821820905992}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Rack
-  m_TagString: Flask
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5961,9 +5907,9 @@ GameObject:
   - component: {fileID: 8521210143215116599}
   - component: {fileID: 3778367917486494411}
   - component: {fileID: 4995304019473783095}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Cylinder Beaker (1)
-  m_TagString: Flask
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6194,7 +6140,7 @@ Transform:
   - {fileID: 5488326166364859401}
   - {fileID: 3261790417418028428}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &6460580093311117924
 Transform:
@@ -6221,9 +6167,9 @@ GameObject:
   - component: {fileID: 8995208689902920839}
   - component: {fileID: 3683372659213405709}
   - component: {fileID: 5727177132639527495}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Cylinder Beaker (8)
-  m_TagString: Flask
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6467,9 +6413,9 @@ GameObject:
   - component: {fileID: 6623519803420426963}
   - component: {fileID: 7900014924664270979}
   - component: {fileID: 5912206311563882307}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Cylinder Beaker (5)
-  m_TagString: Flask
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6530,9 +6476,9 @@ GameObject:
   - component: {fileID: 5137427394016211641}
   - component: {fileID: 6928190055217410452}
   - component: {fileID: 4924024077369908482}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Cylinder Beaker (7)
-  m_TagString: Flask
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6577,9 +6523,9 @@ GameObject:
   - component: {fileID: 8514340041234323457}
   - component: {fileID: 8066556633199744158}
   - component: {fileID: 9167886181444423047}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Cylinder Beaker (4)
-  m_TagString: Flask
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6614,9 +6560,9 @@ GameObject:
   - component: {fileID: 6695602180686518739}
   - component: {fileID: 1145502579835112815}
   - component: {fileID: 3970624716446391941}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Cylinder Beaker (9)
-  m_TagString: Flask
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

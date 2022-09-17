@@ -283,7 +283,7 @@ public class Recipe : MonoBehaviour
                 }
                 else
                 {
-                    GameObject.Find($"Recipe Slot ({i})/Text").GetComponent<TextMeshProUGUI>().text = "Locked";
+                    GameObject.Find($"Recipe Slot ({i})/Text").GetComponent<TextMeshProUGUI>().text = "Lock";
                 }
             }
         }

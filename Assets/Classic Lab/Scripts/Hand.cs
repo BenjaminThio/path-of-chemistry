@@ -19,7 +19,14 @@ public class Hand : MonoBehaviour
 
     public void ChangeItemOnHand()
     {
-        if (db.hotbarItem[db.slotNum] != null)
+        if (gameObject.transform.childCount > 0)
+        {
+            foreach (Transform child in gameObject.transform)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+        if (db.hotbarItem[db.slotNum - 1] != null)
         {
             foreach (string handItemCategory in handItemCategories.Keys)
             {
@@ -32,7 +39,8 @@ public class Hand : MonoBehaviour
                     }
                 }
             }
-            Instantiate(Resources.Load<GameObject>($"Hand/Element"), GameObject.FindGameObjectWithTag("Hand").transform, false);
+            GameObject element = Instantiate(Resources.Load<GameObject>($"Hand/Element"), GameObject.FindGameObjectWithTag("Hand").transform, false);
+            element.GetComponent<Renderer>().material.SetTexture("_BaseMap", Resources.Load<Texture>($"Elements/{db.hotbarItem[db.slotNum - 1]["Item"]}"));
         }
     }
 }

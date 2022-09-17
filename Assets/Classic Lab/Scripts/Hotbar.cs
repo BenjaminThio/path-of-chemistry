@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -82,6 +81,7 @@ public class Hotbar : MonoBehaviour
                 GameObject.Find($"Hotbar/Slot ({i})").GetComponent<Image>().color = Color.white;
             }
         }
+        GameObject.FindGameObjectWithTag("Hand").GetComponent<Hand>().ChangeItemOnHand();
     }
     public void ItemNameAppear(string itemName)
     {

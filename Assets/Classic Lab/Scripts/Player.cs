@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
@@ -9,15 +11,22 @@ public class Player : MonoBehaviour
     private string[] allowTags = {"Flask", "Compound Creator & Reducer", "Element Constructor", "Door", "Faucet", "Dusbin"};
     public static bool pause = false;
     public LayerMask playerLayerMask;
+    private bool isCoroutineRunning;
+    private bool isCrosshairPressed;
 
     private void Start()
     {
         db = Database.db;
         LevelHandler.UpdateLevel();
+        GameObject.Find("Crosshair").GetComponent<Button>().onClick.AddListener(PressCrosshair);
     }
 
     private void Update()
     {
+        if (!isCoroutineRunning)
+        {
+            StartCoroutine(Save());
+        }
         RaycastHit hit;
         if (!pause)
         {
@@ -26,10 +35,17 @@ public class Player : MonoBehaviour
                 if (!Global.IsItemExist(hit.transform.tag, allowTags))
                 {
                     GameObject.Find("Crosshair").GetComponent<Image>().sprite = Resources.Load<Sprite>("Crosshair");
+                    GameObject.Find("Crosshair").GetComponent<Button>().enabled = false;
                     return;
                 }
+                if (GameObject.FindGameObjectWithTag("Tag") != null)
+                {
+                    Destroy(GameObject.FindGameObjectWithTag("Tag"));
+                }
                 GameObject.Find("Crosshair").GetComponent<Image>().sprite = Resources.Load<Sprite>("Press");
-                if (Input.GetMouseButtonDown(1))
+                GameObject.Find("Crosshair").GetComponent<Button>().enabled = true;
+                GameObject crosshair = Instantiate(Resources.Load<GameObject>($"Tags/{hit.transform.tag}"), hit.transform, false);
+                if (Input.GetMouseButtonDown(1) || isCrosshairPressed)
                 {
                     if (hit.transform.tag == "Flask")
                     {
@@ -57,6 +73,7 @@ public class Player : MonoBehaviour
                         if (db.hotbarItem[db.slotNum - 1] != null)
                         {
                             db.hotbarItem[db.slotNum - 1] = null;
+                            GameObject.FindGameObjectWithTag("Hand").GetComponent<Hand>().ChangeItemOnHand();
                         }
                         else
                         {
@@ -79,11 +96,17 @@ public class Player : MonoBehaviour
                     {
                         Application.Quit();
                     }
+                    isCrosshairPressed = false;
                 }
             }
             else
             {
                 GameObject.Find("Crosshair").GetComponent<Image>().sprite = Resources.Load<Sprite>("Crosshair");
+                GameObject.Find("Crosshair").GetComponent<Button>().enabled = false;
+                if (GameObject.FindGameObjectWithTag("Tag") != null)
+                {
+                    Destroy(GameObject.FindGameObjectWithTag("Tag"));
+                }
             }
         }
         if (!pause)
@@ -118,7 +141,6 @@ public class Player : MonoBehaviour
                 {
                     hotbar.ItemNameAppear(Convert.ToString(db.hotbarItem[db.slotNum - 1]["Item"]));
                 }
-                GameObject.FindGameObjectWithTag("Hand").GetComponent<Hand>().ChangeItemOnHand();
             }
         }
         if (Input.GetKeyDown(KeyCode.T))
@@ -133,9 +155,12 @@ public class Player : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
-    public void Save()
+    private IEnumerator Save()
     {
+        isCoroutineRunning = true;
         Database.Save();
+        yield return new WaitForSeconds(5f);
+        isCoroutineRunning = false;
     }
 
     private void OpenCompoundCreatorInterface()
@@ -152,5 +177,10 @@ public class Player : MonoBehaviour
         GameObject compoundCreatorInterface = Instantiate(Resources.Load<GameObject>("Inventory/Compound Reducer Interface"), GameObject.FindGameObjectWithTag("Canvas").transform, false);
         compoundCreatorInterface.name = "Compound Reducer Interface";
         GameObject.FindGameObjectWithTag("Compound Reducer Interface").GetComponent<Animator>().SetTrigger("Glitch");
+    }
+
+    private void PressCrosshair()
+    {
+        isCrosshairPressed = true;
     }
 }

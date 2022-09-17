@@ -9,8 +9,8 @@ public class ElementConstructor : MonoBehaviour
 {
     private static Dictionary<string, int> particles = new Dictionary<string, int>()
     {
-        {"Proton", 1},
-        {"Electron", 1},
+        {"Proton", 0},
+        {"Electron", 0},
         {"Neutron", 0}
     };
     private readonly Dictionary<string, int> particlesMaxValue = new Dictionary<string, int>()
