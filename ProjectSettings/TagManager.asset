@@ -5,50 +5,48 @@ TagManager:
   serializedVersion: 2
   tags:
   - Shootable
-  - Compound Creator & Reducer
   - Element Constructor
+  - Hand
+  - Compound Creator & Reducer
+  - Guide
   - Flask
-  - Item Name
-  - Canvas
-  - Alert Interface
-  - Element Constructor Interface
-  - Compound Creator & Reducer Interface
-  - Flask Interface
-  - Hotbar
-  - Recipe Interface
-  - Alert Button
-  - Red Dot
-  - Quantity Handler
-  - Door
-  - Reaction
   - Rack
-  - Experience
-  - Flask Fill
+  - Reaction
   - Dusbin
+  - Door
   - Faucet
-  - Experience Bar UI
+  - Menu Canvas
+  - Menu UI
+  - Title
+  - UI Buttons
+  - Play
+  - Quit
+  - Credits
   - Flask_Pour
   - Sprint
-  - CCR Confirm
+  - Tag
+  - Compound Creator & Reducer Interface
   - Compound Reducer Interface
   - Clear
-  - Menu Canvas
-  - Title
-  - Credits Background
-  - Menu UI
-  - Back
-  - Hand
-  - Tag
+  - Quantity Handler
+  - Flask Interface
+  - Hotbar
+  - Red Dot
+  - Recipe Interface
   - Pause Interface
-  - New Game
-  - Credits
-  - Quit
-  - Play
-  - UI Buttons
-  - Action
+  - Experience Bar UI
+  - Element Constructor Interface
+  - Credits Background
+  - Back
+  - Canvas
+  - Experience
+  - Alert Button
   - Joystick
   - Jump
-  - Guide
+  - Action
+  - Effect
+  - Item Name
+  - Alert Interface
   layers:
   - Default
   - TransparentFX
@@ -57,15 +55,15 @@ TagManager:
   - Water
   - UI
   - 
-  - 
+  - Sun
   - Lighting
   - Ground
   - Postprocessing
-  - Sun
+  - Screen
   - Interactable
   - Uninteractable
-  - World Canvas
-  - Guide
+  - 
+  - 
   - 
   - 
   - 

@@ -5,6 +5,14 @@ using UnityEngine;
 public class Reaction : MonoBehaviour
 {
     private Database db;
+    public GameObject explosion;
+    public GameObject smoke;
+    public GameObject fire;
+    public GameObject toxicGas;
+    public GameObject cyanideGas;
+    public GameObject flammableGas;
+    public GameObject elephantToothpaste;
+    public GameObject freeze;
 
     private void Start()
     {
@@ -49,7 +57,7 @@ public class Reaction : MonoBehaviour
                             }
                             else
                             {
-                                Alert.AddAlert($"There is no animation inbeaker {i + 1} in early access.");
+                                Alert.AddAlert($"There is no animation in beaker {i + 1} in early access.");
                             }
                             counter++;
                             Transform flaskLiquid = flaskPour.transform.GetChild(0);
@@ -63,6 +71,64 @@ public class Reaction : MonoBehaviour
                         {
                             Destroy(GameObject.Find($"Cylinder Beaker ({i})/Liquid"));
                         }
+                    }
+                    //Explosion
+                    GameObject effect = null;
+                    if (recipeIndex == 0 || recipeIndex == 7 || recipeIndex == 13)
+                    {
+                        effect = Instantiate(explosion, GameObject.FindGameObjectWithTag("Effect").transform, false);
+                        yield return new WaitForSeconds(2f);
+                    }
+                    //Smoke
+                    else if (recipeIndex == 1)
+                    {
+                        effect = Instantiate(smoke, GameObject.FindGameObjectWithTag("Effect").transform, false);
+                        yield return new WaitForSeconds(9f);
+                    }
+                    //Fire
+                    else if (recipeIndex == 2 || recipeIndex == 10)
+                    {
+                        effect = Instantiate(fire, GameObject.FindGameObjectWithTag("Effect").transform, false);
+                        yield return new WaitForSeconds(13f);
+                    }
+                    //Toxic Gas
+                    else if (recipeIndex == 3 || recipeIndex == 8 || recipeIndex == 9 || recipeIndex == 11)
+                    {
+                        effect = Instantiate(toxicGas, GameObject.FindGameObjectWithTag("Effect").transform, false);
+                        yield return new WaitForSeconds(12f);
+                    }
+                    //Cyanide Gas
+                    else if (recipeIndex == 4)
+                    {
+                        effect = Instantiate(cyanideGas, GameObject.FindGameObjectWithTag("Effect").transform, false);
+                        yield return new WaitForSeconds(2f);
+                    }
+                    //Flammable Gas
+                    else if (recipeIndex == 5)
+                    {
+                        effect = Instantiate(flammableGas, GameObject.FindGameObjectWithTag("Effect").transform, false);
+                        yield return new WaitForSeconds(11f);
+                    }
+                    //Elephant Toothpaste
+                    else if (recipeIndex == 6)
+                    {
+                        effect = Instantiate(elephantToothpaste, GameObject.FindGameObjectWithTag("Effect").transform, false);
+                        yield return new WaitForSeconds(6f);
+                    }
+                    //Hot Ice
+                    else if (recipeIndex == 12)
+                    {
+                        effect = Instantiate(freeze, GameObject.FindGameObjectWithTag("Effect").transform, false);
+                        yield return new WaitForSeconds(2f);
+                    }
+                    //Under Construction
+                    else if (recipeIndex == 14 || recipeIndex == 15)
+                    {
+                        Alert.AddAlert("Under Construction!");
+                    }
+                    if (effect != null)
+                    {
+                        Destroy(effect);
                     }
                 }
                 if (recipeIndex == db.level - 1)

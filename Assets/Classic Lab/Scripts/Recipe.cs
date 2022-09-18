@@ -200,17 +200,18 @@ public class Recipe : MonoBehaviour
         new Dictionary<string, int>()
         {
             {"HCl", 1},
-            {"NH2S", 1}
+            {"Na2S", 1}
         },
         new Dictionary<string, int>()
         {
-            {"HCl", 1},
-            {"NaCN", 1}
+            {"AgNO3", 1},
+            {"NH3", 1}
         },
         new Dictionary<string, int>()
         {
-            {"NaH", 1},
-            {"H2O", 1}
+            {"KI", 1},
+            {"H2O2", 1},
+            {"C18H35NaO2", 1}
         },
         new Dictionary<string, int>()
         {
@@ -234,8 +235,8 @@ public class Recipe : MonoBehaviour
         },
         new Dictionary<string, int>()
         {
-            {"AgNO3", 1},
-            {"NH3", 1}
+            {"HCl", 1},
+            {"NaCN", 1}
         },
         new Dictionary<string, int>()
         {
@@ -244,9 +245,8 @@ public class Recipe : MonoBehaviour
         },
         new Dictionary<string, int>()
         {
-            {"KI", 1},
-            {"H2O2", 1},
-            {"C18H35NaO2", 1}
+            {"NaH", 1},
+            {"H2O", 1}
         },
         new Dictionary<string, int>()
         {
@@ -266,15 +266,15 @@ public class Recipe : MonoBehaviour
         "May result in a fire.",
         "May form highly toxic phosphine gas.",
         "Generates highly toxic hydrogen cyanide gas.",
-        "Generates highly toxic hydrogen sulfide gas.",
-        "May form flammable hydrogen gas.",
+        "May generate an explosively unstable solid",
+        "Element Toothpaste.",
         "May cause fires or explosions.",
         "Generates highly toxic chlorine gas.",
         "Releases toxic chloramine vapors.",
         "May result in a fire",
-        "May generate an explosively unstable solid",
+        "Generates highly toxic hydrogen sulfide gas.",
         "Hot Ice.",
-        "Element Toothpaste.",
+        "May form flammable hydrogen gas.",
         "Under Construction!",
         "Under Construction!"
     };

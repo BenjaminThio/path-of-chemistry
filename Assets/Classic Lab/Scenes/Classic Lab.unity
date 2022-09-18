@@ -815,129 +815,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5939611580772429150, guid: f92b886f97e23b94bbdffd567b6e1086, type: 3}
---- !u!1001 &586275662
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1516609993}
-    m_Modifications:
-    - target: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
-      propertyPath: m_Name
-      value: BigExplosion
-      objectReference: {fileID: 0}
-    - target: {fileID: 4388947112716342, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4388947112716342, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4388947112716342, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4388947112716342, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4388947112716342, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4388947112716342, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4388947112716342, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4388947112716342, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4388947112716342, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 4388947112716342, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4388947112716342, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 198604367962915600, guid: e1b08032bec16ba4eb1ae23cbd572664,
-        type: 3}
-      propertyPath: UVModule.flipU
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 198604367962915600, guid: e1b08032bec16ba4eb1ae23cbd572664,
-        type: 3}
-      propertyPath: UVModule.flipV
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 198917022394846920, guid: e1b08032bec16ba4eb1ae23cbd572664,
-        type: 3}
-      propertyPath: UVModule.flipU
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 198917022394846920, guid: e1b08032bec16ba4eb1ae23cbd572664,
-        type: 3}
-      propertyPath: UVModule.flipV
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 199271172029159390, guid: e1b08032bec16ba4eb1ae23cbd572664,
-        type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 199280120914940710, guid: e1b08032bec16ba4eb1ae23cbd572664,
-        type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 199375762842987212, guid: e1b08032bec16ba4eb1ae23cbd572664,
-        type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 199459376760036170, guid: e1b08032bec16ba4eb1ae23cbd572664,
-        type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 199565671101574698, guid: e1b08032bec16ba4eb1ae23cbd572664,
-        type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 199630755385234010, guid: e1b08032bec16ba4eb1ae23cbd572664,
-        type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 199729880478975070, guid: e1b08032bec16ba4eb1ae23cbd572664,
-        type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 199877337873867354, guid: e1b08032bec16ba4eb1ae23cbd572664,
-        type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
---- !u!4 &586275663 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4388947112716342, guid: e1b08032bec16ba4eb1ae23cbd572664,
-    type: 3}
-  m_PrefabInstance: {fileID: 586275662}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &589567385 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1963669517675598840, guid: f92b886f97e23b94bbdffd567b6e1086,
@@ -1126,7 +1003,7 @@ GameObject:
   - component: {fileID: 677917110}
   - component: {fileID: 677917109}
   - component: {fileID: 677917108}
-  m_Layer: 15
+  m_Layer: 11
   m_Name: Screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2500,7 +2377,7 @@ PrefabInstance:
     - target: {fileID: 2382799219754379413, guid: f92b886f97e23b94bbdffd567b6e1086,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 4294904008
+      value: 4294901960
       objectReference: {fileID: 0}
     - target: {fileID: 2600160217220862033, guid: f92b886f97e23b94bbdffd567b6e1086,
         type: 3}
@@ -2835,7 +2712,7 @@ PrefabInstance:
     - target: {fileID: 7588466857087631152, guid: f92b886f97e23b94bbdffd567b6e1086,
         type: 3}
       propertyPath: m_Layer
-      value: 11
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7588466857087631152, guid: f92b886f97e23b94bbdffd567b6e1086,
         type: 3}
@@ -3408,7 +3285,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294934728
+    m_Bits: 4294936648
   m_RenderingLayerMask: 1
   m_Lightmapping: 1
   m_LightShadowCasterMode: 0
@@ -4202,7 +4079,7 @@ GameObject:
   - component: {fileID: 1516609993}
   m_Layer: 12
   m_Name: Effect
-  m_TagString: Untagged
+  m_TagString: Effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4215,10 +4092,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1516609992}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 586275663}
+  m_Children: []
   m_Father: {fileID: 3261790417418028428}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5632,8 +5508,8 @@ GameObject:
   - component: {fileID: 295504761253774451}
   - component: {fileID: 2593280956012376249}
   - component: {fileID: 4106670681818173805}
-  m_Layer: 13
-  m_Name: ' Liquid'
+  m_Layer: 12
+  m_Name: Liquid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6589,6 +6465,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d92537f34fd2341ba2940c2af5a5d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion: {fileID: 1185856574930250941, guid: 908212b428710e94caad2ab5411d79b6,
+    type: 3}
+  smoke: {fileID: 6047058873684646718, guid: d80c1fce01942b845af1beede8a2a631, type: 3}
+  fire: {fileID: 3710846744950954870, guid: b1b210de9c4f0f9488f16c26cf6df1ed, type: 3}
+  toxicGas: {fileID: 4357324171815961291, guid: 24000184e20c4874a857efcd92c2c465,
+    type: 3}
+  cyanideGas: {fileID: 8389401898390549929, guid: 25dd74bbd47bc8542bc21bd7e8f11f9f,
+    type: 3}
+  flammableGas: {fileID: 380449804842017185, guid: ca9274eeb7c1b694fae0fa9634c78f6a,
+    type: 3}
+  elephantToothpaste: {fileID: 8840675028352747042, guid: 765d5ea8d5aa78543a7c8a3f4f0716df,
+    type: 3}
+  freeze: {fileID: 395912727602423789, guid: b38edb5a15f348b4da3b5899bd0afe02, type: 3}
 --- !u!1 &8636515848057274929
 GameObject:
   m_ObjectHideFlags: 0
