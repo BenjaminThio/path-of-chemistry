@@ -146,7 +146,7 @@ public class Reaction : MonoBehaviour
                 {
                     Global.UpdateInventory("Flask", db.flaskItem);
                 }
-                StartCoroutine(GameObject.FindGameObjectWithTag("Experience").GetComponent<Experience>().AddExp((recipeIndex + 1) * 5));
+                GameObject.FindGameObjectWithTag("Experience").GetComponent<Experience>().AddExpToQueue((recipeIndex + 1) * 5);
                 flaskPour.layer = LayerMask.NameToLayer("Interactable");
                 yield break;
             }

@@ -30,6 +30,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7069346400628913947}
   m_Father: {fileID: 0}
@@ -141,6 +142,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 25, y: 25, z: 25}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7069346400259350283}
   m_RootOrder: 0
@@ -212,7 +214,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Dusbin
+  m_text: Dustbin
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2fcb2ce36e592664db06ef7e01d53ec9, type: 2}
   m_sharedMaterial: {fileID: -8858728580624461734, guid: 2fcb2ce36e592664db06ef7e01d53ec9,

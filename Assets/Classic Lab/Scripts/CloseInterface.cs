@@ -70,6 +70,5 @@ public class CloseInterface : MonoBehaviour
     private static void Resume()
     {
         Player.pause = false;
-        Cursor.lockState = CursorLockMode.Locked;
     }
 }

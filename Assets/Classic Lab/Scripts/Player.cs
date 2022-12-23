@@ -1,8 +1,9 @@
+//*** Path Of Chemistry: Reborn Edition ***//
 using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -36,6 +37,10 @@ public class Player : MonoBehaviour
                 {
                     GameObject.Find("Crosshair").GetComponent<Image>().sprite = Resources.Load<Sprite>("Crosshair");
                     GameObject.Find("Crosshair").GetComponent<Button>().enabled = false;
+                    if (GameObject.FindGameObjectWithTag("Water") != null)
+                    {
+                        Destroy(GameObject.FindGameObjectWithTag("Water"));
+                    }
                     return;
                 }
                 if (GameObject.FindGameObjectWithTag("Tag") != null)
@@ -44,8 +49,23 @@ public class Player : MonoBehaviour
                 }
                 GameObject.Find("Crosshair").GetComponent<Image>().sprite = Resources.Load<Sprite>("Press");
                 GameObject.Find("Crosshair").GetComponent<Button>().enabled = true;
-                GameObject crosshair = Instantiate(Resources.Load<GameObject>($"Tags/{hit.transform.tag}"), hit.transform, false);
-                if (Input.GetMouseButtonDown(1) || isCrosshairPressed)
+                GameObject worldCanvasForTag = Instantiate(Resources.Load<GameObject>($"Tags/{hit.transform.tag}"), hit.transform, false);
+                if (hit.transform.tag == "Flask")
+                {
+                    if (Database.db.level <= Recipe.experiments.Length)
+                    {
+                        worldCanvasForTag.transform.GetChild(1).GetComponent<TextMeshPro>().text = $"Level {db.level}/{Recipe.experiments.Length}";
+                    }
+                    else
+                    {
+                        worldCanvasForTag.transform.GetChild(1).GetComponent<TextMeshPro>().text = $"Level Cleared";
+                    }
+                }
+                if (hit.transform.tag == "Faucet" && GameObject.FindGameObjectWithTag("Water") == null)
+                {
+                    Instantiate(Resources.Load<GameObject>("Water/Water"), hit.transform, false);
+                }
+                if (isCrosshairPressed) /*Input.GetMouseButtonDown(1)*/
                 {
                     if (hit.transform.tag == "Flask")
                     {
@@ -107,6 +127,10 @@ public class Player : MonoBehaviour
                 {
                     Destroy(GameObject.FindGameObjectWithTag("Tag"));
                 }
+                if (GameObject.FindGameObjectWithTag("Water") != null)
+                {
+                    Destroy(GameObject.FindGameObjectWithTag("Water"));
+                }
             }
         }
         if (!pause)
@@ -139,7 +163,7 @@ public class Player : MonoBehaviour
                 hotbar.UpdateSlot();
                 if (db.hotbarItem[db.slotNum - 1] != null)
                 {
-                    hotbar.ItemNameAppear(Convert.ToString(db.hotbarItem[db.slotNum - 1]["Item"]));
+                    hotbar.ItemNameAppear(Convert.ToString(db.hotbarItem[db.slotNum - 1]["Item"]), true, false);
                 }
             }
         }

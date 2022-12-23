@@ -5,6 +5,124 @@ using Newtonsoft.Json;
 
 public class Database
 {
+    /*
+    //Cracked Edition
+    private static readonly object threadLock = new object();
+    public static Database db;
+    public int level = 1;
+    public int expLevel = 0;
+    public int exp = 0;
+    public int slotNum = 1;
+    public Dictionary<string, object>[] hotbarItem = {
+        new Dictionary<string, object>(){
+            {"Item", "HCl"},
+            {"Quantity", 4}
+        },
+        new Dictionary<string, object>(){
+            {"Item", "NH3"},
+            {"Quantity", 2}
+        },
+        new Dictionary<string, object>(){
+            {"Item", "IO3"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>(){
+            {"Item", "C3H8O"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>(){
+            {"Item", "Na3P"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>(){
+            {"Item", "Na2S"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>(){
+            {"Item", "AgNO3"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>(){
+            {"Item", "KI"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>(){
+            {"Item", "H2O2"},
+            {"Quantity", 2}
+        }
+    };
+    public Dictionary<string, object>[] flaskItem = {
+        new Dictionary<string, object>(){
+            {"Item", "K"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>(){
+            {"Item", "H2O"},
+            {"Quantity", 1}
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+    };
+    public Dictionary<string, object>[] compoundCreatorItem = {
+        new Dictionary<string, object>(){
+            {"Item", "H2O"},
+            {"Quantity", 5}
+        },
+        new Dictionary<string, object>(){
+            {"Item", "C18H35NaO2"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>(){
+            {"Item", "HNO3"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>(){
+            {"Item", "N2H4"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>(){
+            {"Item", "NaClO"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>(){
+            {"Item", "C3H8O"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>(){
+            {"Item", "NaCN"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>(){
+            {"Item", "C2H3NaO2"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>(){
+            {"Item", "NaH"},
+            {"Quantity", 1}
+        },
+    };
+    public Dictionary<string, object>[] compoundReducerOriginalItem = {
+        null
+    };
+    public Dictionary<string, object>[] compoundReducerReducedItem = {
+        new Dictionary<string, object>(){
+            {"Item", "NaI"},
+            {"Quantity", 1}
+        },
+        new Dictionary<string, object>(){
+            {"Item", "NaCl"},
+            {"Quantity", 1}
+        },
+        null,
+        null,
+        null
+    };
+    */
     private static readonly object threadLock = new object();
     public static Database db;
     public int level = 1;

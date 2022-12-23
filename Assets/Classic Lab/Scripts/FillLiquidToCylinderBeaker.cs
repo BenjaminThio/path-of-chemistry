@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using UnityEngine;
 
 public class FillLiquidToCylinderBeaker : MonoBehaviour
@@ -13,20 +11,20 @@ public class FillLiquidToCylinderBeaker : MonoBehaviour
     private Dictionary<string, string[]> liquidColors = new Dictionary<string, string[]>()
     {
         {
-            "magenta", new string[]
+            "Magenta", new string[]
             {
                 "AgNO3"
             }
         },
         {
-            "blue", new string[]
+            "Blue", new string[]
             {
                 "C2H3NaO2",
                 "H2O"
             }
         },
         {
-            "yellow", new string[]
+            "Yellow", new string[]
             {
                 "C3H8O",
                 "KI",
@@ -36,40 +34,40 @@ public class FillLiquidToCylinderBeaker : MonoBehaviour
             }
         },
         {
-            "red", new string[]
+            "Red", new string[]
             {
                 "C18H35NaO2",
                 "NaCl"
             }
         },
         {
-            "green", new string[]
+            "Green", new string[]
             {
                 "H2O2",
                 "HNO3"
             }
         },
         {
-            "gold", new string[]
+            "Gold", new string[]
             {
                 "HCl",
                 "IO3"
             }
         },
         {
-            "darkGreen", new string[]
+            "Dark Green", new string[]
             {
                 "N2H4"
             }
         },
         {
-            "purple", new string[]
+            "Purple", new string[]
             {
                 "Na2S"
             }
         },
         {
-            "orange", new string[]
+            "Orange", new string[]
             {
                 "NaClO",
                 "NaH",
@@ -96,7 +94,6 @@ public class FillLiquidToCylinderBeaker : MonoBehaviour
                 foreach (string color in liquidColors.Keys)
                 {
                     string[] elements = new string[ReadOnly.elements.Length];
-                    TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
                     for (int b = 0; b < ReadOnly.elements.Length; b++)
                     {
                         elements[b] = Convert.ToString(ReadOnly.elements[b]["symbol"]);
@@ -114,7 +111,7 @@ public class FillLiquidToCylinderBeaker : MonoBehaviour
                     }
                     else if (Global.IsItemExist(itemName, liquidColors[color]))
                     {
-                        GameObject liquid = Instantiate(Resources.Load<GameObject>($"Liquids/{textInfo.ToTitleCase(color)}"), GameObject.Find($"Cylinder Beaker ({a + 1})").transform, false);
+                        GameObject liquid = Instantiate(Resources.Load<GameObject>($"Liquids/{color}"), GameObject.Find($"Cylinder Beaker ({a + 1})").transform, false);
                         liquid.name = "Liquid";
                         liquid.GetComponent<MeshRenderer>().material.SetFloat("Fill", fillStartPoint + fill);
                         break;

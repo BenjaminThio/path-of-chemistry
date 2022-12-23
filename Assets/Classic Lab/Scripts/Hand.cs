@@ -6,7 +6,7 @@ public class Hand : MonoBehaviour
 {
     private Database db;
     private Dictionary<string, string[]> handItemCategories = new Dictionary<string, string[]>(){
-        { "Cylinder Beaker", new string[]{ "AgNo3", "N2H4", "Na3P", "NaH" } },
+        { "Cylinder Beaker", new string[]{ "AgNO3", "N2H4", "Na3P", "NaH" } },
         { "Flask", new string[]{ "C2H3NaO2", "C18H35NaO2", "H2O", "NaCl" } },
         { "Round Flask", new string[]{ "C3H8O", "HCl", "IO3", "NH3" } },
         { "Beaker", new string[]{ "H2O2", "HNO3", "KI", "Na2S", "NaClO", "NaCN", "NaI" } }

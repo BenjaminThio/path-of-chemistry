@@ -33,7 +33,7 @@ public class Recipe : MonoBehaviour
             new KeyValuePair<string, int>("HCl", 1),
             new Dictionary<string, int>()
             {
-                {"H", 2},
+                {"H", 1},
                 {"Cl", 1}
             }
         },
@@ -58,7 +58,7 @@ public class Recipe : MonoBehaviour
             new Dictionary<string, int>()
             {
                 {"Na", 1},
-                {"I", 2}
+                {"I", 1}
             }
         },
         {

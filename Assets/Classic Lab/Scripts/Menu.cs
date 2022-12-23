@@ -9,6 +9,7 @@ public class Menu : MonoBehaviour
 
     void Start()
     {
+        //print($"{Application.persistentDataPath}/Path Of Chemistry/Data/Saves.json");
         AddFunctionToMenuUI();
         GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(6, 5.09707f, 72);
     }
@@ -34,20 +35,22 @@ public class Menu : MonoBehaviour
     private IEnumerator IntoGame()
     {
         Destroy(GameObject.FindGameObjectWithTag("Menu UI"));
+        Destroy(GameObject.FindGameObjectWithTag("Hyperlinks"));
         GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>().enabled = true;
         yield return new WaitForSeconds(5f);
         GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>().enabled = false;
         GameObject inGameCanvas  = Instantiate(Resources.Load<GameObject>("Canvas/InGame Canvas"));
         inGameCanvas.name = "Canvas";
         GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().enabled = true;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
-        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerController>().enabled = true;
+        //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().enabled = true;
         Destroy(GameObject.FindGameObjectWithTag("Menu Canvas"));
     }
 
     private void Credits()
     {
         Destroy(GameObject.FindGameObjectWithTag("Menu UI"));
+        Destroy(GameObject.FindGameObjectWithTag("Hyperlinks"));
         Instantiate(Resources.Load<GameObject>("UI/Credits Background"), GameObject.FindGameObjectWithTag("Menu Canvas").transform, false);
         GameObject.FindGameObjectWithTag("Back").GetComponent<Button>().onClick.AddListener(Back);
     }
@@ -56,7 +59,15 @@ public class Menu : MonoBehaviour
     {
         Destroy(GameObject.FindGameObjectWithTag("Credits Background"));
         Instantiate(Resources.Load<GameObject>("UI/Menu UI"), GameObject.FindGameObjectWithTag("Menu Canvas").transform, false);
+        Instantiate(Resources.Load<GameObject>("UI/Hyperlinks"), GameObject.FindGameObjectWithTag("Menu Canvas").transform, false);
         AddFunctionToMenuUI();
+    }
+
+    private void Manual()
+    {
+        Destroy(GameObject.FindGameObjectWithTag("Menu UI"));
+        Destroy(GameObject.FindGameObjectWithTag("Hyperlinks"));
+        Instantiate(Resources.Load<GameObject>("UI/Manual Interface"), GameObject.FindGameObjectWithTag("Menu Canvas").transform, false);
     }
 
     private void Quit()
@@ -64,7 +75,7 @@ public class Menu : MonoBehaviour
         Application.Quit();
     }
 
-    private void AddFunctionToMenuUI()
+    public void AddFunctionToMenuUI()
     {
         string filePath = $"{Application.persistentDataPath}/Path Of Chemistry/Data/Saves.json";
         /*
@@ -80,6 +91,7 @@ public class Menu : MonoBehaviour
         GameObject.FindGameObjectWithTag("New Game").GetComponent<Button>().onClick.AddListener(NewGame);
         */
         GameObject.FindGameObjectWithTag("Play").GetComponent<Button>().onClick.AddListener(Play);
+        GameObject.FindGameObjectWithTag("Manual").GetComponent<Button>().onClick.AddListener(Manual);
         GameObject.FindGameObjectWithTag("Credits").GetComponent<Button>().onClick.AddListener(Credits);
         GameObject.FindGameObjectWithTag("Quit").GetComponent<Button>().onClick.AddListener(Quit);
     }

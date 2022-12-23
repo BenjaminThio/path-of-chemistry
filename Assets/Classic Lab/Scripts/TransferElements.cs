@@ -60,6 +60,7 @@ public class TransferElements : MonoBehaviour
             quantityHandler.name = "Element Constructor Quantity Handler";
             quantityHandler.transform.GetChild(5).GetComponent<Slider>().maxValue = 64;
             quantityHandler.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Done(Database.db.hotbarItem));
+            quantityHandler.transform.GetChild(6).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = ElementConstructor.constructedElement;
             IdentifyQuantity(quantityHandler.transform.GetChild(5).GetComponent<Slider>().value);
         }
     }

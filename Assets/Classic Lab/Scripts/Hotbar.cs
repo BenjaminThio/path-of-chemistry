@@ -30,9 +30,10 @@ public class Hotbar : MonoBehaviour
             {
                 db.slotNum = Global.Digitize(selectedSlotName);
                 UpdateSlot();
+                GameObject.FindGameObjectWithTag("Hand").GetComponent<Hand>().ChangeItemOnHand();
                 if (db.hotbarItem[db.slotNum - 1] != null)
                 {
-                    ItemNameAppear(Convert.ToString(db.hotbarItem[db.slotNum - 1]["Item"]));
+                    ItemNameAppear(Convert.ToString(db.hotbarItem[db.slotNum - 1]["Item"]), true, false);
                 }
             }
         }
@@ -66,6 +67,10 @@ public class Hotbar : MonoBehaviour
                 Alert.AddAlert("Compound only.");
             }
         }
+        else
+        {
+            Alert.AddAlert($"Nothing to add to \"Compound Reducer\".");
+        }
     }
 
     public void UpdateSlot()
@@ -82,9 +87,13 @@ public class Hotbar : MonoBehaviour
             }
         }
     }
-    public void ItemNameAppear(string itemName)
+    public void ItemNameAppear(string itemName, bool isHotbar, bool handHandlerActive)
     {
-        if (itemName != null)
+        if (!isHotbar)
+        {
+            GameObject.FindGameObjectWithTag("Quantity Handler").transform.GetChild(6).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = itemName;
+        }
+        else if (itemName != null)
         {
             StopAllCoroutines();
             DeleteItemName();
@@ -95,7 +104,10 @@ public class Hotbar : MonoBehaviour
             GameObject itemNameContainer = Instantiate(Resources.Load<GameObject>("UI/Black Container"), GameObject.FindGameObjectWithTag("Canvas").transform, false);
             itemNameContainer.GetComponentInChildren<TextMeshProUGUI>().text = itemName;
             StartCoroutine(WaitAndDeleteItemName(3f));
-            GameObject.FindGameObjectWithTag("Hand").GetComponent<Hand>().ChangeItemOnHand();
+            if (handHandlerActive)
+            {
+                GameObject.FindGameObjectWithTag("Hand").GetComponent<Hand>().ChangeItemOnHand();
+            }
         }
     }
 

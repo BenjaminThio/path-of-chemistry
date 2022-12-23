@@ -1,26 +1,170 @@
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+
+public static class ExtensionMethods
+{
+    public static void AddListener(this EventTrigger trigger, EventTriggerType eventType, System.Action<PointerEventData> listener)
+    {
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = eventType;
+        entry.callback.AddListener(data => listener.Invoke((PointerEventData)data));
+        trigger.triggers.Add(entry);
+    }
+}
 
 public class PlayerController : MonoBehaviour
 {
-    private float sensitivity = 100f;
-    private float xRotation = 0f;
-    public Transform player;
-    
+    public CharacterController characterController;
+    public Transform cameraTransform;
+    private bool crouch = false;
+    private int rightFingerId = -1;
+    private float speed = 10f;
+    private float crouchSpeed = 5f;
+    private float walkSpeed = 15f;
+    private float sprintSpeed = 30f;
+    private float cameraSensitivity = 2f;
+    private float cameraPitch;
+    private float halfScreenWidth = Screen.width / 2;
+    private float normalCameraHeight = 5f;
+    private Vector2 lookInput;
+    private Vector3 moveDirection = Vector3.zero;
+
     private void Start()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
+        GameObject.FindGameObjectWithTag("Action").GetComponent<Button>().onClick.AddListener(SwitchAction);
     }
 
     private void Update()
     {
         if (!Player.pause)
         {
-            float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-            float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
-            xRotation -= mouseY;
-            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-            transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-            player.Rotate(Vector3.up * mouseX);
+            GetTouchInput();
+            JoystickMove();
+        }
+        else
+        {
+            if (rightFingerId > -1)
+            {
+                rightFingerId = -1;
+            }
+            if (GameObject.FindGameObjectWithTag("Sprint") != null)
+            {
+                Destroy(GameObject.FindGameObjectWithTag("Sprint"));
+            }
+        }
+    }
+
+    private void JoystickMove()
+    {
+        FixedJoystick joystick = GameObject.FindGameObjectWithTag("Joystick").GetComponent<FixedJoystick>();
+        if (!crouch)
+        {
+            if (joystick.Vertical >= .97f)
+            {
+                Sprint();
+            }
+            else
+            {
+                if (GameObject.FindGameObjectWithTag("Sprint") != null)
+                {
+                    Destroy(GameObject.FindGameObjectWithTag("Sprint"));
+                }
+                Walk();
+            }
+        }
+        moveDirection = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
+        moveDirection = transform.TransformDirection(moveDirection);
+        moveDirection *= speed;
+        characterController.Move(moveDirection * Time.deltaTime);
+    }
+
+    private void GetTouchInput()
+    {
+        for (int i = 0; i < Input.touchCount; i++)
+        {
+            Touch t = Input.GetTouch(i);
+            switch (t.phase)
+            {
+                case TouchPhase.Began:
+                    if (t.position.x > halfScreenWidth && rightFingerId == -1)
+                    {
+                        rightFingerId = t.fingerId;
+                    }
+                    break;
+                case TouchPhase.Ended:
+                case TouchPhase.Canceled:
+                    if (t.fingerId == rightFingerId)
+                    {
+                        rightFingerId = -1;
+                    }
+                    break;
+                case TouchPhase.Moved:
+                    if (t.position.x > halfScreenWidth && t.fingerId == rightFingerId)
+                    {
+                        lookInput = t.deltaPosition * cameraSensitivity * Time.deltaTime;
+                        TurnAround();
+                    }
+                    break;
+                case TouchPhase.Stationary:
+                    if (t.fingerId == rightFingerId)
+                    {
+                        lookInput = Vector2.zero;
+                    }
+                    break;
+            }
+        }
+    }
+
+    private void TurnAround()
+    {
+        cameraPitch = Mathf.Clamp(cameraPitch - lookInput.y, -90f, 90f);
+        cameraTransform.localRotation = Quaternion.Euler(cameraPitch, 0, 0);
+        transform.Rotate(transform.up, lookInput.x);
+    }
+
+    public void SwitchAction()
+    {
+        if (!Player.pause)
+        {
+            crouch = !crouch;
+            if (crouch)
+            {
+                if (GameObject.FindGameObjectWithTag("Sprint") != null)
+                {
+                    Destroy(GameObject.FindGameObjectWithTag("Sprint"));
+                }
+                Crouch();
+            }
+            else
+            {
+                Walk();
+            }
+        }
+    }
+
+    private void Crouch()
+    {
+        GameObject.FindGameObjectWithTag("Action").GetComponent<Image>().sprite = Resources.Load<Sprite>("Crouch");
+        speed = crouchSpeed;
+        GameObject playerView = GameObject.FindGameObjectWithTag("MainCamera");
+        playerView.transform.localPosition = new Vector3(playerView.transform.localPosition.x, normalCameraHeight / 2, playerView.transform.localPosition.z);
+    }
+
+    private void Walk()
+    {
+        GameObject.FindGameObjectWithTag("Action").GetComponent<Image>().sprite = Resources.Load<Sprite>("Stand");
+        speed = walkSpeed;
+        GameObject playerView = GameObject.FindGameObjectWithTag("MainCamera");
+        playerView.transform.localPosition = new Vector3(playerView.transform.localPosition.x, normalCameraHeight, playerView.transform.localPosition.z);
+    }
+
+    private void Sprint()
+    {
+        speed = sprintSpeed;
+        if (GameObject.FindGameObjectWithTag("Sprint") == null)
+        {
+            Instantiate(Resources.Load<GameObject>("Sprint/Sprint"), GameObject.FindGameObjectWithTag("Canvas").transform, false);
         }
     }
 }
