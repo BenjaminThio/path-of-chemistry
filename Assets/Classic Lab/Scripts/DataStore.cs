@@ -129,6 +129,8 @@ public class Database
     public int expLevel = 0;
     public int exp = 0;
     public int slotNum = 1;
+    public int desktopSensitivity = 150;
+    public int mobileSensitivity = 2;
     public Dictionary<string, object>[] hotbarItem = {
         null,
         null,

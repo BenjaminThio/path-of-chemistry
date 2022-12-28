@@ -63,6 +63,7 @@ public class CloseInterface : MonoBehaviour
 
     public void ClosePauseInterface()
     {
+        Database.Save();
         Destroy(GameObject.FindGameObjectWithTag("Pause Interface"));
         Resume();
     }

@@ -18,13 +18,14 @@ public class PlayerController : MonoBehaviour
 {
     public CharacterController characterController;
     public Transform cameraTransform;
+
+    private Database db;
     private bool crouch = false;
     private int rightFingerId = -1;
     private float speed = 10f;
     private float crouchSpeed = 5f;
     private float walkSpeed = 15f;
     private float sprintSpeed = 30f;
-    private float cameraSensitivity = 2f;
     private float cameraPitch;
     private float halfScreenWidth = Screen.width / 2;
     private float normalCameraHeight = 5f;
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        db = Database.db;
         GameObject.FindGameObjectWithTag("Action").GetComponent<Button>().onClick.AddListener(SwitchAction);
     }
 
@@ -169,7 +171,7 @@ public class PlayerController : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
-            TurnAround(Input.GetAxis("Mouse X") * cameraSensitivity * 50f * Time.deltaTime, Input.GetAxis("Mouse Y") * cameraSensitivity * 50f * Time.deltaTime);
+            TurnAround(Input.GetAxis("Mouse X") * db.desktopSensitivity * Time.deltaTime, Input.GetAxis("Mouse Y") * db.desktopSensitivity * Time.deltaTime);
         }
         else if (Player.platform == "Mobile")
         {
@@ -198,7 +200,7 @@ public class PlayerController : MonoBehaviour
                     case TouchPhase.Moved:
                         if (t.position.x > halfScreenWidth && t.fingerId == rightFingerId)
                         {
-                            lookInput = t.deltaPosition * cameraSensitivity * Time.deltaTime;
+                            lookInput = t.deltaPosition * db.mobileSensitivity * Time.deltaTime;
                             TurnAround(lookInput.x, lookInput.y);
                         }
                         break;

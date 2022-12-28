@@ -60,6 +60,7 @@ TagManager:
   - CCR Confirm
   - Pause
   - Controls Panel
+  - Sensitivity
   layers:
   - Default
   - TransparentFX

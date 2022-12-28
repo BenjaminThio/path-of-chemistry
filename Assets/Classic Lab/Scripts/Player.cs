@@ -232,6 +232,7 @@ public class Player : MonoBehaviour
         pause = true;
         Instantiate(Resources.Load<GameObject>("UI/Light"), GameObject.FindGameObjectWithTag("Canvas").transform, false);
         yield return new WaitForSeconds(3f);
+        Database.Save();
         Application.Quit();
     }
 }
