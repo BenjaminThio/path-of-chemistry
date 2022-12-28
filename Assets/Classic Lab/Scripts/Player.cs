@@ -7,6 +7,9 @@ using TMPro;
 
 public class Player : MonoBehaviour
 {
+    public static string platform = "Desktop";
+    public static bool runOnce = false;
+
     private Database db;
     private float raycastRange = 10f;
     private string[] allowTags = {"Flask", "Compound Creator & Reducer", "Element Constructor", "Door", "Faucet", "Dusbin"};
@@ -20,6 +23,11 @@ public class Player : MonoBehaviour
         db = Database.db;
         LevelHandler.UpdateLevel();
         GameObject.Find("Crosshair").GetComponent<Button>().onClick.AddListener(PressCrosshair);
+        if (!runOnce)
+        {
+            Alert.AddAlert($"Game saves path: {Application.persistentDataPath}");
+            runOnce = true;
+        }
     }
 
     private void Update()
@@ -65,7 +73,7 @@ public class Player : MonoBehaviour
                 {
                     Instantiate(Resources.Load<GameObject>("Water/Water"), hit.transform, false);
                 }
-                if (isCrosshairPressed) /*Input.GetMouseButtonDown(1)*/
+                if (platform == "Mobile" && isCrosshairPressed || platform == "Desktop" && Input.GetMouseButtonDown(1))
                 {
                     if (hit.transform.tag == "Flask")
                     {
@@ -133,43 +141,54 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        if (!pause)
+        if (platform == "Desktop")
         {
-            if (Input.GetAxis("Mouse ScrollWheel") > 0f || Input.GetAxis("Mouse ScrollWheel") < 0f)
+            if (!pause)
             {
-                Hotbar hotbar = GameObject.FindGameObjectWithTag("Hotbar").GetComponent<Hotbar>();
-                if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+                if (Input.GetAxis("Mouse ScrollWheel") > 0f || Input.GetAxis("Mouse ScrollWheel") < 0f)
                 {
-                    if (db.slotNum + 1 <= db.hotbarItem.Length)
+                    Hotbar hotbar = GameObject.FindGameObjectWithTag("Hotbar").GetComponent<Hotbar>();
+                    if (Input.GetAxis("Mouse ScrollWheel") > 0f)
                     {
-                        db.slotNum += 1;
+                        if (db.slotNum + 1 <= db.hotbarItem.Length)
+                        {
+                            db.slotNum += 1;
+                        }
+                        else
+                        {
+                            db.slotNum = 1;
+                        }
                     }
-                    else
+                    else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
                     {
-                        db.slotNum = 1;
+                        if (db.slotNum - 1 > 0)
+                        {
+                            db.slotNum -= 1;
+                        }
+                        else
+                        {
+                            db.slotNum += db.hotbarItem.Length - 1;
+                        }
                     }
-                }
-                else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-                {
-                    if (db.slotNum - 1 > 0)
+                    hotbar.UpdateSlot();
+                    if (db.hotbarItem[db.slotNum - 1] != null)
                     {
-                        db.slotNum -= 1;
+                        hotbar.ItemNameAppear(Convert.ToString(db.hotbarItem[db.slotNum - 1]["Item"]), true, false);
                     }
-                    else
-                    {
-                        db.slotNum += db.hotbarItem.Length - 1;
-                    }
-                }
-                hotbar.UpdateSlot();
-                if (db.hotbarItem[db.slotNum - 1] != null)
-                {
-                    hotbar.ItemNameAppear(Convert.ToString(db.hotbarItem[db.slotNum - 1]["Item"]), true, false);
                 }
             }
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                Alert.OpenAlertInterface();
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                GameObject.FindGameObjectWithTag("Pause").GetComponent<Pause>().OpenPauseInterface();
+            }
         }
-        if (Input.GetKeyDown(KeyCode.T))
+        else if (platform != "Mobile" && platform != "Desktop")
         {
-            Alert.OpenAlertInterface();
+            print("Platform not exist!");
         }
     }
 

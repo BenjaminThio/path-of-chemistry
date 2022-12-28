@@ -21,6 +21,36 @@ public class Hotbar : MonoBehaviour
         Global.UpdateInventory("Hotbar", db.hotbarItem);
     }
 
+    private void Update()
+    {
+        if (Player.platform == "Mobile")
+        {
+            return;
+        }
+        if (Player.pause)
+        {
+            for (int i = 1; i <= db.hotbarItem.Length; i++)
+            {
+                if (GameObject.Find($"Hotbar/Slot ({i})").GetComponent<Button>().enabled)
+                {
+                    return;
+                }
+                GameObject.Find($"Hotbar/Slot ({i})").GetComponent<Button>().enabled = true;
+            }
+        }
+        else
+        {
+            for (int i = 1; i <= db.hotbarItem.Length; i++)
+            {
+                if (!GameObject.Find($"Hotbar/Slot ({i})").GetComponent<Button>().enabled)
+                {
+                    return;
+                }
+                GameObject.Find($"Hotbar/Slot ({i})").GetComponent<Button>().enabled = false;
+            }
+        }
+    }
+
     public void ToggleSlot()
     {
         if (!QuantityHandler.pause)
@@ -28,6 +58,10 @@ public class Hotbar : MonoBehaviour
             string selectedSlotName = EventSystem.current.currentSelectedGameObject.name;
             if (Global.Digitize(selectedSlotName) != db.slotNum)
             {
+                if (Player.platform == "Desktop" && !Player.pause)
+                {
+                    return;
+                }
                 db.slotNum = Global.Digitize(selectedSlotName);
                 UpdateSlot();
                 GameObject.FindGameObjectWithTag("Hand").GetComponent<Hand>().ChangeItemOnHand();

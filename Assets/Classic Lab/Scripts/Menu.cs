@@ -41,10 +41,24 @@ public class Menu : MonoBehaviour
         GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>().enabled = false;
         GameObject inGameCanvas  = Instantiate(Resources.Load<GameObject>("Canvas/InGame Canvas"));
         inGameCanvas.name = "Canvas";
+        if (Player.platform == "Desktop")
+        {
+            Instantiate(Resources.Load<GameObject>("UI/Controls Panel"), GameObject.FindGameObjectWithTag("Canvas").transform, false);
+            GameObject.FindGameObjectWithTag("Pause").GetComponent<Image>().enabled = false;
+            GameObject.FindGameObjectWithTag("Pause").GetComponent<Button>().enabled = false;
+            GameObject.FindGameObjectWithTag("Alert Button").GetComponent<Button>().enabled = false;
+            GameObject.FindGameObjectWithTag("Action").GetComponent<Button>().enabled = false;
+
+        }
+        else if (Player.platform == "Mobile")
+        {
+            Instantiate(Resources.Load<GameObject>("Joystick/Fixed Joystick"), GameObject.FindGameObjectWithTag("Canvas").transform, false);
+        }
         GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().enabled = true;
         //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().enabled = true;
         Destroy(GameObject.FindGameObjectWithTag("Menu Canvas"));
+        Player.pause = false;
     }
 
     private void Credits()

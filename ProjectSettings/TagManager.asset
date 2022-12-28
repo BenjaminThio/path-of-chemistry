@@ -47,6 +47,19 @@ TagManager:
   - Effect
   - Item Name
   - Alert Interface
+  - Hyperlinks
+  - Manual
+  - Water
+  - Manual Interface
+  - Manuals
+  - Explanation
+  - Previous
+  - Next
+  - Manual Image
+  - Manual Page Number
+  - CCR Confirm
+  - Pause
+  - Controls Panel
   layers:
   - Default
   - TransparentFX

@@ -8,7 +8,7 @@ public class Pause : MonoBehaviour
     {
         if (!Player.pause)
         {
-            Player.pause = true;
+            Player.Pause();
             GameObject pauseInterface = Instantiate(Resources.Load<GameObject>("UI/Pause Interface"), GameObject.FindGameObjectWithTag("Canvas").transform, false);
             pauseInterface.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(MainMenu);
             pauseInterface.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(Quit);
@@ -18,7 +18,8 @@ public class Pause : MonoBehaviour
     private void MainMenu()
     {
         Database.Save();
-        Player.pause = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         SceneManager.LoadScene(0);
     }
 

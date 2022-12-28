@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -30,6 +31,10 @@ public class PlayerController : MonoBehaviour
     private Vector2 lookInput;
     private Vector3 moveDirection = Vector3.zero;
 
+    private int shortClicks = 0;
+    private float resetTime = .3f;
+    private bool doubleClick = false;
+
     private void Start()
     {
         GameObject.FindGameObjectWithTag("Action").GetComponent<Button>().onClick.AddListener(SwitchAction);
@@ -39,11 +44,12 @@ public class PlayerController : MonoBehaviour
     {
         if (!Player.pause)
         {
-            GetTouchInput();
-            JoystickMove();
+            Rotate();
+            Move();
         }
         else
         {
+            Cursor.visible = true;
             if (rightFingerId > -1)
             {
                 rightFingerId = -1;
@@ -55,91 +61,171 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void JoystickMove()
+    private void CrouchCheck()
     {
-        FixedJoystick joystick = GameObject.FindGameObjectWithTag("Joystick").GetComponent<FixedJoystick>();
-        if (!crouch)
+        if (crouch)
         {
-            if (joystick.Vertical >= .97f)
+            shortClicks = 0;
+            doubleClick = false;
+            if (GameObject.FindGameObjectWithTag("Sprint") != null)
             {
-                Sprint();
+                Destroy(GameObject.FindGameObjectWithTag("Sprint"));
             }
-            else
+            Crouch();
+        }
+        else
+        {
+            Walk();
+        }
+    }
+
+    private void Move()
+    {
+        if (Player.platform == "Desktop")
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
             {
-                if (GameObject.FindGameObjectWithTag("Sprint") != null)
+                crouch = true;
+                CrouchCheck();
+            }
+            else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
+            {
+                crouch = false;
+                CrouchCheck();
+            }
+            else if (!crouch)
+            {
+                if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    Destroy(GameObject.FindGameObjectWithTag("Sprint"));
+                    shortClicks++;
+                    if (shortClicks == 1)
+                    {
+                        StartCoroutine(ShortClicksReset());
+                    }
+                    else if (shortClicks == 2)
+                    {
+                        doubleClick = true;
+                    }
                 }
-                Walk();
+                else if (Input.GetKeyUp(KeyCode.W) && doubleClick || Input.GetKeyUp(KeyCode.UpArrow) && doubleClick)
+                {
+                    shortClicks = 0;
+                    doubleClick = false;
+                }
+                if (doubleClick)
+                {
+                    Sprint();
+                }
+                else
+                {
+                    if (GameObject.FindGameObjectWithTag("Sprint") != null)
+                    {
+                        Destroy(GameObject.FindGameObjectWithTag("Sprint"));
+                    }
+                    Walk();
+                }
             }
+            moveDirection = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
         }
-        moveDirection = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
-        moveDirection = transform.TransformDirection(moveDirection);
-        moveDirection *= speed;
-        characterController.Move(moveDirection * Time.deltaTime);
-    }
-
-    private void GetTouchInput()
-    {
-        for (int i = 0; i < Input.touchCount; i++)
+        else if (Player.platform == "Mobile")
         {
-            Touch t = Input.GetTouch(i);
-            switch (t.phase)
+            FixedJoystick joystick = GameObject.FindGameObjectWithTag("Joystick").GetComponent<FixedJoystick>();
+            if (!crouch)
             {
-                case TouchPhase.Began:
-                    if (t.position.x > halfScreenWidth && rightFingerId == -1)
+                if (joystick.Vertical >= .97f)
+                {
+                    Sprint();
+                }
+                else
+                {
+                    if (GameObject.FindGameObjectWithTag("Sprint") != null)
                     {
-                        rightFingerId = t.fingerId;
+                        Destroy(GameObject.FindGameObjectWithTag("Sprint"));
                     }
-                    break;
-                case TouchPhase.Ended:
-                case TouchPhase.Canceled:
-                    if (t.fingerId == rightFingerId)
-                    {
-                        rightFingerId = -1;
-                    }
-                    break;
-                case TouchPhase.Moved:
-                    if (t.position.x > halfScreenWidth && t.fingerId == rightFingerId)
-                    {
-                        lookInput = t.deltaPosition * cameraSensitivity * Time.deltaTime;
-                        TurnAround();
-                    }
-                    break;
-                case TouchPhase.Stationary:
-                    if (t.fingerId == rightFingerId)
-                    {
-                        lookInput = Vector2.zero;
-                    }
-                    break;
+                    Walk();
+                }
+            }
+            moveDirection = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
+            moveDirection = transform.TransformDirection(moveDirection);
+        }
+        characterController.Move(moveDirection * speed * Time.deltaTime);
+    }
+
+    private IEnumerator ShortClicksReset()
+    {
+        yield return new WaitForSeconds(resetTime);
+        if (shortClicks < 2)
+        {
+            shortClicks = 0;
+        }
+    }
+
+    private void Rotate()
+    {
+        if (Player.platform == "Desktop")
+        {
+            if (Cursor.lockState != CursorLockMode.Locked)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            TurnAround(Input.GetAxis("Mouse X") * cameraSensitivity * 50f * Time.deltaTime, Input.GetAxis("Mouse Y") * cameraSensitivity * 50f * Time.deltaTime);
+        }
+        else if (Player.platform == "Mobile")
+        {
+            if (Cursor.lockState != CursorLockMode.None)
+            {
+                Cursor.lockState = CursorLockMode.None;
+            }
+            for (int i = 0; i < Input.touchCount; i++)
+            {
+                Touch t = Input.GetTouch(i);
+                switch (t.phase)
+                {
+                    case TouchPhase.Began:
+                        if (t.position.x > halfScreenWidth && rightFingerId == -1)
+                        {
+                            rightFingerId = t.fingerId;
+                        }
+                        break;
+                    case TouchPhase.Ended:
+                    case TouchPhase.Canceled:
+                        if (t.fingerId == rightFingerId)
+                        {
+                            rightFingerId = -1;
+                        }
+                        break;
+                    case TouchPhase.Moved:
+                        if (t.position.x > halfScreenWidth && t.fingerId == rightFingerId)
+                        {
+                            lookInput = t.deltaPosition * cameraSensitivity * Time.deltaTime;
+                            TurnAround(lookInput.x, lookInput.y);
+                        }
+                        break;
+                    case TouchPhase.Stationary:
+                        if (t.fingerId == rightFingerId)
+                        {
+                            lookInput = Vector2.zero;
+                        }
+                        break;
+                }
             }
         }
     }
 
-    private void TurnAround()
+    private void TurnAround(float inputX, float inputY)
     {
-        cameraPitch = Mathf.Clamp(cameraPitch - lookInput.y, -90f, 90f);
+        cameraPitch = Mathf.Clamp(cameraPitch - inputY, -90f, 90f);
         cameraTransform.localRotation = Quaternion.Euler(cameraPitch, 0, 0);
-        transform.Rotate(transform.up, lookInput.x);
+        transform.Rotate(transform.up, inputX);
     }
 
     public void SwitchAction()
     {
-        if (!Player.pause)
+        if (!Player.pause && Player.platform == "Mobile")
         {
             crouch = !crouch;
-            if (crouch)
-            {
-                if (GameObject.FindGameObjectWithTag("Sprint") != null)
-                {
-                    Destroy(GameObject.FindGameObjectWithTag("Sprint"));
-                }
-                Crouch();
-            }
-            else
-            {
-                Walk();
-            }
+            CrouchCheck();
         }
     }
 
