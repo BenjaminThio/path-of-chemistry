@@ -21,6 +21,7 @@ public class Hotbar : MonoBehaviour
         Global.UpdateInventory("Hotbar", db.hotbarItem);
     }
 
+    /*
     private void Update()
     {
         if (Player.platform == "Mobile")
@@ -50,6 +51,7 @@ public class Hotbar : MonoBehaviour
             }
         }
     }
+    */
 
     public void ToggleSlot()
     {
@@ -58,17 +60,19 @@ public class Hotbar : MonoBehaviour
             string selectedSlotName = EventSystem.current.currentSelectedGameObject.name;
             if (Global.Digitize(selectedSlotName) != db.slotNum)
             {
+                /*
                 if (Player.platform == "Desktop" && !Player.pause)
                 {
                     return;
                 }
+                */
                 db.slotNum = Global.Digitize(selectedSlotName);
                 UpdateSlot();
-                GameObject.FindGameObjectWithTag("Hand").GetComponent<Hand>().ChangeItemOnHand();
                 if (db.hotbarItem[db.slotNum - 1] != null)
                 {
-                    ItemNameAppear(Convert.ToString(db.hotbarItem[db.slotNum - 1]["Item"]), true, false);
+                    ItemNameAppear(Convert.ToString(db.hotbarItem[db.slotNum - 1]["Item"]), true);
                 }
+                GameObject.FindGameObjectWithTag("Hand").GetComponent<Hand>().ChangeItemOnHand();
             }
         }
     }
@@ -121,9 +125,9 @@ public class Hotbar : MonoBehaviour
             }
         }
     }
-    public void ItemNameAppear(string itemName, bool isHotbar, bool handHandlerActive)
+    public void ItemNameAppear(string itemName, bool isActionBar)
     {
-        if (!isHotbar)
+        if (!isActionBar)
         {
             GameObject.FindGameObjectWithTag("Quantity Handler").transform.GetChild(6).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = itemName;
         }
@@ -138,10 +142,6 @@ public class Hotbar : MonoBehaviour
             GameObject itemNameContainer = Instantiate(Resources.Load<GameObject>("UI/Black Container"), GameObject.FindGameObjectWithTag("Canvas").transform, false);
             itemNameContainer.GetComponentInChildren<TextMeshProUGUI>().text = itemName;
             StartCoroutine(WaitAndDeleteItemName(3f));
-            if (handHandlerActive)
-            {
-                GameObject.FindGameObjectWithTag("Hand").GetComponent<Hand>().ChangeItemOnHand();
-            }
         }
     }
 

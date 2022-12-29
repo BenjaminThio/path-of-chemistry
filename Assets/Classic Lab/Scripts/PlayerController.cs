@@ -224,7 +224,7 @@ public class PlayerController : MonoBehaviour
 
     public void SwitchAction()
     {
-        if (!Player.pause && Player.platform == "Mobile")
+        if (!Player.pause/* && Player.platform == "Mobile"*/)
         {
             crouch = !crouch;
             CrouchCheck();

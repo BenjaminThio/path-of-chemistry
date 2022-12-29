@@ -7,7 +7,7 @@ using TMPro;
 
 public class ElementConstructor : MonoBehaviour
 {
-    private static Dictionary<string, int> particles = new Dictionary<string, int>()
+    public static Dictionary<string, int> particles = new Dictionary<string, int>()
     {
         {"Proton", 0},
         {"Electron", 0},
@@ -19,7 +19,7 @@ public class ElementConstructor : MonoBehaviour
         {"Electron", 120},
         {"Neutron", 180}
     };
-    public static string constructedElement;
+    public static string constructedElement = null;
 
     private void Start()
     {

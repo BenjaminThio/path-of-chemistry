@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &69809242545665532
+--- !u!1 &2605440848604308037
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,10 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 69809242545665535}
-  - component: {fileID: 69809242545665520}
-  - component: {fileID: 69809242545665521}
-  - component: {fileID: 69809242545665534}
+  - component: {fileID: 5804192212459723014}
+  - component: {fileID: 7280960200655617260}
+  - component: {fileID: 8029158977774135797}
+  - component: {fileID: 4768852878008873123}
   m_Layer: 5
   m_Name: Play
   m_TagString: Play
@@ -19,13 +19,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &69809242545665535
+--- !u!224 &5804192212459723014
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69809242545665532}
+  m_GameObject: {fileID: 2605440848604308037}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 426.0213}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -38,21 +38,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &69809242545665520
+--- !u!222 &7280960200655617260
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69809242545665532}
+  m_GameObject: {fileID: 2605440848604308037}
   m_CullTransparentMesh: 1
---- !u!114 &69809242545665521
+--- !u!114 &8029158977774135797
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69809242545665532}
+  m_GameObject: {fileID: 2605440848604308037}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play
+  m_text: Continue Game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf01d1eaeb9d65b439c0fdeea49fe820, type: 2}
   m_sharedMaterial: {fileID: -2115354019194531962, guid: cf01d1eaeb9d65b439c0fdeea49fe820,
@@ -136,13 +136,13 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &69809242545665534
+--- !u!114 &4768852878008873123
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69809242545665532}
+  m_GameObject: {fileID: 2605440848604308037}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -176,7 +176,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 69809242545665521}
+  m_TargetGraphic: {fileID: 8029158977774135797}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []

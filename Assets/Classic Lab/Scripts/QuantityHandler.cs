@@ -63,7 +63,7 @@ public class QuantityHandler : MonoBehaviour
                     //quantityHandler.transform.GetChild(5).GetComponent<Slider>().value = quantityHandler.transform.GetChild(5).GetComponent<Slider>().maxValue;
                     quantityHandler.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Done(srcName, src, dstName, dst, slotNum));
                     IdentifyQuantity(quantityHandler.transform.GetChild(5).GetComponent<Slider>().value);
-                    GameObject.FindGameObjectWithTag("Hotbar").GetComponent<Hotbar>().ItemNameAppear(Convert.ToString(src[slotNum - 1]["Item"]), false, false);
+                    GameObject.FindGameObjectWithTag("Hotbar").GetComponent<Hotbar>().ItemNameAppear(Convert.ToString(src[slotNum - 1]["Item"]), false);
                 }
                 else
                 {
@@ -75,10 +75,11 @@ public class QuantityHandler : MonoBehaviour
                             GameObject.Find($"{srcName}/Slot ({i})").GetComponent<Image>().color = Color.white;
                         }
                     }
-                    GameObject.FindGameObjectWithTag("Hotbar").GetComponent<Hotbar>().ItemNameAppear(Convert.ToString(src[slotNum - 1]["Item"]), true, false);
+                    GameObject.FindGameObjectWithTag("Hotbar").GetComponent<Hotbar>().ItemNameAppear(Convert.ToString(src[slotNum - 1]["Item"]), true);
                 }
                 Global.UpdateInventory(srcName, src);
                 Global.UpdateInventory(dstName, dst);
+                GameObject.FindGameObjectWithTag("Hand").GetComponent<Hand>().ChangeItemOnHand();
                 if (srcName == "Hotbar" && dstName == "Flask" || srcName == "Flask" && dstName == "Hotbar")
                 {
                     GameObject.FindGameObjectWithTag("Rack").GetComponent<FillLiquidToCylinderBeaker>().FillLiquid();

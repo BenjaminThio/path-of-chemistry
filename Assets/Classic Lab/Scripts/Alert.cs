@@ -5,7 +5,7 @@ using TMPro;
 public class Alert : MonoBehaviour
 {
     private static readonly int maxMessages = 50;
-    private static List<string> messages = new List<string>();
+    public static List<string> messages = new List<string>();
 
     public static void OpenAlertInterface()
     {
@@ -16,6 +16,7 @@ public class Alert : MonoBehaviour
                 Destroy(GameObject.FindGameObjectWithTag("Red Dot"));
             }
             Player.Pause();
+            QuantityHandler.pause = true;
             GameObject alertInterface = Instantiate(Resources.Load<GameObject>("UI/Alert Interface"), GameObject.Find("Canvas").transform, false);
             alertInterface.name = "Alert Interface";
             GameObject.FindGameObjectWithTag("Alert Interface").GetComponent<Animator>().SetTrigger("Glitch");

@@ -125,11 +125,12 @@ public class Database
     */
     private static readonly object threadLock = new object();
     public static Database db;
+    public bool played = false;
     public int level = 1;
     public int expLevel = 0;
     public int exp = 0;
     public int slotNum = 1;
-    public int desktopSensitivity = 150;
+    public int desktopSensitivity = 200;
     public int mobileSensitivity = 2;
     public Dictionary<string, object>[] hotbarItem = {
         null,

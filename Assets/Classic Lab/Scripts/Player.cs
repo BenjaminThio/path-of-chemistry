@@ -7,7 +7,7 @@ using TMPro;
 
 public class Player : MonoBehaviour
 {
-    public static string platform = "Desktop";
+    public static string platform = "Mobile";
     public static bool runOnce = false;
 
     private Database db;
@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
                 {
                     Instantiate(Resources.Load<GameObject>("Water/Water"), hit.transform, false);
                 }
-                if (platform == "Mobile" && isCrosshairPressed || platform == "Desktop" && Input.GetMouseButtonDown(1))
+                if (/*platform == "Mobile" && */isCrosshairPressed || platform == "Desktop" && Input.GetMouseButtonDown(1))
                 {
                     if (hit.transform.tag == "Flask")
                     {
@@ -173,8 +173,9 @@ public class Player : MonoBehaviour
                     hotbar.UpdateSlot();
                     if (db.hotbarItem[db.slotNum - 1] != null)
                     {
-                        hotbar.ItemNameAppear(Convert.ToString(db.hotbarItem[db.slotNum - 1]["Item"]), true, false);
+                        hotbar.ItemNameAppear(Convert.ToString(db.hotbarItem[db.slotNum - 1]["Item"]), true);
                     }
+                    GameObject.FindGameObjectWithTag("Hand").GetComponent<Hand>().ChangeItemOnHand();
                 }
             }
             if (Input.GetKeyDown(KeyCode.T))

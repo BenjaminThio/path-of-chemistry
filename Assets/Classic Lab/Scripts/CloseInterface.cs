@@ -39,11 +39,9 @@ public class CloseInterface : MonoBehaviour
 
     public void CloseAlertInterface()
     {
-        if (!QuantityHandler.pause)
-        {
-            Destroy(GameObject.FindGameObjectWithTag("Alert Interface"));
-            Resume();
-        }
+        QuantityHandler.pause = false;
+        Destroy(GameObject.FindGameObjectWithTag("Alert Interface"));
+        Resume();
     }
 
     public void CloseCompoundReducerInterface()
@@ -64,6 +62,7 @@ public class CloseInterface : MonoBehaviour
     public void ClosePauseInterface()
     {
         Database.Save();
+        QuantityHandler.pause = false;
         Destroy(GameObject.FindGameObjectWithTag("Pause Interface"));
         Resume();
     }

@@ -61,6 +61,9 @@ TagManager:
   - Pause
   - Controls Panel
   - Sensitivity
+  - Settings
+  - Settings Interface
+  - New Game
   layers:
   - Default
   - TransparentFX
