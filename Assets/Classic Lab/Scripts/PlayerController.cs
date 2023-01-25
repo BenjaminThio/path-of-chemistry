@@ -28,14 +28,20 @@ public class PlayerController : MonoBehaviour
     private float sprintSpeed = 30f;
     private float cameraPitch;
     private float halfScreenWidth = Screen.width / 2;
-    private float normalCameraHeight = 5f;
+    private float cameraHeight = 5f;
     private Vector2 lookInput;
-    private Vector3 moveDirection = Vector3.zero;
+    private Vector3 velocity = Vector3.zero;
 
     private int shortClicks = 0;
     private float resetTime = .3f;
     private bool doubleClick = false;
 
+    private bool isGrounded;
+    private float gravity = -9.81f;
+    private float groundDistance = 0.4f;
+    public Transform groundCheck;
+    public LayerMask groundMask;
+    
     private void Start()
     {
         db = Database.db;
@@ -48,6 +54,7 @@ public class PlayerController : MonoBehaviour
         {
             Rotate();
             Move();
+            FreeFall();
         }
         else
         {
@@ -60,7 +67,25 @@ public class PlayerController : MonoBehaviour
             {
                 Destroy(GameObject.FindGameObjectWithTag("Sprint"));
             }
+            if (Player.platform == "Desktop")
+            {
+                if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
+                {
+                    crouch = false;
+                }
+            }
         }
+    }
+
+    private void FreeFall()
+    {
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f;
+        }
+        velocity.y += gravity * Time.deltaTime;
+        characterController.Move(velocity * Time.deltaTime);
     }
 
     private void CrouchCheck()
@@ -75,6 +100,10 @@ public class PlayerController : MonoBehaviour
             }
             Crouch();
         }
+        else if (doubleClick)
+        {
+            Sprint();
+        }
         else
         {
             Walk();
@@ -88,12 +117,10 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
             {
                 crouch = true;
-                CrouchCheck();
             }
             else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
             {
                 crouch = false;
-                CrouchCheck();
             }
             else if (!crouch)
             {
@@ -127,7 +154,8 @@ public class PlayerController : MonoBehaviour
                     Walk();
                 }
             }
-            moveDirection = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
+            CrouchCheck();
+            velocity = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
         }
         else if (Player.platform == "Mobile")
         {
@@ -147,10 +175,10 @@ public class PlayerController : MonoBehaviour
                     Walk();
                 }
             }
-            moveDirection = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
-            moveDirection = transform.TransformDirection(moveDirection);
+            velocity = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
+            velocity = transform.TransformDirection(velocity);
         }
-        characterController.Move(moveDirection * speed * Time.deltaTime);
+        characterController.Move(velocity * speed * Time.deltaTime);
     }
 
     private IEnumerator ShortClicksReset()
@@ -236,7 +264,7 @@ public class PlayerController : MonoBehaviour
         GameObject.FindGameObjectWithTag("Action").GetComponent<Image>().sprite = Resources.Load<Sprite>("Crouch");
         speed = crouchSpeed;
         GameObject playerView = GameObject.FindGameObjectWithTag("MainCamera");
-        playerView.transform.localPosition = new Vector3(playerView.transform.localPosition.x, normalCameraHeight / 2, playerView.transform.localPosition.z);
+        playerView.transform.localPosition = new Vector3(playerView.transform.localPosition.x, cameraHeight / 2, playerView.transform.localPosition.z);
     }
 
     private void Walk()
@@ -244,7 +272,7 @@ public class PlayerController : MonoBehaviour
         GameObject.FindGameObjectWithTag("Action").GetComponent<Image>().sprite = Resources.Load<Sprite>("Stand");
         speed = walkSpeed;
         GameObject playerView = GameObject.FindGameObjectWithTag("MainCamera");
-        playerView.transform.localPosition = new Vector3(playerView.transform.localPosition.x, normalCameraHeight, playerView.transform.localPosition.z);
+        playerView.transform.localPosition = new Vector3(playerView.transform.localPosition.x, cameraHeight, playerView.transform.localPosition.z);
     }
 
     private void Sprint()

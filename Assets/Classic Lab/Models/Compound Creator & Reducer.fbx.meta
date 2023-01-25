@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7e080e62f219cae4c9a47c0ddbc74e8b
+guid: 42acaa501090f934ebc2a7c349b03984
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
@@ -7,13 +7,33 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Glass.002
-    second: {fileID: 2100000, guid: 4c38e73b28fdeae49ac612eac3da589b, type: 2}
+      name: Black
+    second: {fileID: 2100000, guid: 0b8b8ae35ddaa2e4abf4371e6d421f9f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Wood.001
-    second: {fileID: 2100000, guid: eee9e65c9f41f304c820b7f36e9676f9, type: 2}
+      name: Black tubing
+    second: {fileID: 2100000, guid: 477d9d476baa9814dbacb1d386cc16e5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Simple Crystal
+    second: {fileID: 2100000, guid: 8bfeaf1f9af803f47a2d466e4f478f2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal_panels_001
+    second: {fileID: 2100000, guid: 87463ec8a974e59468eefbdb9b0868c2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal_tile_01_2k
+    second: {fileID: 2100000, guid: 48752ed60d932d54faefd6067116ada6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: scifi_panel
+    second: {fileID: 2100000, guid: 6566ea331c6641b4097c22cc22d8e3bf, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
