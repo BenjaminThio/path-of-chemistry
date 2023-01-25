@@ -57,7 +57,15 @@ public class Player : MonoBehaviour
                 }
                 GameObject.Find("Crosshair").GetComponent<Image>().sprite = Resources.Load<Sprite>("Press");
                 GameObject.Find("Crosshair").GetComponent<Button>().enabled = true;
-                GameObject worldCanvasForTag = Instantiate(Resources.Load<GameObject>($"Tags/{hit.transform.tag}"), hit.transform, false);
+                GameObject worldCanvasForTag;
+                if (hit.transform.tag == "Compound Creator & Reducer")
+                {
+                    worldCanvasForTag = Instantiate(Resources.Load<GameObject>($"Tags/{hit.transform.tag}"), hit.transform.parent.transform.GetChild(0).transform, false);
+                }
+                else
+                {
+                    worldCanvasForTag = Instantiate(Resources.Load<GameObject>($"Tags/{hit.transform.tag}"), hit.transform, false);
+                }
                 if (hit.transform.tag == "Flask")
                 {
                     if (Database.db.level <= Recipe.experiments.Length)
