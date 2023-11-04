@@ -110,7 +110,7 @@ public class Menu : MonoBehaviour
         Destroy(GameObject.FindGameObjectWithTag("Hyperlinks"));
         GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>().enabled = true;
         yield return new WaitForSeconds(5f);
-        GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>().enabled = false;
+//        GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>().enabled = false;
         GameObject inGameCanvas  = Instantiate(Resources.Load<GameObject>("Canvas/InGame Canvas"));
         inGameCanvas.name = "Canvas";
         if (Player.platform == "Desktop")

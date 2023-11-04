@@ -74,6 +74,8 @@ public class PlayerController : MonoBehaviour
                     crouch = false;
                 }
             }
+            shortClicks = 0;
+            doubleClick = false;
         }
     }
 

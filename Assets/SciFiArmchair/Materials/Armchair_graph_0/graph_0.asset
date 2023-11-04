@@ -1,0 +1,1017 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eed5864476f84ce4b85454db09ca4eaa, type: 3}
+  m_Name: graph_0
+  m_EditorClassIdentifier: 
+  AssetPath: Assets/SciFiArmchair/Materials/Armchair.sbsar
+  OutputPath: Assets/SciFiArmchair/Materials/Armchair_graph_0
+  RawData: {fileID: -244192453324840774, guid: f285bfdf9d9d8c247a0bdd4836a8bede, type: 3}
+  Name: graph_0
+  IsRoot: 1
+  FlagedForDelete: 0
+  GUID: b60bf0f4-fb86-4ac5-b544-bc1b6a0e25ad
+  Index: 0
+  Input:
+  - id: 0
+  - id: 1
+  - id: 2
+  - id: 3
+  - id: 4
+  - id: 5
+  - id: 6
+  - id: 7
+  - id: 8
+  - id: 9
+  - id: 10
+  - id: 11
+  - id: 12
+  - id: 13
+  - id: 14
+  - id: 15
+  - id: 16
+  - id: 17
+  - id: 18
+  - id: 19
+  - id: 20
+  - id: 21
+  - id: 22
+  - id: 23
+  - id: 24
+  - id: 25
+  - id: 26
+  - id: 27
+  - id: 28
+  - id: 29
+  - id: 30
+  - id: 31
+  - id: 32
+  - id: 33
+  - id: 34
+  - id: 35
+  Output:
+  - Index: 0
+    VirtualOutputIndex: 6
+    GraphIndex: 0
+    Description:
+      Identifier: basecolor
+      Label: basecolor
+      Index: 0
+      Type: 8
+      Channel: baseColor
+    OutputTexture: {fileID: 2800000, guid: db0ed12766dbbb5429a83226d79c1494, type: 3}
+    sRGB: 1
+    IsVirtual: 0
+    IsStandardOutput: 1
+    IsAlphaAssignable: 1
+    AlphaChannel: 
+    InvertAssignedAlpha: 0
+    Flags: 0
+  - Index: 1
+    VirtualOutputIndex: 7
+    GraphIndex: 0
+    Description:
+      Identifier: normal
+      Label: normal
+      Index: 1
+      Type: 8
+      Channel: normal
+    OutputTexture: {fileID: 2800000, guid: 805b184bb93ca59459ef5e8179f16c01, type: 3}
+    sRGB: 0
+    IsVirtual: 0
+    IsStandardOutput: 1
+    IsAlphaAssignable: 0
+    AlphaChannel: 
+    InvertAssignedAlpha: 0
+    Flags: 0
+  - Index: 2
+    VirtualOutputIndex: 8
+    GraphIndex: 0
+    Description:
+      Identifier: roughness
+      Label: roughness
+      Index: 2
+      Type: 8
+      Channel: roughness
+    OutputTexture: {fileID: 0}
+    sRGB: 0
+    IsVirtual: 0
+    IsStandardOutput: 0
+    IsAlphaAssignable: 1
+    AlphaChannel: 
+    InvertAssignedAlpha: 0
+    Flags: 0
+  - Index: 3
+    VirtualOutputIndex: 9
+    GraphIndex: 0
+    Description:
+      Identifier: metallic
+      Label: metallic
+      Index: 3
+      Type: 8
+      Channel: metallic
+    OutputTexture: {fileID: 2800000, guid: 31a238e1c5610404ea3e0d8e382e2338, type: 3}
+    sRGB: 0
+    IsVirtual: 0
+    IsStandardOutput: 1
+    IsAlphaAssignable: 1
+    AlphaChannel: roughness
+    InvertAssignedAlpha: 1
+    Flags: 0
+  - Index: 4
+    VirtualOutputIndex: 10
+    GraphIndex: 0
+    Description:
+      Identifier: ambientocclusion
+      Label: ambientocclusion
+      Index: 4
+      Type: 8
+      Channel: ambientOcclusion
+    OutputTexture: {fileID: 2800000, guid: 57c03c66fa65f6f41a3c46503c8e63a7, type: 3}
+    sRGB: 0
+    IsVirtual: 0
+    IsStandardOutput: 1
+    IsAlphaAssignable: 1
+    AlphaChannel: 
+    InvertAssignedAlpha: 0
+    Flags: 0
+  - Index: 5
+    VirtualOutputIndex: 11
+    GraphIndex: 0
+    Description:
+      Identifier: emissive
+      Label: emissive
+      Index: 5
+      Type: 8
+      Channel: emissive
+    OutputTexture: {fileID: 2800000, guid: a12de6a60f5c12c45ad1212fac07ef1d, type: 3}
+    sRGB: 1
+    IsVirtual: 0
+    IsStandardOutput: 1
+    IsAlphaAssignable: 1
+    AlphaChannel: 
+    InvertAssignedAlpha: 0
+    Flags: 0
+  HasPhysicalSize: 0
+  PhysicalSize: {x: 0, y: 0, z: 0}
+  EnablePhysicalSize: 0
+  Thumbnail: 
+  HasThumbnail: 0
+  CurrentStatePreset: " <sbspreset pkgurl=\"pkg://Sci-Fi_Armchair\" label=\"\" >\n 
+    <presetinput identifier=\"$outputsize\" uid=\"3900813463\" type=\"8\" value=\"10,10\"
+    />\n </sbspreset>\n"
+  IsRuntimeOnly: 0
+  GenerateAllOutputs: 0
+  GenerateAllMipmaps: 0
+  OutputMaterial: {fileID: 2100000, guid: 2a64f5d34d6bae6499a48762220cc67e, type: 2}
+  DefaultPreset: " <sbspreset pkgurl=\"pkg://Sci-Fi_Armchair\" label=\"\" >\n  <presetinput
+    identifier=\"$outputsize\" uid=\"3900813463\" type=\"8\" value=\"10,10\" />\n
+    </sbspreset>\n"
+  MaterialShader: Standard
+  RenderTextures: 0
+  OutputRemaped: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: SubstanceInputInt2, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 0
+        GraphID: 0
+        Description:
+          Identifier: $outputsize
+          Label: $outputsize
+          GuiGroup: 
+          GuiDescription: 
+          Type: 5
+          WidgetType: 0
+        Data: {x: 10, y: 10}
+        NumericalDescription:
+          DefaultValue: {x: 8, y: 8}
+          MinValue: {x: 0, y: 0}
+          MaxValue: {x: 1, y: 1}
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    00000001:
+      type: {class: SubstanceInputFloat4, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 1
+        GraphID: 0
+        Description:
+          Identifier: main
+          Label: Main
+          GuiGroup: Color
+          GuiDescription: 
+          Type: 3
+          WidgetType: 3
+        Data: {x: 0.11, y: 0.0829529, z: 0.0473, w: 1}
+        NumericalDescription:
+          DefaultValue: {x: 0.11, y: 0.0829529, z: 0.0473, w: 1}
+          MinValue: {x: 0, y: 0, z: 0, w: 0}
+          MaxValue: {x: 0, y: 0, z: 0, w: 0}
+          SliderStep: 0
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    00000002:
+      type: {class: SubstanceInputFloat4, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 2
+        GraphID: 0
+        Description:
+          Identifier: trim_01
+          Label: Trim 01
+          GuiGroup: Color
+          GuiDescription: 
+          Type: 3
+          WidgetType: 3
+        Data: {x: 0.603922, y: 0.541176, z: 0.486275, w: 1}
+        NumericalDescription:
+          DefaultValue: {x: 0.603922, y: 0.541176, z: 0.486275, w: 1}
+          MinValue: {x: 0, y: 0, z: 0, w: 0}
+          MaxValue: {x: 0, y: 0, z: 0, w: 0}
+          SliderStep: 0
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    00000003:
+      type: {class: SubstanceInputFloat4, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 3
+        GraphID: 0
+        Description:
+          Identifier: trim_02
+          Label: Trim 02
+          GuiGroup: Color
+          GuiDescription: 
+          Type: 3
+          WidgetType: 3
+        Data: {x: 0.109804, y: 0.0823529, z: 0.0470588, w: 1}
+        NumericalDescription:
+          DefaultValue: {x: 0.109804, y: 0.0823529, z: 0.0470588, w: 1}
+          MinValue: {x: 0, y: 0, z: 0, w: 0}
+          MaxValue: {x: 0, y: 0, z: 0, w: 0}
+          SliderStep: 0
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    00000004:
+      type: {class: SubstanceInputFloat4, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 4
+        GraphID: 0
+        Description:
+          Identifier: seat
+          Label: Seat
+          GuiGroup: Color
+          GuiDescription: 
+          Type: 3
+          WidgetType: 3
+        Data: {x: 0.109804, y: 0.0823529, z: 0.0470588, w: 1}
+        NumericalDescription:
+          DefaultValue: {x: 0.109804, y: 0.0823529, z: 0.0470588, w: 1}
+          MinValue: {x: 0, y: 0, z: 0, w: 0}
+          MaxValue: {x: 0, y: 0, z: 0, w: 0}
+          SliderStep: 0
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    00000005:
+      type: {class: SubstanceInputFloat4, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 5
+        GraphID: 0
+        Description:
+          Identifier: base
+          Label: Base
+          GuiGroup: Color
+          GuiDescription: 
+          Type: 3
+          WidgetType: 3
+        Data: {x: 0.603922, y: 0.541176, z: 0.486275, w: 1}
+        NumericalDescription:
+          DefaultValue: {x: 0.603922, y: 0.541176, z: 0.486275, w: 1}
+          MinValue: {x: 0, y: 0, z: 0, w: 0}
+          MaxValue: {x: 0, y: 0, z: 0, w: 0}
+          SliderStep: 0
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    00000006:
+      type: {class: SubstanceInputFloat4, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 6
+        GraphID: 0
+        Description:
+          Identifier: bottom
+          Label: Bottom
+          GuiGroup: Color
+          GuiDescription: 
+          Type: 3
+          WidgetType: 3
+        Data: {x: 0, y: 0, z: 0, w: 1}
+        NumericalDescription:
+          DefaultValue: {x: 0, y: 0, z: 0, w: 1}
+          MinValue: {x: 0, y: 0, z: 0, w: 0}
+          MaxValue: {x: 0, y: 0, z: 0, w: 0}
+          SliderStep: 0
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    00000007:
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 7
+        GraphID: 0
+        Description:
+          Identifier: aging
+          Label: Aging
+          GuiGroup: Color
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 0
+        NumericalDescription:
+          DefaultValue: 0
+          MinValue: 0
+          MaxValue: 1
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    00000008:
+      type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 8
+        GraphID: 0
+        Description:
+          Identifier: main_pattern
+          Label: Main Pattern
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 4
+          WidgetType: 5
+        Data: 1
+        NumericalDescription:
+          DefaultValue: 1
+          MinValue: 0
+          MaxValue: 0
+          SliderStep: 0
+          SliderClamp: 0
+          LabelFalse: 
+          LabelTrue: 
+          EnumValueCount: 9
+          EnumValues:
+          - Value: 1
+            Label: None
+          - Value: 2
+            Label: Pattern 1
+          - Value: 3
+            Label: Pattern 2
+          - Value: 4
+            Label: Pattern 3
+          - Value: 5
+            Label: Pattern 4
+          - Value: 6
+            Label: Pattern 5
+          - Value: 7
+            Label: Pattern 6
+          - Value: 8
+            Label: Pattern 7
+          - Value: 9
+            Label: Pattern 8
+    00000009:
+      type: {class: SubstanceInputFloat4, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 9
+        GraphID: 0
+        Description:
+          Identifier: main_pattern_color
+          Label: Main Pattern Color
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 3
+          WidgetType: 3
+        Data: {x: 1, y: 1, z: 1, w: 1}
+        NumericalDescription:
+          DefaultValue: {x: 1, y: 1, z: 1, w: 1}
+          MinValue: {x: 0, y: 0, z: 0, w: 0}
+          MaxValue: {x: 0, y: 0, z: 0, w: 0}
+          SliderStep: 0
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    0000000A:
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 10
+        GraphID: 0
+        Description:
+          Identifier: main_pattern_roughness
+          Label: Main Pattern Roughness
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 0
+        NumericalDescription:
+          DefaultValue: 0
+          MinValue: -1
+          MaxValue: 1
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    0000000B:
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 11
+        GraphID: 0
+        Description:
+          Identifier: main_pattern_normal
+          Label: Main Pattern Normal
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 0
+        NumericalDescription:
+          DefaultValue: 0
+          MinValue: -1
+          MaxValue: 1
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    0000000C:
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 12
+        GraphID: 0
+        Description:
+          Identifier: main_pattern_scale
+          Label: Main Pattern Scale
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 0.5
+        NumericalDescription:
+          DefaultValue: 0.5
+          MinValue: 0.2
+          MaxValue: 2
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    0000000D:
+      type: {class: SubstanceInputFloat2, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 13
+        GraphID: 0
+        Description:
+          Identifier: main_pattern_offset
+          Label: Main Pattern Offset
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 1
+          WidgetType: 1
+        Data: {x: 0, y: 0}
+        NumericalDescription:
+          DefaultValue: {x: 0, y: 0}
+          MinValue: {x: -0.5, y: -0.5}
+          MaxValue: {x: 0.5, y: 0.5}
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    0000000E:
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 14
+        GraphID: 0
+        Description:
+          Identifier: main_pattern_rotation
+          Label: Main Pattern Rotation
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 0
+        NumericalDescription:
+          DefaultValue: 0
+          MinValue: 0
+          MaxValue: 360
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    0000000F:
+      type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 15
+        GraphID: 0
+        Description:
+          Identifier: trim_01_pattern
+          Label: Trim 01 Pattern
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 4
+          WidgetType: 5
+        Data: 2
+        NumericalDescription:
+          DefaultValue: 2
+          MinValue: 0
+          MaxValue: 0
+          SliderStep: 0
+          SliderClamp: 0
+          LabelFalse: 
+          LabelTrue: 
+          EnumValueCount: 9
+          EnumValues:
+          - Value: 1
+            Label: None
+          - Value: 2
+            Label: Pattern 1
+          - Value: 3
+            Label: Pattern 2
+          - Value: 4
+            Label: Pattern 3
+          - Value: 5
+            Label: Pattern 4
+          - Value: 6
+            Label: Pattern 5
+          - Value: 7
+            Label: Pattern 6
+          - Value: 8
+            Label: Pattern 7
+          - Value: 9
+            Label: Pattern 8
+    00000010:
+      type: {class: SubstanceInputFloat4, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 16
+        GraphID: 0
+        Description:
+          Identifier: trim_01_pattern_color
+          Label: Trim 01 Pattern Color
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 3
+          WidgetType: 3
+        Data: {x: 0.8, y: 0.716883, z: 0.644156, w: 1}
+        NumericalDescription:
+          DefaultValue: {x: 0.8, y: 0.716883, z: 0.644156, w: 1}
+          MinValue: {x: 0, y: 0, z: 0, w: 0}
+          MaxValue: {x: 0, y: 0, z: 0, w: 0}
+          SliderStep: 0
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    00000011:
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 17
+        GraphID: 0
+        Description:
+          Identifier: trim_01_pattern_roughness
+          Label: Trim 01 Pattern Roughness
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: -0.6
+        NumericalDescription:
+          DefaultValue: -0.6
+          MinValue: -1
+          MaxValue: 1
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    00000012:
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 18
+        GraphID: 0
+        Description:
+          Identifier: trim_01_pattern_normal
+          Label: Trim 01 Pattern Normal
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 0
+        NumericalDescription:
+          DefaultValue: 0
+          MinValue: -1
+          MaxValue: 1
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    00000013:
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 19
+        GraphID: 0
+        Description:
+          Identifier: trim_01_pattern_scale
+          Label: Trim 01 Pattern Scale
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 0.5
+        NumericalDescription:
+          DefaultValue: 0.5
+          MinValue: 0.2
+          MaxValue: 2
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    00000014:
+      type: {class: SubstanceInputFloat2, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 20
+        GraphID: 0
+        Description:
+          Identifier: trim_01_pattern_offset
+          Label: Trim 01 Pattern Offset
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 1
+          WidgetType: 1
+        Data: {x: 0, y: 0.2}
+        NumericalDescription:
+          DefaultValue: {x: 0, y: 0.2}
+          MinValue: {x: -0.5, y: -0.5}
+          MaxValue: {x: 0.5, y: 0.5}
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    00000015:
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 21
+        GraphID: 0
+        Description:
+          Identifier: trim_01_pattern_rotation
+          Label: Trim 01 Pattern Rotation
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 0
+        NumericalDescription:
+          DefaultValue: 0
+          MinValue: 0
+          MaxValue: 360
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    00000016:
+      type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 22
+        GraphID: 0
+        Description:
+          Identifier: trim_02_pattern
+          Label: Trim 02 Pattern
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 4
+          WidgetType: 5
+        Data: 1
+        NumericalDescription:
+          DefaultValue: 1
+          MinValue: 0
+          MaxValue: 0
+          SliderStep: 0
+          SliderClamp: 0
+          LabelFalse: 
+          LabelTrue: 
+          EnumValueCount: 9
+          EnumValues:
+          - Value: 1
+            Label: None
+          - Value: 2
+            Label: Pattern 1
+          - Value: 3
+            Label: Pattern 2
+          - Value: 4
+            Label: Pattern 3
+          - Value: 5
+            Label: Pattern 4
+          - Value: 6
+            Label: Pattern 5
+          - Value: 7
+            Label: Pattern 6
+          - Value: 8
+            Label: Pattern 7
+          - Value: 9
+            Label: Pattern 8
+    00000017:
+      type: {class: SubstanceInputFloat4, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 23
+        GraphID: 0
+        Description:
+          Identifier: trim_02_pattern_color
+          Label: Trim 02 Pattern Color
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 3
+          WidgetType: 3
+        Data: {x: 1, y: 1, z: 1, w: 1}
+        NumericalDescription:
+          DefaultValue: {x: 1, y: 1, z: 1, w: 1}
+          MinValue: {x: 0, y: 0, z: 0, w: 0}
+          MaxValue: {x: 0, y: 0, z: 0, w: 0}
+          SliderStep: 0
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    00000018:
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 24
+        GraphID: 0
+        Description:
+          Identifier: trim_02_pattern_roughness
+          Label: Trim 02 Pattern Roughness
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 0
+        NumericalDescription:
+          DefaultValue: 0
+          MinValue: -1
+          MaxValue: 1
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    00000019:
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 25
+        GraphID: 0
+        Description:
+          Identifier: trim_02_pattern_normal
+          Label: Trim 02 Pattern Normal
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 0
+        NumericalDescription:
+          DefaultValue: 0
+          MinValue: -1
+          MaxValue: 1
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    0000001A:
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 26
+        GraphID: 0
+        Description:
+          Identifier: trim_02_pattern_scale
+          Label: Trim 02 Pattern Scale
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 0.5
+        NumericalDescription:
+          DefaultValue: 0.5
+          MinValue: 0.2
+          MaxValue: 2
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    0000001B:
+      type: {class: SubstanceInputFloat2, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 27
+        GraphID: 0
+        Description:
+          Identifier: trim_02_pattern_offset
+          Label: Trim 02 Pattern Offset
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 1
+          WidgetType: 1
+        Data: {x: 0, y: 0}
+        NumericalDescription:
+          DefaultValue: {x: 0, y: 0}
+          MinValue: {x: -0.5, y: -0.5}
+          MaxValue: {x: 0.5, y: 0.5}
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    0000001C:
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 28
+        GraphID: 0
+        Description:
+          Identifier: trim_02_pattern_rotation
+          Label: Trim 02 Pattern Rotation
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 0
+        NumericalDescription:
+          DefaultValue: 0
+          MinValue: 0
+          MaxValue: 360
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    0000001D:
+      type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 29
+        GraphID: 0
+        Description:
+          Identifier: seat_pattern
+          Label: Seat Pattern
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 4
+          WidgetType: 5
+        Data: 1
+        NumericalDescription:
+          DefaultValue: 1
+          MinValue: 0
+          MaxValue: 0
+          SliderStep: 0
+          SliderClamp: 0
+          LabelFalse: 
+          LabelTrue: 
+          EnumValueCount: 9
+          EnumValues:
+          - Value: 1
+            Label: None
+          - Value: 2
+            Label: Pattern 1
+          - Value: 3
+            Label: Pattern 2
+          - Value: 4
+            Label: Pattern 3
+          - Value: 5
+            Label: Pattern 4
+          - Value: 6
+            Label: Pattern 5
+          - Value: 7
+            Label: Pattern 6
+          - Value: 8
+            Label: Pattern 7
+          - Value: 9
+            Label: Pattern 8
+    0000001E:
+      type: {class: SubstanceInputFloat4, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 30
+        GraphID: 0
+        Description:
+          Identifier: seat_pattern_color
+          Label: Seat Pattern Color
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 3
+          WidgetType: 3
+        Data: {x: 1, y: 1, z: 1, w: 1}
+        NumericalDescription:
+          DefaultValue: {x: 1, y: 1, z: 1, w: 1}
+          MinValue: {x: 0, y: 0, z: 0, w: 0}
+          MaxValue: {x: 0, y: 0, z: 0, w: 0}
+          SliderStep: 0
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    0000001F:
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 31
+        GraphID: 0
+        Description:
+          Identifier: seat_pattern_roughness
+          Label: Seat Pattern Roughness
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 0
+        NumericalDescription:
+          DefaultValue: 0
+          MinValue: -1
+          MaxValue: 1
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    00000020:
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 32
+        GraphID: 0
+        Description:
+          Identifier: seat_pattern_normal
+          Label: Seat Pattern Normal
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 0
+        NumericalDescription:
+          DefaultValue: 0
+          MinValue: -1
+          MaxValue: 1
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    00000021:
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 33
+        GraphID: 0
+        Description:
+          Identifier: seat_pattern_scale
+          Label: Seat Pattern Scale
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 0.5
+        NumericalDescription:
+          DefaultValue: 0.5
+          MinValue: 0.2
+          MaxValue: 2
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    00000022:
+      type: {class: SubstanceInputFloat2, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 34
+        GraphID: 0
+        Description:
+          Identifier: seat_pattern_offset
+          Label: Seat Pattern Offset
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 1
+          WidgetType: 1
+        Data: {x: 0, y: 0}
+        NumericalDescription:
+          DefaultValue: {x: 0, y: 0}
+          MinValue: {x: -0.5, y: -0.5}
+          MaxValue: {x: 0.5, y: 0.5}
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
+    00000023:
+      type: {class: SubstanceInputFloat, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        Index: 35
+        GraphID: 0
+        Description:
+          Identifier: seat_pattern_rotation
+          Label: Seat Pattern Rotation
+          GuiGroup: Pattern
+          GuiDescription: 
+          Type: 0
+          WidgetType: 1
+        Data: 0
+        NumericalDescription:
+          DefaultValue: 0
+          MinValue: 0
+          MaxValue: 360
+          SliderStep: 0.01
+          SliderClamp: 0
+          EnumValueCount: 0
+          EnumValues: []
