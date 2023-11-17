@@ -18,9 +18,11 @@ public class PlayerController : MonoBehaviour
 {
     public CharacterController characterController;
     public Transform cameraTransform;
+    public float scale = 1f;
+    public Vector3 velocity = Vector3.zero;
 
     private Database db;
-    private bool crouch = false;
+    public bool crouch = false;
     private int rightFingerId = -1;
     private float speed = 10f;
     private float crouchSpeed = 5f;
@@ -28,55 +30,100 @@ public class PlayerController : MonoBehaviour
     private float sprintSpeed = 30f;
     private float cameraPitch;
     private float halfScreenWidth = Screen.width / 2;
-    private float cameraHeight = 5f;
     private Vector2 lookInput;
-    private Vector3 velocity = Vector3.zero;
 
-    private int shortClicks = 0;
+    public int shortClicks = 0;
+    public bool doubleClick = false;
     private float resetTime = .3f;
-    private bool doubleClick = false;
 
     private bool isGrounded;
     private float gravity = -9.81f;
     private float groundDistance = 0.4f;
     public Transform groundCheck;
     public LayerMask groundMask;
-    
+    public float cameraHeight;
+    public AudioSource footstepSound;
+
+    public bool crouchBeforeSit = false;
+
     private void Start()
     {
         db = Database.db;
+
+        speed *= scale;
+        crouchSpeed *= scale;
+        walkSpeed *= scale;
+        sprintSpeed *= scale;
+
         GameObject.FindGameObjectWithTag("Action").GetComponent<Button>().onClick.AddListener(SwitchAction);
     }
 
     private void Update()
     {
-        if (!Player.pause)
+        Player player = GetComponent<Player>();
+
+        if (player.moveable)
+        {
+            FreeFall();
+            if (!Player.pause)
+            {
+                Rotate();
+                Move();
+            }
+            else
+            {
+                //Cursor.visible = true;
+                if (rightFingerId > -1)
+                {
+                    rightFingerId = -1;
+                }
+                if (GameObject.FindGameObjectWithTag("Sprint") != null)
+                {
+                    Destroy(GameObject.FindGameObjectWithTag("Sprint"));
+                }
+                if (Player.platform == "Desktop")
+                {
+                    if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
+                    {
+                        crouch = false;
+                    }
+                }
+                shortClicks = 0;
+                doubleClick = false;
+            }
+        }
+        else if (!Player.pause)
         {
             Rotate();
-            Move();
-            FreeFall();
-        }
-        else
-        {
-            Cursor.visible = true;
-            if (rightFingerId > -1)
-            {
-                rightFingerId = -1;
-            }
-            if (GameObject.FindGameObjectWithTag("Sprint") != null)
-            {
-                Destroy(GameObject.FindGameObjectWithTag("Sprint"));
-            }
+
             if (Player.platform == "Desktop")
             {
                 if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
                 {
-                    crouch = false;
+                    if (!crouchBeforeSit)
+                    {
+                        Stand();
+                    }
+                    else
+                    {
+                        crouchBeforeSit = false;
+                    }
                 }
             }
-            shortClicks = 0;
-            doubleClick = false;
         }
+    }
+
+    private void Stand()
+    {
+        Player player = GetComponent<Player>();
+        GameObject playerView = GameObject.FindGameObjectWithTag("MainCamera");
+
+        player.raycastRange = 10f * scale;
+        player.moveable = true;
+        player.transform.position = player.positionBeforeSit;
+        player.targetedChair.GetComponent<MeshCollider>().enabled = true;
+        player.targetedChair = null;
+        playerView.transform.localPosition = new Vector3(playerView.transform.localPosition.x, cameraHeight, playerView.transform.localPosition.z);
     }
 
     private void FreeFall()
@@ -90,7 +137,7 @@ public class PlayerController : MonoBehaviour
         characterController.Move(velocity * Time.deltaTime);
     }
 
-    private void CrouchCheck()
+    public void CrouchCheck()
     {
         if (crouch)
         {
@@ -137,12 +184,14 @@ public class PlayerController : MonoBehaviour
                     {
                         doubleClick = true;
                     }
+
                 }
                 else if (Input.GetKeyUp(KeyCode.W) && doubleClick || Input.GetKeyUp(KeyCode.UpArrow) && doubleClick)
                 {
                     shortClicks = 0;
                     doubleClick = false;
                 }
+
                 if (doubleClick)
                 {
                     Sprint();
@@ -157,7 +206,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
             CrouchCheck();
-            velocity = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
+            velocity = new Vector3(0, velocity.y, 0) + transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
         }
         else if (Player.platform == "Mobile")
         {
@@ -177,10 +226,58 @@ public class PlayerController : MonoBehaviour
                     Walk();
                 }
             }
-            velocity = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
+            velocity = new Vector3(joystick.Horizontal, velocity.y, joystick.Vertical);
             velocity = transform.TransformDirection(velocity);
+
+            if (crouch)
+            {
+                if (velocity.x < 0 || velocity.x > 0 || velocity.z < 0 || velocity.z > 0)
+                {
+                    GameObject.FindGameObjectWithTag("Action").GetComponent<Image>().sprite = Resources.Load<Sprite>("Crouch Walk V2");
+                }
+                else //if (velocity.x == 0 && velocity.z == 0)
+                {
+                    GameObject.FindGameObjectWithTag("Action").GetComponent<Image>().sprite = Resources.Load<Sprite>("Crouch");
+                }
+            }
         }
+
         characterController.Move(velocity * speed * Time.deltaTime);
+        GenerateFootstepSoundBasedOnSpeed();
+    }
+
+    private void GenerateFootstepSoundBasedOnSpeed()
+    {
+        if (velocity.x < 0 || velocity.x > 0 || velocity.z < 0 || velocity.z > 0)
+        {
+            if (speed == walkSpeed || speed == sprintSpeed || speed == crouchSpeed)
+            {
+                if (speed == walkSpeed)
+                {
+                    footstepSound.pitch = 1f;
+                }
+                else if (speed == sprintSpeed)
+                {
+                    footstepSound.pitch = 1.4f;
+                }
+                else if (speed == crouchSpeed)
+                {
+                    footstepSound.pitch = .7f;
+                }
+
+                if (!footstepSound.isPlaying)
+                {
+                    footstepSound.Play();
+                }
+            }
+        }
+        else
+        {
+            if (footstepSound.isPlaying)
+            {
+                footstepSound.Pause();
+            }
+        }
     }
 
     private IEnumerator ShortClicksReset()
@@ -254,16 +351,29 @@ public class PlayerController : MonoBehaviour
 
     public void SwitchAction()
     {
-        if (!Player.pause/* && Player.platform == "Mobile"*/)
+        Player player = GetComponent<Player>();
+
+        if (!Player.pause && player.moveable/* && Player.platform == "Mobile"*/)
         {
             crouch = !crouch;
             CrouchCheck();
+        }
+        else if (!player.moveable)
+        {
+            Stand();
         }
     }
 
     private void Crouch()
     {
-        GameObject.FindGameObjectWithTag("Action").GetComponent<Image>().sprite = Resources.Load<Sprite>("Crouch");
+        if (velocity.x < 0 || velocity.x > 0 || velocity.z < 0 || velocity.z > 0)
+        {
+            GameObject.FindGameObjectWithTag("Action").GetComponent<Image>().sprite = Resources.Load<Sprite>("Crouch Walk V2");
+        }
+        else
+        {
+            GameObject.FindGameObjectWithTag("Action").GetComponent<Image>().sprite = Resources.Load<Sprite>("Crouch");
+        }
         speed = crouchSpeed;
         GameObject playerView = GameObject.FindGameObjectWithTag("MainCamera");
         playerView.transform.localPosition = new Vector3(playerView.transform.localPosition.x, cameraHeight / 2, playerView.transform.localPosition.z);
@@ -271,7 +381,14 @@ public class PlayerController : MonoBehaviour
 
     private void Walk()
     {
-        GameObject.FindGameObjectWithTag("Action").GetComponent<Image>().sprite = Resources.Load<Sprite>("Stand");
+        if (velocity.x < 0 || velocity.x > 0 || velocity.z < 0 || velocity.z > 0)
+        {
+            GameObject.FindGameObjectWithTag("Action").GetComponent<Image>().sprite = Resources.Load<Sprite>("Walk");
+        }
+        else
+        {
+            GameObject.FindGameObjectWithTag("Action").GetComponent<Image>().sprite = Resources.Load<Sprite>("Stand");
+        }
         speed = walkSpeed;
         GameObject playerView = GameObject.FindGameObjectWithTag("MainCamera");
         playerView.transform.localPosition = new Vector3(playerView.transform.localPosition.x, cameraHeight, playerView.transform.localPosition.z);
@@ -279,6 +396,7 @@ public class PlayerController : MonoBehaviour
 
     private void Sprint()
     {
+        GameObject.FindGameObjectWithTag("Action").GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprint");
         speed = sprintSpeed;
         if (GameObject.FindGameObjectWithTag("Sprint") == null)
         {

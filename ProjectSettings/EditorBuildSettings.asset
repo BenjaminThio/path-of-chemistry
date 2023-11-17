@@ -6,6 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Classic Lab/Scenes/Revamped Classic Lab.unity
-    guid: f2d687741d09c0040904a2528238c240
+    path: Assets/Classic Lab/Scenes/Transition.unity
+    guid: 68896df778c5df949ab69d8d1c525306
+  - enabled: 1
+    path: Assets/Classic Lab/Scenes/Revamped Lab.unity
+    guid: 7c67dea53b15da04b8f5d3cbad79cd72
+  - enabled: 0
+    path: Assets/Classic Lab/Beta/Classic Lab.unity
+    guid: 4270376cfe08e9c4b9869f1ebf62df6d
+  - enabled: 0
+    path: Assets/Classic Lab/Beta/Home Lab.unity
+    guid: dc7a80f6b7cdfe846848e37ef372ffc2
+  - enabled: 0
+    path: Assets/Classic Lab/Beta/Industry Lab.unity
+    guid: a223949e5d62f204f97a087fcdcc37b1
   m_configObjects: {}

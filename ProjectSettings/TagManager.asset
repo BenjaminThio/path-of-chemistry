@@ -64,6 +64,11 @@ TagManager:
   - Settings
   - Settings Interface
   - New Game
+  - Lab Toggle
+  - Light
+  - Alert Content
+  - Chair
+  - Custom Sit Point
   layers:
   - Default
   - TransparentFX

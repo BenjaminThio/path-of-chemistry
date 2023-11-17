@@ -306,7 +306,7 @@ public class Recipe : MonoBehaviour
 
     public void GetRecipe(string recipeName)
     {
-        if (GameObject.Find("Recipe Interface") == null)
+        if (!QuantityHandler.pause && GameObject.Find("Recipe Interface") == null)
         {
             selectedSlotNum = 1;
             recipeActive = recipeName;

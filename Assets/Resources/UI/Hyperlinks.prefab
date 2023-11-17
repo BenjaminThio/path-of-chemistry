@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2625004014440312002}
   - component: {fileID: 5454215418498655818}
   - component: {fileID: 8579497137471714438}
+  - component: {fileID: 2057418986112676511}
   m_Layer: 0
   m_Name: Instagram
   m_TagString: Untagged
@@ -32,7 +33,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2054217884443247584}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -145,6 +146,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795384646a7b82f4f8e7b5382f73b61d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2057418986112676511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639766866085424711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8579497137471714438}
+          m_TargetAssemblyTypeName: Hyperlinks, Assembly-CSharp
+          m_MethodName: OnPointerEnter
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8579497137471714438}
+          m_TargetAssemblyTypeName: Hyperlinks, Assembly-CSharp
+          m_MethodName: OnPointerExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &789978646198986063
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,6 +204,7 @@ GameObject:
   - component: {fileID: 2460242551729592391}
   - component: {fileID: 3942186749463004552}
   - component: {fileID: 5149178462149379497}
+  - component: {fileID: 6647670529569356513}
   m_Layer: 0
   m_Name: Youtube
   m_TagString: Untagged
@@ -290,6 +337,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795384646a7b82f4f8e7b5382f73b61d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6647670529569356513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789978646198986063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5149178462149379497}
+          m_TargetAssemblyTypeName: Hyperlinks, Assembly-CSharp
+          m_MethodName: OnPointerEnter
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5149178462149379497}
+          m_TargetAssemblyTypeName: Hyperlinks, Assembly-CSharp
+          m_MethodName: OnPointerExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &4543806444297582759
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,6 +395,7 @@ GameObject:
   - component: {fileID: 3949656766687510403}
   - component: {fileID: 2185270788119619636}
   - component: {fileID: 3798948669067788827}
+  - component: {fileID: 7116998492159462162}
   m_Layer: 0
   m_Name: Facebook
   m_TagString: Untagged
@@ -322,7 +415,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2054217884443247584}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -435,6 +528,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795384646a7b82f4f8e7b5382f73b61d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7116998492159462162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4543806444297582759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3798948669067788827}
+          m_TargetAssemblyTypeName: Hyperlinks, Assembly-CSharp
+          m_MethodName: OnPointerEnter
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3798948669067788827}
+          m_TargetAssemblyTypeName: Hyperlinks, Assembly-CSharp
+          m_MethodName: OnPointerExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &4685901954794320705
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,6 +586,7 @@ GameObject:
   - component: {fileID: 8674086074239209831}
   - component: {fileID: 1949579257214138797}
   - component: {fileID: 3706982682375921147}
+  - component: {fileID: 7128788142143906251}
   m_Layer: 0
   m_Name: GitHub
   m_TagString: Untagged
@@ -464,7 +603,7 @@ RectTransform:
   m_GameObject: {fileID: 4685901954794320705}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0132799, y: 1.0132799, z: 1.0132799}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2054217884443247584}
   m_RootOrder: 2
@@ -580,6 +719,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795384646a7b82f4f8e7b5382f73b61d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7128788142143906251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4685901954794320705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3706982682375921147}
+          m_TargetAssemblyTypeName: Hyperlinks, Assembly-CSharp
+          m_MethodName: OnPointerEnter
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3706982682375921147}
+          m_TargetAssemblyTypeName: Hyperlinks, Assembly-CSharp
+          m_MethodName: OnPointerExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &5285916779624063475
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,8 +792,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5285112770393601495}
   - {fileID: 2722892736048209363}
+  - {fileID: 5285112770393601495}
   - {fileID: 8735674010206384915}
   - {fileID: 2908673418697384943}
   m_Father: {fileID: 0}

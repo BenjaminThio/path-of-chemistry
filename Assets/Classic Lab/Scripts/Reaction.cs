@@ -5,6 +5,7 @@ using UnityEngine;
 public class Reaction : MonoBehaviour
 {
     private Database db;
+
     public GameObject explosion;
     public GameObject smoke;
     public GameObject fire;
@@ -13,6 +14,12 @@ public class Reaction : MonoBehaviour
     public GameObject flammableGas;
     public GameObject elephantToothpaste;
     public GameObject freeze;
+
+    public int maxFillTimes = 9;
+    public float transitionDurationPerFill = 3f;
+    public float minFillValue = -1f;
+    public float maxFillValue = 1.3f;
+    private int fillPhase = 0;
 
     private void Start()
     {
@@ -23,6 +30,45 @@ public class Reaction : MonoBehaviour
     {
         //Instantiate(Resources.Load<GameObject>("Animations/Flask_Pour"), GameObject.FindGameObjectWithTag("Reaction").transform, false);
         StartCoroutine(React());
+    }
+
+    IEnumerator Fill(GameObject flask, int fillTimes)
+    {
+        yield return new WaitForSeconds(2f);
+
+        Transform flaskLiquid = flask.transform.GetChild(0);
+        
+        LeanTween.value(gameObject, GetFillValueWithPhase(fillPhase - 1), GetFillValueWithPhase(fillPhase), transitionDurationPerFill).setOnUpdate(
+            (float value) => {
+                flaskLiquid.GetComponent<Renderer>().material.SetFloat("Fill", value);
+            }
+        );
+
+        yield return new WaitForSeconds(2f);
+    }
+
+    private float GetFillValueWithPhase(int fillPhase)
+    {
+        Transform flaskLiquid = GameObject.FindGameObjectWithTag("Flask").transform.GetChild(0);
+        float perFill = ((maxFillValue * GetScaleMultiplication(flaskLiquid)) - (minFillValue * GetScaleMultiplication(flaskLiquid))) / maxFillTimes;
+
+        return (minFillValue * GetScaleMultiplication(flaskLiquid)) + (perFill * (fillPhase));
+    }
+
+    public void ResetFlaskLiquidFillValue()
+    {
+        Transform flaskLiquid = GameObject.FindGameObjectWithTag("Flask").transform.GetChild(0);
+
+        flaskLiquid.GetComponent<Renderer>().sharedMaterial.SetFloat("Fill", (minFillValue * GetScaleMultiplication(flaskLiquid)));
+        fillPhase = 0;
+    }
+
+    private float GetScaleMultiplication(Transform flaskLiquid)
+    {
+        Transform flask = flaskLiquid.parent;
+        Transform reaction = flask.parent;
+
+        return flask.localScale.y * reaction.localScale.y;
     }
 
     private IEnumerator React()
@@ -42,12 +88,14 @@ public class Reaction : MonoBehaviour
                 {
                     CloseInterface.CloseFlaskInterface();
                     flaskPour.layer = LayerMask.NameToLayer("Uninteractable");
+                    ResetFlaskLiquidFillValue();
                     int counter = 0;
                     for (int i = 0; i < db.flaskItem.Length; i++)
                     {
                         if (db.flaskItem[i] != null)
                         {
                             GameObject beaker = GameObject.Find($"Cylinder Beaker ({i + 1})");
+
                             if (beaker.GetComponent<Animator>() != null)
                             {
                                 Transform beakerLiquid = beaker.transform.GetChild(0);
@@ -57,14 +105,17 @@ public class Reaction : MonoBehaviour
                             }
                             else
                             {
-                                Alert.AddAlert($"There is no animation in beaker {i + 1} in early access.");
+                                Alert.AddAlert($"The developer lazy animate the animation of beaker {i + 1}.");
                             }
                             counter++;
-                            Transform flaskLiquid = flaskPour.transform.GetChild(0);
-                            flaskLiquid.GetComponent<Animator>().SetTrigger($"Fill{counter}");
+                            fillPhase++;
+
+                            StartCoroutine(Fill(flaskPour, fillPhase));
+
                             yield return new WaitForSeconds(7f);
                         }
                     }
+                    
                     for (int i = 1; i <= db.flaskItem.Length; i++)
                     {
                         if (GameObject.Find($"Cylinder Beaker ({i})/Liquid") != null)
@@ -146,6 +197,7 @@ public class Reaction : MonoBehaviour
                 {
                     Global.UpdateInventory("Flask", db.flaskItem);
                 }
+                ResetFlaskLiquidFillValue();
                 GameObject.FindGameObjectWithTag("Experience").GetComponent<Experience>().AddExpToQueue((recipeIndex + 1) * 5);
                 flaskPour.layer = LayerMask.NameToLayer("Interactable");
                 yield break;

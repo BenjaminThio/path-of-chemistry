@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -31,20 +32,35 @@ public class Pause : MonoBehaviour
     {
         if (!Player.pause)
         {
-            Player.Pause();
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Pause();
             QuantityHandler.pause = true;
             GameObject pauseInterface = Instantiate(Resources.Load<GameObject>("UI/Pause Interface"), GameObject.FindGameObjectWithTag("Canvas").transform, false);
-            int sensitivityPercentage = 0;
+
+            float maxSensitivity;
+
             if (Player.platform == "Desktop")
             {
-                pauseInterface.transform.GetChild(1).GetChild(1).GetComponent<Slider>().minValue = 1;
-                sensitivityPercentage = db.desktopSensitivity / 10;
+                maxSensitivity = 600f;
+
             }
-            else if (Player.platform == "Mobile")
+            else
             {
-                pauseInterface.transform.GetChild(1).GetChild(1).GetComponent<Slider>().minValue = 2;
-                sensitivityPercentage = db.mobileSensitivity * 2;
+                maxSensitivity = 25f;
             }
+
+            float sensitivity;
+
+            if (Player.platform == "Desktop")
+            {
+                sensitivity = db.desktopSensitivity;
+            }
+            else
+            {
+                sensitivity = db.mobileSensitivity;
+            }
+
+            int sensitivityPercentage = Convert.ToInt32(sensitivity / maxSensitivity * 100f);
+
             pauseInterface.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = $"Sensitivity:\n{sensitivityPercentage}%";
             pauseInterface.transform.GetChild(1).GetChild(1).GetComponent<Slider>().value = sensitivityPercentage;
             pauseInterface.transform.GetChild(1).GetChild(1).GetComponent<Slider>().onValueChanged.AddListener(OnSensitivityValueChanged);
@@ -55,24 +71,51 @@ public class Pause : MonoBehaviour
 
     private void OnSensitivityValueChanged(float value)
     {
-        int sensitivityPercentage = 0;
+        float maxSensitivity;
+
         if (Player.platform == "Desktop")
         {
-            int sensitivity = Convert.ToInt32(Math.Floor(value) * 10);
-            sensitivityPercentage = sensitivity / 10;
+            maxSensitivity = 600f;
+
+        }
+        else
+        {
+            maxSensitivity = 25f;
+        }
+
+        float sensitivityPerUnit = maxSensitivity / 100f;
+        float sensitivity = sensitivityPerUnit * value;
+        int sensitivityPercentage = Convert.ToInt32(sensitivity / maxSensitivity * 100f);
+
+        if (Player.platform == "Desktop")
+        {
             db.desktopSensitivity = sensitivity;
+
         }
         else if (Player.platform == "Mobile")
         {
-            int sensitivity = Convert.ToInt32(Math.Floor(value) / 2);
-            sensitivityPercentage = sensitivity * 2;
             db.mobileSensitivity = sensitivity;
         }
+
         GameObject.FindGameObjectWithTag("Sensitivity").transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"Sensitivity:\n{sensitivityPercentage}%";
     }
 
     private void MainMenu()
     {
+        StartCoroutine(FadeOutAndMainMenu());
+    }
+
+    private void Quit()
+    {
+        Database.Save();
+        QuantityHandler.pause = false;
+        Application.Quit();
+    }
+
+    private IEnumerator FadeOutAndMainMenu()
+    {
+        GameObject light = Instantiate(Resources.Load<GameObject>("UI/Light"), GameObject.FindGameObjectWithTag("Canvas").transform, false);
+
         foreach (string particleName in ElementConstructor.particles.Keys.ToArray())
         {
             ElementConstructor.particles[particleName] = 0;
@@ -84,13 +127,8 @@ public class Pause : MonoBehaviour
         Cursor.visible = true;
         Database.Save();
         QuantityHandler.pause = false;
-        SceneManager.LoadScene(0);
-    }
-
-    private void Quit()
-    {
-        Database.Save();
-        QuantityHandler.pause = false;
-        Application.Quit();
+        light.GetComponent<Animator>().SetFloat("SpeedMultiplier", 2f);
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene(db.labIndex + 1);
     }
 }

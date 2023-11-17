@@ -9,15 +9,34 @@ using UnityEngine.UI;
 public class Menu : MonoBehaviour
 {
     public static bool menuPause = false;
-    public GameObject menuUi;
     private Database db;
     
     private void Start()
     {
         db = Database.db;
         //print($"{Application.persistentDataPath}/Path Of Chemistry/Data/Saves.json");
+
+        GameObject.FindGameObjectWithTag("Reaction").GetComponent<Reaction>().ResetFlaskLiquidFillValue();
+        StartCoroutine(FadeIn());
         AddFunctionToMenuUI();
-        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(6, 5.09707f, 72);
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>() != null)
+        {
+            GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(6, 5.09707f, 72);
+        }
+    }
+
+    private IEnumerator FadeIn()
+    {
+        GameObject light = Instantiate(Resources.Load<GameObject>("UI/Light Reverse"), GameObject.FindGameObjectWithTag("Menu Canvas").transform, false);
+
+        light.GetComponent<Animator>().SetFloat("SpeedMultiplier", 2f);
+        yield return new WaitForSeconds(1.5f);
+        Destroy(light);
+        /*
+        yield return new WaitForSeconds(1.2f);
+        light.GetComponent<Image>().raycastTarget = false;
+        yield return new WaitForSeconds(.3f);
+        */
     }
 
     /*
@@ -108,19 +127,21 @@ public class Menu : MonoBehaviour
     {
         Destroy(GameObject.FindGameObjectWithTag("Menu UI"));
         Destroy(GameObject.FindGameObjectWithTag("Hyperlinks"));
-        GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>().enabled = true;
-        yield return new WaitForSeconds(5f);
-//        GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>().enabled = false;
-        GameObject inGameCanvas  = Instantiate(Resources.Load<GameObject>("Canvas/InGame Canvas"));
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>() != null)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>().enabled = true;
+            yield return new WaitForSeconds(5f);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>().enabled = false;
+        }
+        GameObject inGameCanvas = Instantiate(Resources.Load<GameObject>("Canvas/InGame Canvas"));
         inGameCanvas.name = "Canvas";
         if (Player.platform == "Desktop")
         {
             Instantiate(Resources.Load<GameObject>("UI/Controls Panel"), GameObject.FindGameObjectWithTag("Canvas").transform, false);
-            //GameObject.FindGameObjectWithTag("Pause").GetComponent<Image>().enabled = false;
-            //GameObject.FindGameObjectWithTag("Pause").GetComponent<Button>().enabled = false;
-            //GameObject.FindGameObjectWithTag("Alert Button").GetComponent<Button>().enabled = false;
-            //GameObject.FindGameObjectWithTag("Action").GetComponent<Button>().enabled = false;
-
+            GameObject.FindGameObjectWithTag("Pause").GetComponent<Image>().enabled = false;
+            GameObject.FindGameObjectWithTag("Pause").GetComponent<Button>().enabled = false;
+            GameObject.FindGameObjectWithTag("Alert Button").GetComponent<Button>().enabled = false;
+            GameObject.FindGameObjectWithTag("Action").GetComponent<Button>().enabled = false;
         }
         else if (Player.platform == "Mobile")
         {
@@ -176,39 +197,71 @@ public class Menu : MonoBehaviour
         {
             menuPause = true;
             GameObject settingsInterface = Instantiate(Resources.Load<GameObject>("UI/Settings Interface"), GameObject.FindGameObjectWithTag("Menu Canvas").transform, false);
-            int sensitivityPercentage = 0;
+            Transform sensitivityGroup = settingsInterface.transform.GetChild(2).GetChild(0);
+            TextMeshProUGUI sensitivityText = sensitivityGroup.GetChild(0).GetComponent<TextMeshProUGUI>();
+            Slider sensitivitySlider = sensitivityGroup.GetChild(1).GetComponent<Slider>();
+            Button closeButton = settingsInterface.transform.GetChild(1).GetComponent<Button>();
+
+            float maxSensitivity;
+
             if (Player.platform == "Desktop")
             {
-                settingsInterface.transform.GetChild(1).GetChild(1).GetComponent<Slider>().minValue = 1;
-                sensitivityPercentage = db.desktopSensitivity / 10;
+                maxSensitivity = 600f;
+
             }
-            else if (Player.platform == "Mobile")
+            else
             {
-                settingsInterface.transform.GetChild(1).GetChild(1).GetComponent<Slider>().minValue = 2;
-                sensitivityPercentage = db.mobileSensitivity * 2;
+                maxSensitivity = 25f;
             }
-            settingsInterface.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = $"Sensitivity:\n{sensitivityPercentage}%";
-            settingsInterface.transform.GetChild(1).GetChild(1).GetComponent<Slider>().value = sensitivityPercentage;
-            settingsInterface.transform.GetChild(1).GetChild(1).GetComponent<Slider>().onValueChanged.AddListener(OnSensitivityValueChanged);
-            settingsInterface.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(CloseSettingsInterface);
+
+            float sensitivity;
+
+            if (Player.platform == "Desktop")
+            {
+                sensitivity = db.desktopSensitivity;
+            }
+            else
+            {
+                sensitivity = db.mobileSensitivity;
+            }
+
+            int sensitivityPercentage = Convert.ToInt32(sensitivity / maxSensitivity * 100f);
+
+            sensitivityText.text = $"Sensitivity:\n{sensitivityPercentage}%";
+            sensitivitySlider.value = sensitivityPercentage;
+            sensitivitySlider.onValueChanged.AddListener(OnSensitivityValueChanged);
+            closeButton.onClick.AddListener(CloseSettingsInterface);
         }
     }
 
     private void OnSensitivityValueChanged(float value)
     {
-        int sensitivityPercentage = 0;
+        float maxSensitivity;
+
         if (Player.platform == "Desktop")
         {
-            int sensitivity = Convert.ToInt32(Math.Floor(value) * 10);
-            sensitivityPercentage = sensitivity / 10;
+            maxSensitivity = 600f;
+
+        }
+        else
+        {
+            maxSensitivity = 25f;
+        }
+
+        float sensitivityPerUnit = maxSensitivity / 100f;
+        float sensitivity = sensitivityPerUnit * value;
+        int sensitivityPercentage = Convert.ToInt32(sensitivity / maxSensitivity * 100f);
+
+        if (Player.platform == "Desktop")
+        {
             db.desktopSensitivity = sensitivity;
+
         }
         else if (Player.platform == "Mobile")
         {
-            int sensitivity = Convert.ToInt32(Math.Floor(value) / 2);
-            sensitivityPercentage = sensitivity * 2;
             db.mobileSensitivity = sensitivity;
         }
+
         GameObject.FindGameObjectWithTag("Sensitivity").transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"Sensitivity:\n{sensitivityPercentage}%";
     }
 

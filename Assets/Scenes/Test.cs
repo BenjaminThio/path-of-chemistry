@@ -1,39 +1,46 @@
-using System.Collections;
 using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    public int tapTimes;
-
-    IEnumerator ResetTapTimes()
+    private void OnTriggerStay(Collider other)
     {
-        yield return new WaitForSeconds(.5f);
-        if (tapTimes < 2)
-        {
-            tapTimes = 0;
-        }
+        print("IN");
     }
 
-    private void Update()
+    /*
+    public int maxFillTimes = 8;
+    public float transitionDurationPerFill = 2.0f;
+    public float minFillValue = -1f;
+    public float maxFillValue = 1.3f;
+
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            tapTimes++;
-            if (tapTimes == 1)
-            {
-                StartCoroutine(ResetTapTimes());
-            }
-        }
-        if (tapTimes >= 2)
-        {
-            if (Input.GetKey(KeyCode.W))
-            {
-                print("Running");
-            }
-            else
-            {
-                tapTimes = 0;
-            }
-        }
+        GetComponent<Renderer>().sharedMaterial.SetFloat("Fill", minFillValue);
+        StartCoroutine(playFillAnimation());
     }
+
+    IEnumerator playFillAnimation()
+    {
+        yield return new WaitForSeconds(2f);
+
+        Fill(8);
+    }
+
+    public void Fill(int fillTimes)
+    {
+        LeanTween.value(gameObject, minFillValue * GetScaleMultiplication(), maxFillValue * GetScaleMultiplication() * fillTimes / maxFillTimes, fillTimes * transitionDurationPerFill).setOnUpdate(
+            (float value) => {
+                GetComponent<Renderer>().material.SetFloat("Fill", value);
+            }
+        );
+    }
+
+    private float GetScaleMultiplication()
+    {
+        Transform flask = transform.parent;
+        Transform reaction = flask.parent;
+
+        return flask.localScale.y * reaction.localScale.y;
+    }
+    */
 }

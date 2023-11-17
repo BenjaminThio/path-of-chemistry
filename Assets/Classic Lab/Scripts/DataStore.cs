@@ -130,8 +130,9 @@ public class Database
     public int expLevel = 0;
     public int exp = 0;
     public int slotNum = 1;
-    public int desktopSensitivity = 200;
-    public int mobileSensitivity = 2;
+    public float desktopSensitivity = 300f;
+    public float mobileSensitivity = 12.5f;
+    public int labIndex = 0;
     public Dictionary<string, object>[] hotbarItem = {
         null,
         null,
@@ -1421,5 +1422,6 @@ public class DataStore : MonoBehaviour
     private void Awake()
     {
         Database.Load();
+        Database db = Database.db;
     }
 }

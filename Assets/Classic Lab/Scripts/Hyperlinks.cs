@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Hyperlinks : MonoBehaviour
@@ -32,5 +33,15 @@ public class Hyperlinks : MonoBehaviour
         {
             Application.OpenURL("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
         }
+    }
+
+    public void OnPointerEnter()
+    {
+        LeanTween.scale(gameObject, new Vector2(1.2f, 1.2f), 0.2f);
+    }
+
+    public void OnPointerExit()
+    {
+        LeanTween.scale(gameObject, Vector2.one, 0.2f);
     }
 }

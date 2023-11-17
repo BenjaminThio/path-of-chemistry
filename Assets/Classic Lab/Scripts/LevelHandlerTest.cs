@@ -10,7 +10,7 @@ public class LevelHandler : MonoBehaviour
     {
         if (Database.db.level > Recipe.experiments.Length)
         {
-            GameObject.Find("Guide").GetComponent<TextMeshProUGUI>().text = "Under Construction!";
+            GameObject.FindGameObjectWithTag("Guide").GetComponent<TextMeshProUGUI>().text = "Under Construction!";
             return;
         }
         string info = "";
@@ -25,6 +25,6 @@ public class LevelHandler : MonoBehaviour
                 info += " + ";
             }
         }
-        GameObject.Find("Guide").GetComponent<TextMeshProUGUI>().text = info;
+        GameObject.FindGameObjectWithTag("Guide").GetComponent<TextMeshProUGUI>().text = info;
     }
 }

@@ -67,6 +67,14 @@ public class CloseInterface : MonoBehaviour
         Resume();
     }
 
+    public void CloseSettingsInterface()
+    {
+        Database.Save();
+        QuantityHandler.pause = false;
+        Destroy(GameObject.FindGameObjectWithTag("Settings Interface"));
+        Resume();
+    }
+
     private static void Resume()
     {
         Player.pause = false;

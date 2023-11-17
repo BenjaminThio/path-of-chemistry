@@ -15,9 +15,9 @@ public class Alert : MonoBehaviour
             {
                 Destroy(GameObject.FindGameObjectWithTag("Red Dot"));
             }
-            Player.Pause();
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Pause();
             QuantityHandler.pause = true;
-            GameObject alertInterface = Instantiate(Resources.Load<GameObject>("UI/Alert Interface"), GameObject.Find("Canvas").transform, false);
+            GameObject alertInterface = Instantiate(Resources.Load<GameObject>("UI/Alert Interface"), GameObject.FindGameObjectWithTag("Canvas").transform, false);
             alertInterface.name = "Alert Interface";
             GameObject.FindGameObjectWithTag("Alert Interface").GetComponent<Animator>().SetTrigger("Glitch");
             UpdateAlert();
@@ -28,9 +28,11 @@ public class Alert : MonoBehaviour
     {
         if (messages.Count == 0)
         {
-            GameObject Message = Instantiate(Resources.Load<GameObject>("UI/Message"), GameObject.Find("Alert Interface/Scroll View/Viewport/Content").transform);
+            /*GameObject Message = Instantiate(Resources.Load<GameObject>("UI/Message"), GameObject.Find("Alert Interface/Scroll View/Viewport/Content").transform);
             Message.name = "Null Message";
-            Message.GetComponent<TextMeshProUGUI>().text = "Nothing Here!";
+            Message.GetComponent<TextMeshProUGUI>().text = "Nothing Here!";*/
+
+            GameObject.FindGameObjectWithTag("Alert Content").GetComponent<AlertHandler>().AddMessage("Nothing Here!");
         }
         else
         {
@@ -42,9 +44,11 @@ public class Alert : MonoBehaviour
                 }
                 for (int i = 0; i < messages.Count; i++)
                 {
-                    GameObject Message = Instantiate(Resources.Load<GameObject>("UI/Message"), GameObject.Find("Alert Interface/Scroll View/Viewport/Content").transform);
+                    /*GameObject Message = Instantiate(Resources.Load<GameObject>("UI/Message"), GameObject.Find("Alert Interface/Scroll View/Viewport/Content").transform);
                     Message.name = $"Message ({i})";
-                    Message.GetComponent<TextMeshProUGUI>().text = $"{i + 1}. {messages[i]}";
+                    Message.GetComponent<TextMeshProUGUI>().text = $"{i + 1}. {messages[i]}";*/
+
+                    GameObject.FindGameObjectWithTag("Alert Content").GetComponent<AlertHandler>().AddMessage($"{i + 1}. {messages[i]}");
                 }
             }
         }

@@ -11,18 +11,28 @@ public class Player : MonoBehaviour
     public static bool runOnce = false;
 
     private Database db;
-    private float raycastRange = 10f;
-    private string[] allowTags = {"Flask", "Compound Creator & Reducer", "Element Constructor", "Door", "Faucet", "Dusbin"};
+    public float raycastRange = 10f;
+    private string[] allowTags = {"Flask", "Compound Creator & Reducer", "Element Constructor", "Door", "Faucet", "Dusbin", "Chair"};
     public static bool pause = false;
     public LayerMask playerLayerMask;
     private bool isCoroutineRunning;
     private bool isCrosshairPressed;
 
+    public Transform targetedChair = null;
+    public bool moveable = true;
+    public Vector3 positionBeforeSit = Vector3.zero;
+
     private void Start()
     {
         db = Database.db;
+        PlayerController playerController = GetComponent<PlayerController>();
+
+        raycastRange *= playerController.scale;
+
         LevelHandler.UpdateLevel();
         GameObject.Find("Crosshair").GetComponent<Button>().onClick.AddListener(PressCrosshair);
+        playerController.cameraHeight = playerController.cameraTransform.localPosition.y;
+        Sit();
         if (!runOnce)
         {
             Alert.AddAlert($"Game saves path: {Application.persistentDataPath}");
@@ -55,7 +65,14 @@ public class Player : MonoBehaviour
                 {
                     Destroy(GameObject.FindGameObjectWithTag("Tag"));
                 }
-                GameObject.Find("Crosshair").GetComponent<Image>().sprite = Resources.Load<Sprite>("Press");
+                if (platform == "Desktop")
+                {
+                    GameObject.Find("Crosshair").GetComponent<Image>().sprite = Resources.Load<Sprite>("Left_Click");
+                }
+                else if (platform == "Mobile")
+                {
+                    GameObject.Find("Crosshair").GetComponent<Image>().sprite = Resources.Load<Sprite>("Press");
+                }
                 GameObject.Find("Crosshair").GetComponent<Button>().enabled = true;
                 GameObject worldCanvasForTag;
                 if (hit.transform.tag == "Compound Creator & Reducer")
@@ -64,7 +81,28 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    worldCanvasForTag = Instantiate(Resources.Load<GameObject>($"Tags/{hit.transform.tag}"), hit.transform, false);
+                    if (hit.transform.tag == "Chair")
+                    {
+                        if (hit.transform.childCount > 1)
+                        {
+                            if (hit.transform.GetChild(1).tag == "Custom Sit Point")
+                            {
+                                worldCanvasForTag = Instantiate(Resources.Load<GameObject>($"Tags/{hit.transform.tag}"), hit.transform.GetChild(1), false);
+                            }
+                            else
+                            {
+                                worldCanvasForTag = Instantiate(Resources.Load<GameObject>($"Tags/{hit.transform.tag}"), hit.transform, false);
+                            }
+                        }
+                        else
+                        {
+                            worldCanvasForTag = Instantiate(Resources.Load<GameObject>($"Tags/{hit.transform.tag}"), hit.transform, false);
+                        }
+                    }
+                    else
+                    {
+                        worldCanvasForTag = Instantiate(Resources.Load<GameObject>($"Tags/{hit.transform.tag}"), hit.transform, false);
+                    }
                 }
                 if (hit.transform.tag == "Flask")
                 {
@@ -86,7 +124,7 @@ public class Player : MonoBehaviour
                     if (hit.transform.tag == "Flask")
                     {
                         Pause();
-                        GameObject flaskInterface = Instantiate(Resources.Load<GameObject>("Inventory/Flask Interface"), GameObject.Find("Canvas").transform, false);
+                        GameObject flaskInterface = Instantiate(Resources.Load<GameObject>("Inventory/Flask Interface"), GameObject.FindGameObjectWithTag("Canvas").transform, false);
                         flaskInterface.name = "Flask Interface";
                         GameObject.FindGameObjectWithTag("Flask Interface").GetComponent<Animator>().SetTrigger("Glitch");
                     }
@@ -100,7 +138,7 @@ public class Player : MonoBehaviour
                     else if (hit.transform.tag == "Element Constructor")
                     {
                         Pause();
-                        GameObject elementConstructor = Instantiate(Resources.Load<GameObject>("UI/Element Constructor"), GameObject.Find("Canvas").transform, false);
+                        GameObject elementConstructor = Instantiate(Resources.Load<GameObject>("UI/Element Constructor"), GameObject.FindGameObjectWithTag("Canvas").transform, false);
                         elementConstructor.name = "Element Constructor";
                         GameObject.FindGameObjectWithTag("Element Constructor Interface").GetComponent<Animator>().SetTrigger("Glitch");
                     }
@@ -131,6 +169,21 @@ public class Player : MonoBehaviour
                     else if (hit.transform.tag == "Door")
                     {
                         StartCoroutine(QuitLight());
+                    }
+                    else if (hit.transform.tag == "Chair" && targetedChair == null)
+                    {
+                        Seat targetedSeat = hit.transform.GetChild(0).GetComponent<Seat>();
+
+                        if (targetedSeat.isPlayerInTriggerArea)
+                        {
+                            targetedChair = hit.transform;
+
+                            Sit();
+                        }
+                        else
+                        {
+                            Alert.AddAlert("You may not sit now, the seat is too far away.");
+                        }
                     }
                     isCrosshairPressed = false;
                 }
@@ -201,10 +254,79 @@ public class Player : MonoBehaviour
         }
     }
 
-    public static void Pause()
+    private void Sit()
     {
+        if (targetedChair != null)
+        {
+            PlayerController playerController = GetComponent<PlayerController>();
+            GameObject playerView = GameObject.FindGameObjectWithTag("MainCamera");
+            float cameraHeight = playerController.cameraHeight;
+
+            if (playerController.crouch)
+            {
+                playerController.crouchBeforeSit = true;
+            }
+
+            raycastRange = 12f * playerController.scale;
+
+            playerController.crouch = false;
+            playerController.shortClicks = 0;
+            playerController.doubleClick = false;
+            playerController.CrouchCheck();
+
+            moveable = false;
+            if (runOnce)
+            {
+                positionBeforeSit = transform.position;
+            }
+
+            targetedChair.GetComponent<MeshCollider>().enabled = false;
+
+            if (targetedChair.transform.childCount > 1)
+            {
+                if (targetedChair.transform.GetChild(1).tag == "Custom Sit Point")
+                {
+                    transform.position = new Vector3(targetedChair.transform.GetChild(1).position.x, transform.position.y, targetedChair.transform.GetChild(1).transform.position.z);
+                }
+                else
+                {
+                    transform.position = new Vector3(targetedChair.transform.position.x, transform.position.y, targetedChair.transform.position.z);
+                }
+            }
+            else
+            {
+                transform.position = new Vector3(targetedChair.transform.position.x, transform.position.y, targetedChair.transform.position.z);
+            }
+
+            playerView.transform.localPosition = new Vector3(playerView.transform.localPosition.x, cameraHeight / 1.3f, playerView.transform.localPosition.z);
+
+            if (GameObject.FindGameObjectWithTag("Sprint") != null)
+            {
+                Destroy(GameObject.FindGameObjectWithTag("Sprint"));
+            }
+            if (playerController.footstepSound.isPlaying)
+            {
+                playerController.footstepSound.Pause();
+            }
+
+            GameObject.FindGameObjectWithTag("Action").GetComponent<Image>().sprite = Resources.Load<Sprite>("Sit");
+        }
+    }
+
+    public void Pause()
+    {
+        PlayerController playerController = GetComponent<PlayerController>();
+
         pause = true;
+
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        playerController.velocity = Vector3.zero;
+        if (playerController.footstepSound.isPlaying)
+        {
+            playerController.footstepSound.Pause();
+        }
     }
 
     private IEnumerator Save()
@@ -239,6 +361,7 @@ public class Player : MonoBehaviour
     private IEnumerator QuitLight()
     {
         pause = true;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().velocity = Vector3.zero;
         Instantiate(Resources.Load<GameObject>("UI/Light"), GameObject.FindGameObjectWithTag("Canvas").transform, false);
         yield return new WaitForSeconds(3f);
         Database.Save();
