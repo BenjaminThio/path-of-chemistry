@@ -4,71 +4,25 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Shootable
-  - Element Constructor
-  - Hand
-  - Compound Creator & Reducer
-  - Guide
-  - Flask
-  - Rack
-  - Reaction
-  - Dusbin
-  - Door
-  - Faucet
   - Menu Canvas
   - Menu UI
   - Title
   - UI Buttons
-  - Play
   - Quit
   - Credits
-  - Flask_Pour
-  - Sprint
-  - Tag
-  - Compound Creator & Reducer Interface
-  - Compound Reducer Interface
-  - Clear
-  - Quantity Handler
-  - Flask Interface
-  - Hotbar
-  - Red Dot
-  - Recipe Interface
-  - Pause Interface
-  - Experience Bar UI
-  - Element Constructor Interface
-  - Credits Background
-  - Back
-  - Canvas
-  - Experience
-  - Alert Button
-  - Joystick
-  - Jump
-  - Action
-  - Effect
-  - Item Name
-  - Alert Interface
   - Hyperlinks
   - Manual
-  - Water
-  - Manual Interface
+  - Settings
+  - New Game
   - Manuals
   - Explanation
   - Previous
+  - Manual Interface
   - Next
   - Manual Image
+  - Back
   - Manual Page Number
-  - CCR Confirm
-  - Pause
-  - Controls Panel
-  - Sensitivity
-  - Settings
   - Settings Interface
-  - New Game
-  - Lab Toggle
-  - Light
-  - Alert Content
-  - Chair
-  - Custom Sit Point
   layers:
   - Default
   - TransparentFX
